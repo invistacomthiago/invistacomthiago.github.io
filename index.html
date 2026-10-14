@@ -112,6 +112,13 @@
   .galeria img{width:100%;height:100%;object-fit:cover;display:block}
   .galeria figcaption{position:absolute;inset:auto 0 0 0;padding:16px 8px 7px;font-size:10.5px;font-weight:600;
        background:linear-gradient(transparent,rgba(21,18,15,.9))}
+  .premio{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:8px;height:340px}
+  .premio figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .premio figure:first-child{grid-row:span 3}
+  .premio img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+  .premio figcaption{position:absolute;inset:auto 0 0 0;padding:18px 10px 8px;font-size:11px;font-weight:600;line-height:1.35;
+       background:linear-gradient(transparent,rgba(21,18,15,.92))}
+  .premio figure:first-child figcaption{font-size:13px}
   footer{margin-top:28px;font-size:11px;line-height:1.6;color:var(--muted);max-width:400px}
   .disclaimer{display:block;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:10px;line-height:1.55;opacity:.8;text-align:left}
   .disclaimer b{font-weight:600}
@@ -124,6 +131,7 @@
     .col-conteudo .bloco:first-child{margin-top:0}
     .local{height:380px}
     .galeria figure{height:200px}
+    .premio{height:460px}
     .midia{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     footer{max-width:none}
   }
@@ -191,6 +199,17 @@
       <figure><img src="img/lounge-bar.jpg" alt="Lounge de atendimento" loading="lazy"><figcaption>Lounge</figcaption></figure>
       <figure><img src="img/auditorio-1.jpg" alt="Auditório de treinamentos" loading="lazy"><figcaption>Auditório</figcaption></figure>
       <figure><img src="img/sala-consultores-aberta.jpg" alt="Sala dos consultores" loading="lazy"><figcaption>Time</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="bloco" aria-labelledby="t-premio">
+    <h2 id="t-premio">Reconhecimento</h2>
+    <p class="sub">A Monteo foi eleita Consórcio Imobiliário do Ano no Real Estate Awards 2026 e é certificada GPTW.</p>
+    <div class="premio">
+      <figure><img src="img/trofeu-retrato-terno-azul.jpg" alt="Thiago Pereira com o troféu do Real Estate Awards 2026" loading="lazy"><figcaption>Real Estate Awards 2026 · Consórcio Imobiliário do Ano</figcaption></figure>
+      <figure><img src="img/telao-consorcio-imobiliario-do-ano.jpg" alt="Telão anunciando a Monteo como Consórcio Imobiliário do Ano" loading="lazy"><figcaption>O anúncio</figcaption></figure>
+      <figure><img style="object-position:center 82%" src="img/premio-equipe-palco.jpg" alt="Equipe Monteo no palco do prêmio" loading="lazy"><figcaption>O time no palco</figcaption></figure>
+      <figure><img src="img/gptw-3-anos-bolo.jpg" alt="Comemoração dos 3 anos de certificação GPTW" loading="lazy"><figcaption>3º ano GPTW</figcaption></figure>
     </div>
   </section>
 
