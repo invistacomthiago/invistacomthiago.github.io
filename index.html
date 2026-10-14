@@ -112,13 +112,14 @@
   .galeria img{width:100%;height:100%;object-fit:cover;display:block}
   .galeria figcaption{position:absolute;inset:auto 0 0 0;padding:16px 8px 7px;font-size:10.5px;font-weight:600;
        background:linear-gradient(transparent,rgba(21,18,15,.9))}
-  .premio{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:8px;height:340px}
-  .premio figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
-  .premio figure:first-child{grid-row:span 3}
+  .premio{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .premio figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);height:230px}
+  .premio .f-main{grid-column:1/-1;height:380px}
+  .premio .f-anuncio{grid-column:1/-1;height:190px}
   .premio img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
   .premio figcaption{position:absolute;inset:auto 0 0 0;padding:18px 10px 8px;font-size:11px;font-weight:600;line-height:1.35;
        background:linear-gradient(transparent,rgba(21,18,15,.92))}
-  .premio figure:first-child figcaption{font-size:13px}
+  .premio .f-main figcaption{font-size:13px}
   footer{margin-top:28px;font-size:11px;line-height:1.6;color:var(--muted);max-width:400px}
   .disclaimer{display:block;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:10px;line-height:1.55;opacity:.8;text-align:left}
   .disclaimer b{font-weight:600}
@@ -131,7 +132,10 @@
     .col-conteudo .bloco:first-child{margin-top:0}
     .local{height:380px}
     .galeria figure{height:200px}
-    .premio{height:460px}
+    .premio{grid-template-columns:1.3fr .6fr .6fr;grid-template-rows:200px 300px}
+    .premio figure,.premio .f-main,.premio .f-anuncio{height:auto}
+    .premio .f-main{grid-column:1;grid-row:1/3}
+    .premio .f-anuncio{grid-column:2/4}
     .midia{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     footer{max-width:none}
   }
@@ -206,10 +210,10 @@
     <h2 id="t-premio">Reconhecimento</h2>
     <p class="sub">A Monteo foi eleita Consórcio Imobiliário do Ano no Real Estate Awards 2026 e é certificada GPTW.</p>
     <div class="premio">
-      <figure><img src="img/trofeu-retrato-terno-azul.jpg" alt="Thiago Pereira com o troféu do Real Estate Awards 2026" loading="lazy"><figcaption>Real Estate Awards 2026 · Consórcio Imobiliário do Ano</figcaption></figure>
-      <figure><img src="img/telao-consorcio-imobiliario-do-ano.jpg" alt="Telão anunciando a Monteo como Consórcio Imobiliário do Ano" loading="lazy"><figcaption>O anúncio</figcaption></figure>
-      <figure><img style="object-position:center 82%" src="img/premio-equipe-palco.jpg" alt="Equipe Monteo no palco do prêmio" loading="lazy"><figcaption>O time no palco</figcaption></figure>
-      <figure><img src="img/gptw-3-anos-bolo.jpg" alt="Comemoração dos 3 anos de certificação GPTW" loading="lazy"><figcaption>3º ano GPTW</figcaption></figure>
+      <figure class="f-main"><img src="img/trofeu-retrato-terno-azul.jpg" alt="Thiago Pereira com o troféu do Real Estate Awards 2026" loading="lazy"><figcaption>Real Estate Awards 2026 · Consórcio Imobiliário do Ano</figcaption></figure>
+      <figure class="f-anuncio"><img src="img/telao-consorcio-imobiliario-do-ano.jpg" alt="Telão anunciando a Monteo como Consórcio Imobiliário do Ano" loading="lazy"><figcaption>O anúncio</figcaption></figure>
+      <figure><img style="object-position:center 50%" src="img/premio-equipe-palco.jpg" alt="Equipe Monteo no palco do prêmio" loading="lazy"><figcaption>O time no palco</figcaption></figure>
+      <figure><img style="object-position:center 35%" src="img/gptw-3-anos-bolo.jpg" alt="Comemoração dos 3 anos de certificação GPTW" loading="lazy"><figcaption>3º ano GPTW</figcaption></figure>
     </div>
   </section>
 
