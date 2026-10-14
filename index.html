@@ -28,7 +28,7 @@
   "description": "Estrutura estratégias com consórcio para construção de patrimônio, renda e alavancagem patrimonial. Mais de 300 clientes e mais de R$ 400 milhões em crédito estruturado.",
   "knowsAbout": ["Consórcio imobiliário", "Alavancagem patrimonial", "Planejamento patrimonial", "Investimento imobiliário"],
   "worksFor": {"@type": "Organization", "name": "Monteo"},
-  "sameAs": ["https://www.instagram.com/invistacomthiago/"]
+  "sameAs": ["https://www.instagram.com/invistacomthiago/", "https://www.tiktok.com/@invistacomthiago", "https://www.linkedin.com/in/invistacomthiago/"]
 }
 </script>
 <style>
@@ -82,10 +82,16 @@
   a.btn:not(.principal) .txt small{color:var(--muted);opacity:1}
   .seta{margin-left:auto;opacity:.55;font-size:18px}
   [data-oculto]{display:none!important}
-  .redes{margin-top:26px;display:flex;gap:14px}
-  .redes a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted)}
-  .redes a:hover{color:var(--gold);border-color:rgba(171,116,89,.6)}
-  .redes svg{width:18px;height:18px}
+  .redes-tit{width:100%;margin-top:26px;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .redes{width:100%;margin-top:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .redes a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px 12px;border-radius:16px;text-decoration:none;
+       color:var(--ink);background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid rgba(171,116,89,.45);
+       transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+  .redes a:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(207,152,89,.6)}
+  .redes .ri{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--grad);color:var(--bg)}
+  .redes svg{width:20px;height:20px}
+  .redes strong{font-size:13px;font-weight:700}
+  .redes small{font-size:10.5px;color:var(--muted)}
   .bloco{width:100%;margin-top:30px;text-align:left}
   .bloco h2{font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 4px 12px}
   .bloco p.sub{font-size:12.5px;color:var(--muted);margin:-6px 4px 12px;line-height:1.45}
@@ -183,12 +189,19 @@
     </a>
   </nav>
 
+  <p class="redes-tit">Me acompanhe</p>
   <div class="redes">
-    <a href="https://www.instagram.com/invistacomthiago/" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    <a href="https://www.instagram.com/invistacomthiago/" target="_blank" rel="noopener" aria-label="Instagram @invistacomthiago">
+      <span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+      <strong>Instagram</strong><small>@invistacomthiago</small>
     </a>
-    <a href="https://www.linkedin.com/in/invistacomthiago/" target="_blank" rel="noopener" aria-label="LinkedIn">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.4 8.6H2.2V21h3.2V8.6ZM3.8 3a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8ZM21.8 13.9c0-3.3-1.8-5.6-4.9-5.6a4 4 0 0 0-3.6 2V8.6h-3.1V21h3.2v-6.4c0-1.7.6-3.2 2.4-3.2s2.3 1.6 2.3 3.3V21h3.2v-7.1Z"/></svg>
+    <a href="https://www.tiktok.com/@invistacomthiago" target="_blank" rel="noopener" aria-label="TikTok @invistacomthiago">
+      <span class="ri"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.3v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V8.6a7.9 7.9 0 0 0 4.4 1.3V6.6a4.5 4.5 0 0 1-4.4-4.6Z"/></svg></span>
+      <strong>TikTok</strong><small>@invistacomthiago</small>
+    </a>
+    <a href="https://www.linkedin.com/in/invistacomthiago/" target="_blank" rel="noopener" aria-label="LinkedIn Thiago Pereira">
+      <span class="ri"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.4 8.6H2.2V21h3.2V8.6ZM3.8 3a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8ZM21.8 13.9c0-3.3-1.8-5.6-4.9-5.6a4 4 0 0 0-3.6 2V8.6h-3.1V21h3.2v-6.4c0-1.7.6-3.2 2.4-3.2s2.3 1.6 2.3 3.3V21h3.2v-7.1Z"/></svg></span>
+      <strong>LinkedIn</strong><small>Thiago Pereira</small>
     </a>
     <!-- YouTube entra aqui quando o canal estiver pronto -->
   </div>
