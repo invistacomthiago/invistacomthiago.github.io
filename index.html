@@ -111,6 +111,14 @@
   .bloco{width:100%;margin-top:30px;text-align:left}
   .bloco h2{font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 4px 12px}
   .bloco p.sub{font-size:12.5px;color:var(--muted);margin:-6px 4px 12px;line-height:1.45}
+  /* Jornadas */
+  .jornadas{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .jornada{display:flex;flex-direction:column;gap:10px;padding:20px 16px 18px;border-radius:16px;background:linear-gradient(145deg,var(--card),var(--card-2));border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:border-color .2s ease,transform .15s ease}
+  .jornada:hover{border-color:rgba(171,116,89,.6);transform:translateY(-2px)}
+  .jornada-ico{width:32px;height:32px;color:var(--gold)}
+  .jornada-tit{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.3px}
+  .jornada-desc{font-size:12px;color:var(--muted);line-height:1.45;margin-top:2px}
+  .jornada-cta{margin-top:auto;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
   .midia{display:flex;flex-direction:column;gap:10px}
   .midia a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;text-decoration:none;color:var(--ink);
            background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);transition:border-color .15s ease}
@@ -271,6 +279,28 @@
 
 </div>
 <div class="col-conteudo">
+  <section class="bloco" aria-labelledby="t-jornada">
+    <h2 id="t-jornada">Escolha sua jornada</h2>
+    <div class="jornadas">
+      <a class="jornada" href="https://consorcio-alavancai.lovable.app/" target="_blank" rel="noopener">
+        <svg class="jornada-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div>
+          <div class="jornada-tit">Quero ser cliente</div>
+          <div class="jornada-desc">Estruture seu patrimônio com estratégia. Simule agora e veja como o consórcio trabalha para você.</div>
+        </div>
+        <div class="jornada-cta">Simular agora →</div>
+      </a>
+      <a class="jornada" href="https://www.linkedin.com/jobs/view/4432718408/" target="_blank" rel="noopener">
+        <svg class="jornada-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <div class="jornada-tit">Quero ser parceiro</div>
+          <div class="jornada-desc">Faça parte da operação. Veja a vaga aberta e candidate-se para trabalhar comigo.</div>
+        </div>
+        <div class="jornada-cta">Ver vaga →</div>
+      </a>
+    </div>
+  </section>
+
   <section class="bloco" aria-labelledby="t-local">
     <h2 id="t-local">Onde eu atendo</h2>
     <figure class="local"><img src="img/recepcao-logo-aberta.jpg" alt="Recepção do escritório Monteo em Maringá" loading="lazy">
