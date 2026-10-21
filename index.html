@@ -16,7 +16,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315120F'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23CF9859'%3ET%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,254 +33,340 @@
 }
 </script>
 <style>
-  /* Paleta igual ao simulador consorcio-alavancai.lovable.app */
-  :root{
-    color-scheme:dark;
-    --bg:#15120F; --card:#1E1915; --card-2:#29231E; --line:#362D26;
-    --ink:#F6F3EE; --muted:#B3A798;
-    --copper:#AB7459; --gold:#CF9859;
-    --grad:linear-gradient(135deg,#AB7459,#CF9859);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{background:var(--bg)}
-  body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--ink);min-height:100vh;background:transparent;
-       display:flex;justify-content:center;padding:28px 16px 32px;-webkit-font-smoothing:antialiased}
-  /* fundo: foto real da recepção, bem escurecida */
-  body::before{content:"";position:fixed;inset:0;z-index:-1;
-       background:radial-gradient(ellipse at top,rgba(171,116,89,.20),transparent 60%),
-                  linear-gradient(rgba(21,18,15,.94),rgba(21,18,15,.97)),
-                  url(img/recepcao-logo-aberta.jpg) center/cover no-repeat}
-  main{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;text-align:center}
-  .col-perfil,.col-conteudo{width:100%;display:flex;flex-direction:column;align-items:center}
-  .col-conteudo{text-align:left}
-  .logo{width:112px;height:auto;margin-bottom:22px}
-  .foto{width:116px;height:116px;border-radius:50%;object-fit:cover;padding:3px;background:var(--grad);
-        box-shadow:0 0 60px rgba(171,116,89,.35)}
-  h1{font-weight:800;font-size:30px;letter-spacing:-.4px;margin-top:18px;line-height:1.1}
-  .metodo{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:999px;border:1px solid rgba(171,116,89,.45);
-          background:rgba(171,116,89,.10);font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:600}
-  .tese{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:400;font-size:19px;line-height:1.4;color:var(--ink);opacity:.92;margin:18px 6px 0}
-  .tese em{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .prova{display:flex;margin-top:22px;width:100%;border:1px solid var(--line);border-radius:16px;
-         background:linear-gradient(135deg,var(--card),var(--card-2));overflow:hidden}
-  .prova div{flex:1;padding:13px 4px}
-  .prova div+div{border-left:1px solid var(--line)}
-  .prova b{display:block;white-space:nowrap;font-weight:800;font-size:clamp(17px,5vw,21px);line-height:1.15;
-           background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .prova span{font-size:11px;color:var(--muted);line-height:1.3;display:block;margin-top:3px}
-  nav{width:100%;margin-top:24px;display:flex;flex-direction:column;gap:12px}
-  a.btn{display:flex;align-items:center;gap:14px;width:100%;padding:16px 18px;border-radius:16px;
-        text-decoration:none;color:var(--ink);background:linear-gradient(135deg,var(--card),var(--card-2));
-        border:1px solid var(--line);text-align:left;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
-  a.btn:hover{transform:translateY(-1px);border-color:rgba(171,116,89,.6)}
-  a.btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-  a.btn.principal{background:var(--grad);color:var(--bg);border-color:transparent;box-shadow:0 20px 50px -20px rgba(171,116,89,.5)}
-  .ico{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(171,116,89,.12);color:var(--gold)}
-  a.principal .ico{background:rgba(21,18,15,.14);color:var(--bg)}
-  .ico svg{width:20px;height:20px}
-  .txt strong{display:block;font-weight:700;font-size:15px}
-  .txt small{display:block;font-size:12.5px;opacity:.75;margin-top:2px}
-  a.btn:not(.principal) .txt small{color:var(--muted);opacity:1}
-  a.btn.canal{border-color:rgba(37,211,102,.45);background:linear-gradient(135deg,rgba(37,211,102,.10),var(--card-2))}
-  a.btn.canal .ico{background:rgba(37,211,102,.16);color:#3ddc84}
-  a.btn.canal .gratis{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 8px;border-radius:999px;background:rgba(37,211,102,.16);color:#5be397}
-  a.btn.canal .gratis+.seta{margin-left:8px}
-  a.btn.news{border-color:rgba(10,102,194,.5);background:linear-gradient(135deg,rgba(10,102,194,.12),var(--card-2))}
-  a.btn.news .ico{background:rgba(10,102,194,.2);color:#5aa7f0}
-  a.btn.news .gratis{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 8px;border-radius:999px;background:rgba(10,102,194,.2);color:#7fbaf3}
-  a.btn.news .gratis+.seta{margin-left:8px}
-  .seta{margin-left:auto;opacity:.55;font-size:18px}
-  [data-oculto]{display:none!important}
-  .siga{width:100%;margin-top:26px;padding:18px 14px 14px;border-radius:20px;text-align:center;
-       background:radial-gradient(ellipse at top,rgba(207,152,89,.18),transparent 70%),linear-gradient(135deg,var(--card),var(--card-2));
-       border:1px solid rgba(207,152,89,.55);box-shadow:0 24px 50px -30px rgba(207,152,89,.55)}
-  .siga h3{font-size:18px;font-weight:800;line-height:1.25}
-  .siga h3 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .siga p{font-size:12.5px;color:var(--muted);line-height:1.45;margin:6px 4px 0}
-  .siga .redes{margin-top:14px}
-  .redes-tit{width:100%;margin-top:26px;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:700}
-  .redes{width:100%;margin-top:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .redes a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px 12px;border-radius:16px;text-decoration:none;
-       color:var(--ink);background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid rgba(171,116,89,.45);
-       transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
-  .redes a:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(207,152,89,.6)}
-  .redes .ri{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--grad);color:var(--bg)}
-  .redes svg{width:20px;height:20px}
-  .redes strong{font-size:13px;font-weight:700}
-  .redes small{font-size:10.5px;color:var(--muted)}
-  .bloco{width:100%;margin-top:30px;text-align:left}
-  .bloco h2{font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 4px 12px}
-  .bloco p.sub{font-size:12.5px;color:var(--muted);margin:-6px 4px 12px;line-height:1.45}
-  /* Jornadas */
-  .jornadas{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
-  .jornada{display:flex;flex-direction:column;gap:10px;padding:20px 16px 18px;border-radius:16px;background:linear-gradient(145deg,var(--card),var(--card-2));border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:border-color .2s ease,transform .15s ease}
-  .jornada:hover{border-color:rgba(171,116,89,.6);transform:translateY(-2px)}
-  .jornada-ico{width:32px;height:32px;color:var(--gold)}
-  .jornada-tit{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.3px}
-  .jornada-desc{font-size:12px;color:var(--muted);line-height:1.45;margin-top:2px}
-  .jornada-cta{margin-top:auto;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
-  .midia{display:flex;flex-direction:column;gap:10px}
-  .midia a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;text-decoration:none;color:var(--ink);
-           background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);transition:border-color .15s ease}
-  .midia a:hover{border-color:rgba(171,116,89,.6)}
-  .midia img{flex:none;width:96px;height:54px;border-radius:9px;object-fit:cover;background:var(--card-2)}
-  .midia .ep{display:block;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.6px}
-  .midia strong{display:block;font-size:13.5px;font-weight:600;line-height:1.3;margin-top:2px}
-  .midia img.capa{width:60px;height:80px;border-radius:10px;object-fit:cover;border:1px solid var(--line)}
-  .midia .reel{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(171,116,89,.12);color:var(--gold)}
-  .midia .reel svg{width:18px;height:18px}
-  .nota{font-size:10.5px;color:var(--muted);opacity:.85;margin:10px 4px 0;line-height:1.5}
-  /* Onde eu atendo */
-  .local{position:relative;display:block;border-radius:18px;overflow:hidden;border:1px solid var(--line);height:260px}
-  .local img{width:100%;height:100%;object-fit:cover;display:block}
-  .local::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(21,18,15,.92))}
-  .local figcaption{position:absolute;left:16px;right:16px;bottom:14px;z-index:1}
-  .local figcaption strong{display:block;font-size:16px;font-weight:700}
-  .local figcaption span{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4}
-  .galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
-  .galeria figure{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);height:120px}
-  .galeria img{width:100%;height:100%;object-fit:cover;display:block}
-  .galeria figcaption{position:absolute;inset:auto 0 0 0;padding:16px 8px 7px;font-size:10.5px;font-weight:600;
-       background:linear-gradient(transparent,rgba(21,18,15,.9))}
-  .premio{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .premio figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);height:230px}
-  .premio .f-main{grid-column:1/-1;height:380px}
-  .premio .f-anuncio{grid-column:1/-1;height:190px}
-  .premio img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
-  .premio figcaption{position:absolute;inset:auto 0 0 0;padding:18px 10px 8px;font-size:11px;font-weight:600;line-height:1.35;
-       background:linear-gradient(transparent,rgba(21,18,15,.92))}
-  .premio .f-main figcaption{font-size:13px}
-  footer{margin-top:28px;font-size:11px;line-height:1.6;color:var(--muted);max-width:400px}
-  .disclaimer{display:block;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:10px;line-height:1.55;opacity:.8;text-align:left}
-  .disclaimer b{font-weight:600}
-  /* Selos de certificação */
-  .selos{width:100%;margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .selo{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 10px 14px;border-radius:14px;background:linear-gradient(145deg,var(--card),var(--card-2));border:1px solid rgba(171,116,89,.4);text-align:center}
-  .selo-ico{flex:none;width:72px;height:72px;object-fit:contain;border-radius:50%;box-shadow:0 0 0 2px rgba(207,152,89,.75);filter:drop-shadow(0 2px 8px rgba(207,152,89,.25))}
-  .selo-txt{font-size:11.5px;font-weight:700;color:var(--gold);line-height:1.3}
-  .selo-txt small{display:block;font-size:10px;color:var(--muted);font-weight:400;margin-top:2px}
-  /* Imprensa */
-  .imprensa{display:flex;flex-direction:column;gap:10px}
-  .imprensa a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;text-decoration:none;color:var(--ink);
-             background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);transition:border-color .15s ease}
-  .imprensa a:hover{border-color:rgba(171,116,89,.6)}
-  .imprensa .thumb{flex:none;width:60px;height:60px;border-radius:10px;object-fit:cover;background:var(--card-2);display:grid;place-items:center}
-  .imprensa .ep{display:block;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.6px}
-  .imprensa strong{display:block;font-size:13.5px;font-weight:600;line-height:1.3;margin-top:2px}
-  @media (min-width:960px){
-.imprensa{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  }
-  /* Computador: duas colunas, perfil fixo à esquerda */
-  @media (min-width:960px){
-    body{padding:56px 40px}
-    main{max-width:1120px;flex-direction:row;align-items:flex-start;gap:64px}
-    .col-perfil{flex:0 0 400px;position:sticky;top:40px}
-    .col-conteudo{flex:1;min-width:0}
-    .col-conteudo .bloco:first-child{margin-top:0}
-    .local{height:380px}
-    .galeria figure{height:200px}
-    .premio{grid-template-columns:1.3fr .6fr .6fr;grid-template-rows:200px 300px}
-    .premio figure,.premio .f-main,.premio .f-anuncio{height:auto}
-    .premio .f-main{grid-column:1;grid-row:1/3}
-    .premio .f-anuncio{grid-column:2/4}
-    .midia{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    footer{max-width:none}
-  }
+:root {
+  color-scheme: dark;
+  --bg: #15120F;
+  --card: #1E1915;
+  --card-2: #29231E;
+  --line: #362D26;
+  --ink: #F6F3EE;
+  --muted: #B3A798;
+  --copper: #AB7459;
+  --gold: #CF9859;
+  --grad: linear-gradient(135deg,#AB7459,#CF9859);
+  --wrap: 1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ─── FUNDO GLOBAL ─── */
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(171,116,89,.14),transparent 60%),var(--bg)}
+
+/* ─── CONTAINER ─── */
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
+
+/* ─── NAVBAR ─── */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(21,18,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(54,45,38,.6)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 20px;max-width:var(--wrap);margin:0 auto}
+.nav-logo{height:36px;width:auto}
+.nav-links{display:none;gap:28px}
+.nav-links a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;letter-spacing:.3px;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn-nav{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;
+  background:var(--grad);color:var(--bg);border:none;cursor:pointer;white-space:nowrap;letter-spacing:.2px}
+.btn-wpp{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;
+  background:transparent;color:var(--gold);border:1px solid rgba(207,152,89,.5);white-space:nowrap;letter-spacing:.2px}
+@media(min-width:768px){.nav-links{display:flex}}
+
+/* ─── HERO ─── */
+#hero{min-height:100svh;display:flex;align-items:center;padding:100px 0 60px;
+  background:radial-gradient(ellipse 70% 60% at 60% 40%,rgba(171,116,89,.12),transparent 65%)}
+.hero-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
+.hero-foto-wrap{position:relative;margin-bottom:28px}
+.hero-foto{width:140px;height:140px;border-radius:50%;object-fit:cover;
+  padding:3px;background:var(--grad);box-shadow:0 0 80px rgba(171,116,89,.4)}
+.hero-badge{position:absolute;bottom:2px;right:2px;background:var(--grad);border-radius:999px;
+  padding:4px 10px;font-size:10px;font-weight:800;color:var(--bg);letter-spacing:.8px;text-transform:uppercase;
+  box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.hero-metodo{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:7px 16px;
+  border-radius:999px;border:1px solid rgba(171,116,89,.45);background:rgba(171,116,89,.10);
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.hero-metodo::before{content:"";display:block;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+h1.hero-nome{font-weight:800;font-size:clamp(38px,8vw,72px);letter-spacing:-1.5px;line-height:1;margin-bottom:22px}
+.hero-tese{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:clamp(20px,3.5vw,30px);
+  line-height:1.45;color:var(--ink);opacity:.9;max-width:640px;margin:0 auto 36px}
+.hero-tese em{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:14px;
+  text-decoration:none;font-weight:700;font-size:15px;color:var(--bg);background:var(--grad);
+  box-shadow:0 20px 50px -20px rgba(171,116,89,.6);letter-spacing:.2px;transition:transform .15s,box-shadow .15s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 28px 60px -20px rgba(171,116,89,.7)}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:14px;
+  text-decoration:none;font-weight:700;font-size:15px;color:var(--ink);
+  background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);
+  letter-spacing:.2px;transition:transform .15s,border-color .15s}
+.btn-secondary:hover{transform:translateY(-2px);border-color:rgba(207,152,89,.6)}
+.hero-scroll{margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;opacity:.6}
+.hero-scroll svg{animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ─── SECTION BASE ─── */
+section{padding:80px 0}
+section:nth-child(even){background:rgba(30,25,21,.5)}
+.sec-label{display:block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;text-align:center}
+.sec-title{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-1px;line-height:1.1;text-align:center;margin-bottom:16px}
+.sec-sub{font-size:16px;color:var(--muted);line-height:1.6;text-align:center;max-width:580px;margin:0 auto 48px}
+.divider{width:40px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 48px}
+
+/* ─── JORNADAS ─── */
+.jornadas{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:0 auto}
+.jornada{display:flex;flex-direction:column;gap:12px;padding:28px 24px 24px;border-radius:20px;
+  background:linear-gradient(145deg,var(--card),var(--card-2));border:1px solid var(--line);
+  text-decoration:none;color:var(--ink);transition:border-color .2s ease,transform .15s ease,box-shadow .2s}
+.jornada:hover{border-color:rgba(171,116,89,.6);transform:translateY(-3px);box-shadow:0 20px 50px -20px rgba(171,116,89,.3)}
+.jornada-ico{width:40px;height:40px;color:var(--gold)}
+.jornada-tit{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:.2px}
+.jornada-desc{font-size:13.5px;color:var(--muted);line-height:1.55;margin-top:2px;flex:1}
+.jornada-cta{margin-top:8px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.8px;text-transform:uppercase}
+@media(max-width:540px){.jornadas{grid-template-columns:1fr}}
+
+/* ─── SOBRE ─── */
+.sobre-inner{display:flex;flex-direction:column;align-items:center;gap:48px}
+.sobre-foto-col{display:flex;justify-content:center}
+.sobre-foto{width:280px;height:340px;object-fit:cover;object-position:center 15%;
+  border-radius:24px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);
+  border:1px solid var(--line)}
+.sobre-texto{max-width:620px}
+.sobre-texto p{font-size:17px;line-height:1.75;color:var(--ink);opacity:.9;margin-bottom:22px}
+.sobre-texto p:last-child{margin-bottom:0}
+.sobre-texto strong{color:var(--gold)}
+.sobre-assinatura{display:flex;align-items:center;gap:16px;margin-top:36px;padding-top:28px;border-top:1px solid var(--line)}
+.sobre-assinatura img{width:56px;height:56px;border-radius:50%;object-fit:cover;padding:2px;background:var(--grad)}
+.sobre-assinatura-txt strong{display:block;font-size:15px;font-weight:700}
+.sobre-assinatura-txt span{font-size:13px;color:var(--muted)}
+@media(min-width:860px){
+  .sobre-inner{flex-direction:row;align-items:flex-start;gap:64px}
+  .sobre-foto-col{flex:0 0 280px}
+}
+
+/* ─── NÚMEROS ─── */
+#numeros{background:linear-gradient(135deg,rgba(21,18,15,.9),rgba(30,25,21,.9));
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.numeros-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:20px;overflow:hidden;max-width:860px;margin:0 auto}
+.num-card{background:var(--card);padding:40px 24px;text-align:center}
+.num-val{font-size:clamp(36px,6vw,56px);font-weight:800;letter-spacing:-2px;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  display:block;margin-bottom:10px}
+.num-label{font-size:13px;color:var(--muted);line-height:1.4;font-weight:500}
+@media(max-width:560px){
+  .numeros-grid{grid-template-columns:1fr}
+  .num-card{padding:28px 20px}
+}
+
+/* ─── SELOS ─── */
+.selos{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:560px;margin:0 auto}
+.selo{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 16px 20px;
+  border-radius:18px;background:linear-gradient(145deg,var(--card),var(--card-2));
+  border:1px solid rgba(171,116,89,.4);text-align:center;text-decoration:none;color:var(--ink)}
+.selo-ico{flex:none;width:80px;height:80px;object-fit:contain;border-radius:50%;
+  box-shadow:0 0 0 2px rgba(207,152,89,.75);filter:drop-shadow(0 2px 8px rgba(207,152,89,.25))}
+.selo-txt{font-size:12px;font-weight:700;color:var(--gold);line-height:1.3}
+.selo-txt small{display:block;font-size:10.5px;color:var(--muted);font-weight:400;margin-top:3px}
+@media(max-width:420px){.selos{grid-template-columns:1fr}}
+
+/* ─── RECONHECIMENTO ─── */
+.premio{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.premio figure{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.premio .f-main{grid-column:1/-1}
+.premio img{width:100%;height:100%;object-fit:cover;display:block}
+.premio .f-main img{height:360px;object-position:center 20%}
+.premio .f-sec img{height:200px;object-position:center 30%}
+.premio figcaption{position:absolute;inset:auto 0 0 0;padding:20px 14px 12px;font-size:12px;font-weight:600;line-height:1.4;
+  background:linear-gradient(transparent,rgba(21,18,15,.92))}
+.premio .f-main figcaption{font-size:14px}
+@media(min-width:680px){
+  .premio{grid-template-columns:1.4fr .55fr .55fr;grid-template-rows:300px 200px}
+  .premio .f-main{grid-column:1;grid-row:1/3}
+  .premio .f-main img{height:100%;object-position:center 20%}
+  .premio .f-ano{grid-column:2/4;grid-row:1}
+  .premio .f-sec{grid-row:2}
+  .premio .f-sec img{height:200px}
+  .premio figure{height:auto}
+}
+
+/* ─── ONDE ATENDO ─── */
+.atendimento-grid{display:flex;flex-direction:column;gap:10px}
+.local{position:relative;display:block;border-radius:20px;overflow:hidden;border:1px solid var(--line);height:300px}
+.local img{width:100%;height:100%;object-fit:cover;display:block}
+.local::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(21,18,15,.92))}
+.local figcaption{position:absolute;left:20px;right:20px;bottom:18px;z-index:1}
+.local figcaption strong{display:block;font-size:18px;font-weight:700}
+.local figcaption span{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45}
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.galeria figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);height:130px}
+.galeria img{width:100%;height:100%;object-fit:cover;display:block}
+.galeria figcaption{position:absolute;inset:auto 0 0 0;padding:18px 10px 8px;font-size:11px;font-weight:600;
+  background:linear-gradient(transparent,rgba(21,18,15,.9))}
+@media(min-width:768px){
+  .local{height:420px}
+  .galeria figure{height:200px}
+}
+
+/* ─── IMPRENSA ─── */
+.imprensa{display:flex;flex-direction:column;gap:12px}
+.imprensa a{display:flex;align-items:center;gap:14px;padding:14px;border-radius:16px;text-decoration:none;color:var(--ink);
+  background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);transition:border-color .15s,transform .15s}
+.imprensa a:hover{border-color:rgba(171,116,89,.6);transform:translateX(3px)}
+.imprensa .thumb{flex:none;width:72px;height:72px;border-radius:12px;object-fit:cover;background:var(--card-2)}
+.imprensa .ep{display:block;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.imprensa strong{display:block;font-size:14px;font-weight:600;line-height:1.35;margin-top:4px}
+@media(min-width:680px){.imprensa{display:grid;grid-template-columns:1fr 1fr;gap:14px}}
+
+/* ─── MÍDIA (podcast/vídeos) ─── */
+.midia{display:flex;flex-direction:column;gap:12px}
+.midia a{display:flex;align-items:center;gap:14px;padding:12px;border-radius:16px;text-decoration:none;color:var(--ink);
+  background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);transition:border-color .15s,transform .15s}
+.midia a:hover{border-color:rgba(171,116,89,.6);transform:translateX(3px)}
+.midia img{flex:none;width:100px;height:56px;border-radius:10px;object-fit:cover;background:var(--card-2)}
+.midia img.capa{width:48px;height:64px;border-radius:10px;object-fit:cover;border:1px solid var(--line)}
+.midia .ep{display:block;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+.midia strong{display:block;font-size:14px;font-weight:600;line-height:1.35;margin-top:3px}
+@media(min-width:680px){.midia{display:grid;grid-template-columns:1fr 1fr;gap:14px}}
+
+/* ─── DEPOIMENTOS ─── */
+.depo-grid{display:grid;gap:14px;grid-template-columns:1fr}
+.depo{padding:28px;border-radius:20px;background:linear-gradient(145deg,var(--card),var(--card-2));
+  border:1px solid var(--line);position:relative}
+.depo::before{content:"\201C";position:absolute;top:14px;left:20px;font-family:Georgia,serif;font-size:64px;
+  color:var(--copper);opacity:.35;line-height:1}
+.depo-text{font-size:15px;line-height:1.7;color:var(--ink);opacity:.88;padding-top:28px}
+.depo-link{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:12px;font-weight:700;
+  color:var(--gold);text-decoration:none;letter-spacing:.6px;text-transform:uppercase}
+.depo-link:hover{text-decoration:underline}
+@media(min-width:680px){.depo-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.depo-grid{grid-template-columns:1fr 1fr 1fr}}
+
+/* ─── CTA FINAL ─── */
+#cta{background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(171,116,89,.20),transparent 65%);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta-inner{text-align:center;max-width:620px;margin:0 auto}
+.cta-inner .sec-title{margin-bottom:20px}
+.cta-inner .sec-sub{margin-bottom:40px}
+.cta-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+/* ─── REDES SOCIAIS ─── */
+.redes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:480px;margin:0 auto 0}
+.redes a{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 10px 16px;border-radius:18px;text-decoration:none;
+  color:var(--ink);background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid rgba(171,116,89,.4);
+  transition:transform .15s ease,border-color .15s ease,box-shadow .15s}
+.redes a:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(207,152,89,.6)}
+.redes .ri{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--grad);color:var(--bg)}
+.redes svg{width:22px;height:22px}
+.redes strong{font-size:13px;font-weight:700}
+.redes small{font-size:10.5px;color:var(--muted)}
+
+/* ─── CANAIS ─── */
+.canais{display:flex;flex-direction:column;gap:12px;max-width:640px;margin:0 auto}
+a.canal-btn{display:flex;align-items:center;gap:14px;width:100%;padding:16px 20px;border-radius:16px;
+  text-decoration:none;color:var(--ink);background:linear-gradient(135deg,var(--card),var(--card-2));
+  border:1px solid var(--line);transition:transform .15s,border-color .15s}
+a.canal-btn:hover{transform:translateX(3px);border-color:rgba(207,152,89,.6)}
+a.canal-btn.wpp{border-color:rgba(37,211,102,.45);background:linear-gradient(135deg,rgba(37,211,102,.10),var(--card-2))}
+a.canal-btn.li{border-color:rgba(10,102,194,.5);background:linear-gradient(135deg,rgba(10,102,194,.12),var(--card-2))}
+.canal-ico{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(171,116,89,.12);color:var(--gold)}
+a.canal-btn.wpp .canal-ico{background:rgba(37,211,102,.16);color:#3ddc84}
+a.canal-btn.li .canal-ico{background:rgba(10,102,194,.2);color:#5aa7f0}
+.canal-ico svg{width:22px;height:22px}
+.canal-txt strong{display:block;font-weight:700;font-size:15px}
+.canal-txt small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.canal-pill{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:1px;padding:5px 10px;border-radius:999px}
+a.canal-btn.wpp .canal-pill{background:rgba(37,211,102,.16);color:#5be397}
+a.canal-btn.li .canal-pill{background:rgba(10,102,194,.2);color:#7fbaf3}
+.canal-seta{margin-left:auto;opacity:.45;font-size:20px;line-height:1}
+
+/* ─── FAQ ─── */
+.faq{display:flex;flex-direction:column;gap:10px;max-width:780px;margin:0 auto}
+.faq-item{border-radius:16px;background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);overflow:hidden}
+.faq-q{width:100%;background:none;border:none;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  gap:16px;padding:22px 22px;text-align:left;font-family:inherit;font-size:15px;font-weight:600;line-height:1.45}
+.faq-q:hover{color:var(--gold)}
+.faq-icon{flex:none;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);
+  display:grid;place-items:center;color:var(--gold);transition:transform .25s,background .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:rgba(207,152,89,.15)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
+.faq-item.open .faq-a{max-height:400px}
+.faq-a-inner{padding:0 22px 22px;font-size:14.5px;color:var(--muted);line-height:1.75;border-top:1px solid var(--line);padding-top:18px}
+
+/* ─── FOOTER ─── */
+footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
+.footer-inner{max-width:var(--wrap);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+.footer-logo{height:30px;opacity:.7}
+.footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+.footer-links a{font-size:12.5px;color:var(--muted);text-decoration:none;font-weight:500;transition:color .15s}
+.footer-links a:hover{color:var(--gold)}
+.footer-disc{font-size:10.5px;color:var(--muted);opacity:.65;line-height:1.65;max-width:680px;text-align:center}
+.footer-disc b{font-weight:600}
+
+/* ─── NOTA ─── */
+.nota{font-size:11px;color:var(--muted);opacity:.8;margin-top:16px;line-height:1.6;text-align:center}
+
+/* ─── ANIMAÇÕES ─── */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
-<main>
-<div class="col-perfil">
-  <img class="logo" src="logo-ocre.png" alt="Invista com Thiago · Alavancagem Patrimonial" width="379" height="264">
-  <img class="foto" src="foto-thiago.jpg" alt="Foto de Thiago Pereira" width="112" height="112">
-  <h1>Thiago Pereira</h1>
-  <p class="metodo">Arquitetura Patrimonial</p>
-  <p class="tese">Eu não vendo consórcio. Transformo capital presente em <em>patrimônio futuro.</em></p>
 
-  <section class="prova" aria-label="Números">
-    <div><b>4 anos</b><span>de mercado</span></div>
-    <div><b>700+</b><span>clientes</span></div>
-    <div><b>R$ 400 mi+</b><span>em crédito estruturado</span></div>
-  </section>
-
-  <div class="selos" aria-label="Certificações">
-    <a class="selo" href="http://badges.com.br/share/e0d83cbf0a60000293a5df1d53b71bf1.php?a=6064" target="_blank" rel="noopener" style="text-decoration:none">
-      <img class="selo-ico" src="abac-selo.png" alt="Certificação ABAC PCA-10">
-      <div class="selo-txt">Certificado ABAC PCA-10<small>Especialista em Consórcio · Verificar</small></div>
-    </a>
-    <div class="selo">
-      <svg class="selo-ico" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#0f0f0f" stroke="#CF9859" stroke-width="2.5"/>
-        <text x="32" y="29" font-family="Georgia,serif" font-size="14" font-weight="700" font-style="italic" fill="#E8161B" text-anchor="middle" letter-spacing=".5">exame.</text>
-        <text x="32" y="42" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="2.5">INVEST</text>
-      </svg>
-      <div class="selo-txt">Exame Invest Aprovado<small>Certificação de investimentos</small></div>
+<!-- ─── NAVBAR ─── -->
+<header id="navbar" role="banner">
+  <div class="nav-inner">
+    <img class="nav-logo" src="logo-ocre.png" alt="Invista com Thiago" width="152" height="40">
+    <nav class="nav-links" aria-label="Seções">
+      <a href="#sobre">Sobre</a>
+      <a href="#numeros">Números</a>
+      <a href="#reconhecimento">Reconhecimento</a>
+      <a href="#conteudo">Conteúdo</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn-wpp" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn-nav" href="https://consorcio-alavancai.lovable.app" target="_blank" rel="noopener">Simular agora</a>
     </div>
   </div>
+</header>
 
-  <nav aria-label="Links">
-    <a class="btn principal" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20Instagram%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg></span>
-      <span class="txt"><strong>Falar comigo no WhatsApp</strong><small>Atendimento direto e individual</small></span>
-      <span class="seta">›</span>
-    </a>
-
-    <a class="btn" href="https://calendar.app.google/JqPLMmbxKfL9betLA" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></span>
-      <span class="txt"><strong>Agendar uma conversa</strong><small>Escolha o melhor horário na minha agenda</small></span>
-      <span class="seta">›</span>
-    </a>
-
-    <a class="btn" href="https://consorcio-alavancai.lovable.app" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg></span>
-      <span class="txt"><strong>Simule sua estratégia</strong><small>Veja como o seu capital pode trabalhar</small></span>
-      <span class="seta">›</span>
-    </a>
-
-    <a class="btn canal" href="https://whatsapp.com/channel/0029VbDkI5C5Ejy0HYc7tX22" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
-      <span class="txt"><strong>Receba no WhatsApp</strong><small>Canal semanal sobre patrimônio, sem grupo</small></span>
-      <span class="gratis">GRÁTIS</span><span class="seta">›</span>
-    </a>
-
-    <a class="btn news" href="https://www.linkedin.com/newsletters/arquitetura-patrimonial-7516142606838460417/" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-      <span class="txt"><strong>Assine a newsletter</strong><small>Arquitetura Patrimonial · semanal no LinkedIn</small></span>
-      <span class="gratis">GRÁTIS</span><span class="seta">›</span>
-    </a>
-
-    <!-- VÍDEO: quando "O que é investir?" estiver publicado, cole o link em href e remova data-oculto -->
-    <a class="btn" href="#" target="_blank" rel="noopener" data-oculto>
-      <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg></span>
-      <span class="txt"><strong>Assista: O que é investir?</strong><small>Buffett, Graham, Kiyosaki e a Arquitetura Patrimonial</small></span>
-      <span class="seta">›</span>
-    </a>
-  </nav>
-
-  <div class="siga">
-  <h3>Siga e fique <em>por dentro</em></h3>
-  <p>Toda semana: estratégias de patrimônio, mercado imobiliário e os bastidores do que estamos construindo.</p>
-  <div class="redes">
-    <a href="https://www.instagram.com/invistacomthiago/" target="_blank" rel="noopener" aria-label="Instagram @invistacomthiago">
-      <span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
-      <strong>Instagram</strong><small>@invistacomthiago</small>
-    </a>
-    <a href="https://www.tiktok.com/@invistacomthiago" target="_blank" rel="noopener" aria-label="TikTok @invistacomthiago">
-      <span class="ri"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.3v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V8.6a7.9 7.9 0 0 0 4.4 1.3V6.6a4.5 4.5 0 0 1-4.4-4.6Z"/></svg></span>
-      <strong>TikTok</strong><small>@invistacomthiago</small>
-    </a>
-    <a href="https://www.linkedin.com/in/invistacomthiago/" target="_blank" rel="noopener" aria-label="LinkedIn Thiago Pereira">
-      <span class="ri"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.4 8.6H2.2V21h3.2V8.6ZM3.8 3a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8ZM21.8 13.9c0-3.3-1.8-5.6-4.9-5.6a4 4 0 0 0-3.6 2V8.6h-3.1V21h3.2v-6.4c0-1.7.6-3.2 2.4-3.2s2.3 1.6 2.3 3.3V21h3.2v-7.1Z"/></svg></span>
-      <strong>LinkedIn</strong><small>Thiago Pereira</small>
-    </a>
-    <!-- YouTube entra aqui quando o canal estiver pronto -->
+<!-- ─── HERO ─── -->
+<section id="hero" aria-labelledby="hero-nome">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-foto-wrap">
+        <img class="hero-foto" src="foto-thiago.jpg" alt="Thiago Pereira" width="140" height="140">
+        <span class="hero-badge">Master Franqueado</span>
+      </div>
+      <span class="hero-metodo">Arquitetura Patrimonial</span>
+      <h1 class="hero-nome" id="hero-nome">Thiago Pereira</h1>
+      <p class="hero-tese">Eu não vendo consórcio.<br>Transformo capital presente em <em>patrimônio futuro.</em></p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <a class="btn-secondary" href="https://consorcio-alavancai.lovable.app" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg>
+          Simular minha estratégia
+        </a>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Conheça mais</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </div>
+    </div>
   </div>
-  </div>
+</section>
 
-</div>
-<div class="col-conteudo">
-  <section class="bloco" aria-labelledby="t-jornada">
-    <h2 id="t-jornada">Escolha sua jornada</h2>
+<!-- ─── JORNADAS ─── -->
+<section id="jornada" aria-labelledby="t-jornada">
+  <div class="wrap">
+    <span class="sec-label">Escolha seu caminho</span>
+    <h2 class="sec-title" id="t-jornada">Escolha sua jornada</h2>
+    <div class="divider"></div>
     <div class="jornadas">
       <a class="jornada" href="https://consorcio-alavancai.lovable.app/" target="_blank" rel="noopener">
         <svg class="jornada-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -299,101 +385,428 @@
         <div class="jornada-cta">Ver vaga →</div>
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-local">
-    <h2 id="t-local">Onde eu atendo</h2>
-    <figure class="local"><img src="img/recepcao-logo-aberta.jpg" alt="Recepção do escritório Monteo em Maringá" loading="lazy">
-      <figcaption><strong>Escritório Monteo · Maringá-PR</strong><span>Av. Advogado Horácio Racanelo Filho, 5145, 3º andar · atendimento presencial ou online, para todo o Brasil</span></figcaption></figure>
-    <div class="galeria">
-      <figure><img src="img/lounge-bar.jpg" alt="Lounge de atendimento" loading="lazy"><figcaption>Lounge</figcaption></figure>
-      <figure><img src="img/auditorio-1.jpg" alt="Auditório de treinamentos" loading="lazy"><figcaption>Auditório</figcaption></figure>
-      <figure><img src="img/sala-consultores-aberta.jpg" alt="Sala dos consultores" loading="lazy"><figcaption>Time</figcaption></figure>
+<!-- ─── SOBRE ─── -->
+<section id="sobre" aria-labelledby="t-sobre">
+  <div class="wrap">
+    <span class="sec-label">Quem sou eu</span>
+    <h2 class="sec-title" id="t-sobre">A história por trás da estratégia</h2>
+    <div class="divider"></div>
+    <div class="sobre-inner">
+      <div class="sobre-foto-col">
+        <img class="sobre-foto" src="img/trofeu-retrato-terno-azul.jpg" alt="Thiago Pereira no Real Estate Awards 2026" loading="lazy">
+      </div>
+      <div class="sobre-texto">
+        <p>Em 2021, eu estava no começo de uma virada que eu ainda não entendia completamente. Tinha formação em matemática e contabilidade, entendia os números — mas não sabia usar isso a meu favor.</p>
+        <p>Foi quando entrei em contato com o consórcio de verdade. Não como produto, mas como <strong>estratégia</strong>. Percebi que a maioria das pessoas usa o consórcio como plano B, como espera passiva. Eu aprendi a usar como <strong>motor ativo de construção de patrimônio</strong>.</p>
+        <p>Hoje, como Master Franqueado da Monteo, já estruturei mais de <strong>R$ 400 milhões em crédito</strong> para mais de <strong>700 clientes</strong> — de profissionais liberais a investidores com múltiplos imóveis. Não vendo consórcio. Faço Arquitetura Patrimonial.</p>
+        <p>Sou matemático, contador e, antes de tudo, estrategista. Cada cliente recebe uma estrutura feita para o patrimônio <em>dele</em> — não um produto pronto de prateleira.</p>
+        <div class="sobre-assinatura">
+          <img src="foto-thiago.jpg" alt="Thiago Pereira" width="56" height="56">
+          <div class="sobre-assinatura-txt">
+            <strong>Thiago Pereira</strong>
+            <span>Matemático · Contador · Master Franqueado Monteo</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-premio">
-    <h2 id="t-premio">Reconhecimento</h2>
-    <p class="sub">A Monteo foi eleita Consórcio Imobiliário do Ano no Real Estate Awards 2026 e é certificada GPTW.</p>
+<!-- ─── NÚMEROS ─── -->
+<section id="numeros" aria-labelledby="t-numeros">
+  <div class="wrap">
+    <span class="sec-label">Em números</span>
+    <h2 class="sec-title" id="t-numeros">Resultados que falam por si</h2>
+    <div class="divider"></div>
+    <div class="numeros-grid">
+      <div class="num-card">
+        <span class="num-val" data-target="4" data-suffix=" anos">4 anos</span>
+        <span class="num-label">de mercado e operação</span>
+      </div>
+      <div class="num-card">
+        <span class="num-val" data-target="700" data-suffix="+">700+</span>
+        <span class="num-label">clientes atendidos</span>
+      </div>
+      <div class="num-card">
+        <span class="num-val" data-target="400" data-prefix="R$ " data-suffix=" mi+">R$ 400 mi+</span>
+        <span class="num-label">em crédito estruturado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SELOS ─── -->
+<section id="selos" aria-labelledby="t-selos">
+  <div class="wrap">
+    <span class="sec-label">Certificações</span>
+    <h2 class="sec-title" id="t-selos">Qualificação reconhecida</h2>
+    <div class="divider"></div>
+    <div class="selos">
+      <a class="selo" href="http://badges.com.br/share/e0d83cbf0a60000293a5df1d53b71bf1.php?a=6064" target="_blank" rel="noopener">
+        <img class="selo-ico" src="abac-selo.png" alt="Certificação ABAC PCA-10">
+        <div class="selo-txt">Certificado ABAC PCA-10<small>Especialista em Consórcio · Verificar</small></div>
+      </a>
+      <div class="selo">
+        <svg class="selo-ico" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#0f0f0f" stroke="#CF9859" stroke-width="2.5"/>
+          <text x="32" y="29" font-family="Georgia,serif" font-size="14" font-weight="700" font-style="italic" fill="#E8161B" text-anchor="middle" letter-spacing=".5">exame.</text>
+          <text x="32" y="42" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="2.5">INVEST</text>
+        </svg>
+        <div class="selo-txt">Exame Invest Aprovado<small>Certificação de investimentos</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RECONHECIMENTO ─── -->
+<section id="reconhecimento" aria-labelledby="t-premio">
+  <div class="wrap">
+    <span class="sec-label">Prêmios e reconhecimento</span>
+    <h2 class="sec-title" id="t-premio">Reconhecimento do mercado</h2>
+    <p class="sec-sub">A Monteo foi eleita Consórcio Imobiliário do Ano no Real Estate Awards 2026 e é certificada GPTW pelo 3º ano consecutivo.</p>
     <div class="premio">
       <figure class="f-main"><img src="img/trofeu-retrato-terno-azul.jpg" alt="Thiago Pereira com o troféu do Real Estate Awards 2026" loading="lazy"><figcaption>Real Estate Awards 2026 · Consórcio Imobiliário do Ano</figcaption></figure>
-      <figure class="f-anuncio"><img src="img/telao-consorcio-imobiliario-do-ano.jpg" alt="Telão anunciando a Monteo como Consórcio Imobiliário do Ano" loading="lazy"><figcaption>O anúncio</figcaption></figure>
-      <figure><img style="object-position:center 50%" src="img/premio-equipe-palco.jpg" alt="Equipe Monteo no palco do prêmio" loading="lazy"><figcaption>O time no palco</figcaption></figure>
-      <figure><img style="object-position:center 35%" src="img/gptw-3-anos-bolo.jpg" alt="Comemoração dos 3 anos de certificação GPTW" loading="lazy"><figcaption>3º ano GPTW</figcaption></figure>
+      <figure class="f-ano"><img src="img/telao-consorcio-imobiliario-do-ano.jpg" alt="Telão anunciando a Monteo como Consórcio Imobiliário do Ano" loading="lazy" style="object-position:center 40%"><figcaption>O anúncio</figcaption></figure>
+      <figure class="f-sec"><img style="object-position:center 50%" src="img/premio-equipe-palco.jpg" alt="Equipe Monteo no palco do prêmio" loading="lazy"><figcaption>O time no palco</figcaption></figure>
+      <figure class="f-sec"><img style="object-position:center 35%" src="img/gptw-3-anos-bolo.jpg" alt="Comemoração dos 3 anos de certificação GPTW" loading="lazy"><figcaption>3º ano GPTW</figcaption></figure>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-imprensa">
-    <h2 id="t-imprensa">Imprensa</h2>
-    <p class="sub">Matéria espontânea e gratuita — quando o mercado fala por você.</p>
+<!-- ─── ONDE ATENDO ─── -->
+<section id="atendimento" aria-labelledby="t-local">
+  <div class="wrap">
+    <span class="sec-label">Escritório</span>
+    <h2 class="sec-title" id="t-local">Onde eu atendo</h2>
+    <div class="divider"></div>
+    <div class="atendimento-grid">
+      <figure class="local"><img src="img/recepcao-logo-aberta.jpg" alt="Recepção do escritório Monteo em Maringá" loading="lazy">
+        <figcaption><strong>Escritório Monteo · Maringá-PR</strong><span>Av. Advogado Horácio Racanelo Filho, 5145, 3º andar · atendimento presencial ou online, para todo o Brasil</span></figcaption>
+      </figure>
+      <div class="galeria">
+        <figure><img src="img/lounge-bar.jpg" alt="Lounge de atendimento" loading="lazy"><figcaption>Lounge</figcaption></figure>
+        <figure><img src="img/auditorio-1.jpg" alt="Auditório de treinamentos" loading="lazy"><figcaption>Auditório</figcaption></figure>
+        <figure><img src="img/sala-consultores-aberta.jpg" alt="Sala dos consultores" loading="lazy"><figcaption>Time</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── IMPRENSA ─── -->
+<section id="imprensa" aria-labelledby="t-imprensa">
+  <div class="wrap">
+    <span class="sec-label">Na mídia</span>
+    <h2 class="sec-title" id="t-imprensa">Imprensa</h2>
+    <p class="sec-sub">Matéria espontânea e gratuita — quando o mercado fala por você.</p>
     <div class="imprensa">
       <a href="https://www.instagram.com/p/DTiRcDgkd9E/" target="_blank" rel="noopener">
         <img class="thumb" src="imprensa-thumb.jpg" alt="Matéria de imprensa" loading="lazy" onerror="this.style.background='var(--card-2)';this.removeAttribute('onerror')">
-        <span><span class="ep">ASSESSORIA DE IMPRENSA</span><strong>Matéria espontânea sobre alavancagem patrimonial com consórcio</strong></span>
+        <span><span class="ep">Assessoria de Imprensa</span><strong>Matéria espontânea sobre alavancagem patrimonial com consórcio</strong></span>
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-lives">
-    <h2 id="t-lives">Lives com parceiros</h2>
-    <p class="sub">Participações ao vivo que ficaram gravadas.</p>
+<!-- ─── LIVES ─── -->
+<section id="lives" aria-labelledby="t-lives">
+  <div class="wrap">
+    <span class="sec-label">Conteúdo</span>
+    <h2 class="sec-title" id="t-lives">Lives com parceiros</h2>
+    <p class="sec-sub">Participações ao vivo que ficaram gravadas.</p>
     <div class="midia">
-      <a href="https://www.youtube.com/live/gwcPueRdINM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/gwcPueRdINM/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">CANAL LEPONT PERSONAL BROKERS · LIVE</span><strong>Estratégia patrimonial com consórcio ao vivo</strong></span></a>
-      <a href="https://www.youtube.com/live/lKVx-haDBmI" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/lKVx-haDBmI/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">CANAL LEPONT PERSONAL BROKERS · LIVE</span><strong>Alavancagem imobiliária — perguntas e respostas ao vivo</strong></span></a>
+      <a href="https://www.youtube.com/live/gwcPueRdINM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/gwcPueRdINM/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">LePont Personal Brokers · Live</span><strong>Estratégia patrimonial com consórcio ao vivo</strong></span></a>
+      <a href="https://www.youtube.com/live/lKVx-haDBmI" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/lKVx-haDBmI/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">LePont Personal Brokers · Live</span><strong>Alavancagem imobiliária — perguntas e respostas ao vivo</strong></span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-midia">
-    <h2 id="t-midia">MonteoCast</h2>
-    <p class="sub">Podcast oficial da Monteo — episódios com a minha participação.</p>
+<!-- ─── MONTEOCAST ─── -->
+<section id="monteocast" aria-labelledby="t-monteocast">
+  <div class="wrap">
+    <span class="sec-label" id="conteudo">Podcast</span>
+    <h2 class="sec-title" id="t-monteocast">MonteoCast</h2>
+    <p class="sec-sub">Podcast oficial da Monteo — episódios com a minha participação.</p>
     <div class="midia">
-      <a href="https://youtu.be/KpOa47GLl4Y" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/KpOa47GLl4Y/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MONTEOCAST · EP. 21</span><strong>Seu vendedor de consórcio é especialista? Faça essas perguntas antes de contratar</strong></span></a>
-      <a href="https://youtu.be/IV3lCd98ZYE" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/IV3lCd98ZYE/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MONTEOCAST · EP. 16</span><strong>Selic alta: consórcio ainda vale a pena?</strong></span></a>
-      <a href="https://youtu.be/pDlTGVK8tiQ" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/pDlTGVK8tiQ/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MONTEOCAST · EP. 13</span><strong>Reforma tributária e consórcio: atenção, investidor</strong></span></a>
-      <a href="https://youtu.be/op4WJk-Scws" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/op4WJk-Scws/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MONTEOCAST · EP. 08</span><strong>Consórcio: turbine o retorno dos aluguéis</strong></span></a>
-      <a href="https://youtu.be/rfk3PDTMyXQ" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/rfk3PDTMyXQ/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MONTEOCAST · EP. 07</span><strong>Fortuna inteligente: consórcio e leilão</strong></span></a>
-      <a href="https://youtu.be/t-RHeoBHzzM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/t-RHeoBHzzM/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MONTEOCAST · EP. 04</span><strong>O segredo das grandes operações com consórcio</strong></span></a>
-      <a href="https://youtu.be/89_4jaPNwxg" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/89_4jaPNwxg/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MONTEOCAST · EP. 01</span><strong>Formas de alavancar com consórcio imobiliário</strong></span></a>
+      <a href="https://youtu.be/KpOa47GLl4Y" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/KpOa47GLl4Y/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 21</span><strong>Seu vendedor de consórcio é especialista? Faça essas perguntas antes de contratar</strong></span></a>
+      <a href="https://youtu.be/IV3lCd98ZYE" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/IV3lCd98ZYE/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 16</span><strong>Selic alta: consórcio ainda vale a pena?</strong></span></a>
+      <a href="https://youtu.be/pDlTGVK8tiQ" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/pDlTGVK8tiQ/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 13</span><strong>Reforma tributária e consórcio: atenção, investidor</strong></span></a>
+      <a href="https://youtu.be/op4WJk-Scws" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/op4WJk-Scws/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 08</span><strong>Consórcio: turbine o retorno dos aluguéis</strong></span></a>
+      <a href="https://youtu.be/rfk3PDTMyXQ" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/rfk3PDTMyXQ/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 07</span><strong>Fortuna inteligente: consórcio e leilão</strong></span></a>
+      <a href="https://youtu.be/t-RHeoBHzzM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/t-RHeoBHzzM/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 04</span><strong>O segredo das grandes operações com consórcio</strong></span></a>
+      <a href="https://youtu.be/89_4jaPNwxg" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/89_4jaPNwxg/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 01</span><strong>Formas de alavancar com consórcio imobiliário</strong></span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-participacoes">
-    <h2 id="t-participacoes">Participações em podcasts</h2>
-    <p class="sub">Convidado em outros programas.</p>
+<!-- ─── PARTICIPAÇÕES ─── -->
+<section id="participacoes" aria-labelledby="t-participacoes">
+  <div class="wrap">
+    <span class="sec-label">Podcast</span>
+    <h2 class="sec-title" id="t-participacoes">Participações externas</h2>
+    <p class="sec-sub">Convidado em outros programas pelo Brasil.</p>
     <div class="midia">
-      <a href="https://youtu.be/X3c73a4O_zU" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/X3c73a4O_zU/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">VALUATION PODCAST · EP. 15</span><strong>Desistindo da falsa "segurança"</strong></span></a>
-      <a href="https://youtu.be/F0evudL-7b0" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/F0evudL-7b0/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">AVANTBUSINESS CAST · EP. 09 · JOÃO PESSOA</span><strong>Construir patrimônio não é sorte, é estratégia</strong></span></a>
+      <a href="https://youtu.be/X3c73a4O_zU" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/X3c73a4O_zU/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">Valuation Podcast · Ep. 15</span><strong>Desistindo da falsa "segurança"</strong></span></a>
+      <a href="https://youtu.be/F0evudL-7b0" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/F0evudL-7b0/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">AvantBusiness Cast · Ep. 09 · João Pessoa</span><strong>Construir patrimônio não é sorte, é estratégia</strong></span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-depoimentos">
-    <h2 id="t-depoimentos">Depoimentos</h2>
-    <p class="sub">Clientes contando a própria experiência com a estratégia.</p>
-    <div class="midia">
-      <a href="https://www.instagram.com/invistacomthiago/reel/C3VN3fVAsP3/" target="_blank" rel="noopener"><img class="capa" src="historia-guilherme.jpg" alt="Guilherme, cliente" loading="lazy"><span><span class="ep">DEPOIMENTO</span><strong>Guilherme conta como foi a experiência</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/DC9w-XrvGF7/" target="_blank" rel="noopener"><img class="capa" src="historia-cliente-estrategia.jpg" alt="Cliente da carteira do Thiago" loading="lazy"><span><span class="ep">DEPOIMENTO</span><strong>Um cliente da minha carteira conta o que a estratégia certa mudou</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/DDfPCcevHhP/" target="_blank" rel="noopener"><img class="capa" src="historia-por-que-confiar.jpg" alt="Cliente explica por que confiou" loading="lazy"><span><span class="ep">DEPOIMENTO</span><strong>Por que confiar? Um cliente responde</strong></span></a>
+<!-- ─── DEPOIMENTOS ─── -->
+<section id="depoimentos" aria-labelledby="t-depoimentos">
+  <div class="wrap">
+    <span class="sec-label">O que dizem os clientes</span>
+    <h2 class="sec-title" id="t-depoimentos">Depoimentos</h2>
+    <p class="sec-sub">Clientes contando a própria experiência com a estratégia.</p>
+    <div class="depo-grid">
+      <div class="depo">
+        <p class="depo-text">Guilherme conta como foi a experiência de estruturar o patrimônio com consórcio — do primeiro contato à contemplação.</p>
+        <a class="depo-link" href="https://www.instagram.com/invistacomthiago/reel/C3VN3fVAsP3/" target="_blank" rel="noopener">Ver depoimento →</a>
+      </div>
+      <div class="depo">
+        <p class="depo-text">Um cliente da carteira conta o que a estratégia certa mudou — e por que a escolha do especialista faz toda a diferença.</p>
+        <a class="depo-link" href="https://www.instagram.com/monteo.oficial/reel/DC9w-XrvGF7/" target="_blank" rel="noopener">Ver depoimento →</a>
+      </div>
+      <div class="depo">
+        <p class="depo-text">Por que confiar? Um cliente responde com a própria história e explica o que o levou a fechar — e a indicar.</p>
+        <a class="depo-link" href="https://www.instagram.com/monteo.oficial/reel/DDfPCcevHhP/" target="_blank" rel="noopener">Ver depoimento →</a>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="bloco" aria-labelledby="t-historias">
-    <h2 id="t-historias">Clientes contemplados</h2>
-    <p class="sub">Cases reais e bastidores das contemplações.</p>
+<!-- ─── CLIENTES CONTEMPLADOS ─── -->
+<section id="contemplados" aria-labelledby="t-historias">
+  <div class="wrap">
+    <span class="sec-label">Cases e bastidores</span>
+    <h2 class="sec-title" id="t-historias">Clientes contemplados</h2>
+    <p class="sec-sub">Resultados reais e bastidores das contemplações.</p>
     <div class="midia">
-      <a href="https://www.instagram.com/reel/Det--2Ex2dX/" target="_blank" rel="noopener"><img class="capa" src="historia-contemplado-novo.jpg" alt="Cliente contemplado — prova social recente" loading="lazy" onerror="this.style.background='var(--card-2)';this.removeAttribute('onerror')"><span><span class="ep">CASE REAL · RECENTE</span><strong>Mais um cliente contemplado — resultado real da estratégia</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/DUio5YLkeE6/" target="_blank" rel="noopener"><img class="capa" src="historia-lance-fixo.jpg" alt="Case de cliente contemplado com lance fixo" loading="lazy"><span><span class="ep">CASE REAL</span><strong>Cliente dobrou o capital com a estratégia de lance fixo</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/DP4kr7uj6w4/" target="_blank" rel="noopener"><img class="capa" src="historia-ligacao-contemplacao.jpg" alt="Thiago ligando para um cliente contemplado" loading="lazy"><span><span class="ep">BASTIDOR</span><strong>A ligação que todo cliente quer receber</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/C-GRhTAPouc/" target="_blank" rel="noopener"><img class="capa" src="historia-ligacao-investidor.jpg" alt="Ligação de contemplação para um cliente investidor" loading="lazy"><span><span class="ep">BASTIDOR</span><strong>A ligação que todo investidor quer receber</strong></span></a>
+      <a href="https://www.instagram.com/reel/Det--2Ex2dX/" target="_blank" rel="noopener"><img class="capa" src="historia-contemplado-novo.jpg" alt="Cliente contemplado" loading="lazy" onerror="this.style.background='var(--card-2)';this.removeAttribute('onerror')"><span><span class="ep">Case Real · Recente</span><strong>Mais um cliente contemplado — resultado real da estratégia</strong></span></a>
+      <a href="https://www.instagram.com/monteo.oficial/reel/DUio5YLkeE6/" target="_blank" rel="noopener"><img class="capa" src="historia-lance-fixo.jpg" alt="Case de lance fixo" loading="lazy"><span><span class="ep">Case Real</span><strong>Cliente dobrou o capital com a estratégia de lance fixo</strong></span></a>
+      <a href="https://www.instagram.com/monteo.oficial/reel/DP4kr7uj6w4/" target="_blank" rel="noopener"><img class="capa" src="historia-ligacao-contemplacao.jpg" alt="Ligação de contemplação" loading="lazy"><span><span class="ep">Bastidor</span><strong>A ligação que todo cliente quer receber</strong></span></a>
+      <a href="https://www.instagram.com/monteo.oficial/reel/C-GRhTAPouc/" target="_blank" rel="noopener"><img class="capa" src="historia-ligacao-investidor.jpg" alt="Ligação de contemplação para investidor" loading="lazy"><span><span class="ep">Bastidor</span><strong>A ligação que todo investidor quer receber</strong></span></a>
     </div>
     <p class="nota">Experiências individuais. Contemplação por sorteio ou lance, sem prazo garantido. Resultados passados não garantem resultados futuros.</p>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    Matemático e Contador · Master Franqueado na Monteo.<br>
-    <a href="mailto:contato@invistacomthiago.com.br" style="color:var(--gold);text-decoration:none;font-weight:600">contato@invistacomthiago.com.br</a>
-    <span class="disclaimer"><b>Disclaimer:</b> As simulações e informações aqui apresentadas têm caráter informativo e não constituem proposta formal, garantia de contemplação ou oferta de crédito. Os valores são estimativas com base em dados de referência e podem sofrer variações conforme a administradora, condições do grupo e perfil do cliente. Este material tem caráter educativo e visa apresentar estratégias de planejamento financeiro e aquisição patrimonial por meio de consórcio.</span>
-  </footer>
-</div>
-</main>
+<!-- ─── CTA FINAL ─── -->
+<section id="cta">
+  <div class="wrap">
+    <div class="cta-inner">
+      <span class="sec-label">Próximo passo</span>
+      <h2 class="sec-title">Pronto para estruturar o seu patrimônio?</h2>
+      <p class="sec-sub">Seja pelo WhatsApp, pela agenda ou pelo simulador — a primeira conversa é gratuita e sem compromisso.</p>
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <a class="btn-secondary" href="https://calendar.app.google/JqPLMmbxKfL9betLA" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+          Agendar conversa
+        </a>
+        <a class="btn-secondary" href="https://consorcio-alavancai.lovable.app" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg>
+          Simular estratégia
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REDES ─── -->
+<section id="redes" aria-labelledby="t-redes">
+  <div class="wrap">
+    <span class="sec-label">Acompanhe</span>
+    <h2 class="sec-title" id="t-redes">Siga para ficar por dentro</h2>
+    <p class="sec-sub">Toda semana: estratégias de patrimônio, mercado imobiliário e bastidores do que estamos construindo.</p>
+    <div class="redes" style="margin-bottom:40px">
+      <a href="https://www.instagram.com/invistacomthiago/" target="_blank" rel="noopener" aria-label="Instagram @invistacomthiago">
+        <span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <strong>Instagram</strong><small>@invistacomthiago</small>
+      </a>
+      <a href="https://www.tiktok.com/@invistacomthiago" target="_blank" rel="noopener" aria-label="TikTok @invistacomthiago">
+        <span class="ri"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2h-3.3v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V8.6a7.9 7.9 0 0 0 4.4 1.3V6.6a4.5 4.5 0 0 1-4.4-4.6Z"/></svg></span>
+        <strong>TikTok</strong><small>@invistacomthiago</small>
+      </a>
+      <a href="https://www.linkedin.com/in/invistacomthiago/" target="_blank" rel="noopener" aria-label="LinkedIn Thiago Pereira">
+        <span class="ri"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.4 8.6H2.2V21h3.2V8.6ZM3.8 3a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8ZM21.8 13.9c0-3.3-1.8-5.6-4.9-5.6a4 4 0 0 0-3.6 2V8.6h-3.1V21h3.2v-6.4c0-1.7.6-3.2 2.4-3.2s2.3 1.6 2.3 3.3V21h3.2v-7.1Z"/></svg></span>
+        <strong>LinkedIn</strong><small>Thiago Pereira</small>
+      </a>
+    </div>
+    <div class="canais">
+      <a class="canal-btn wpp" href="https://whatsapp.com/channel/0029VbDkI5C5Ejy0HYc7tX22" target="_blank" rel="noopener">
+        <span class="canal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
+        <div class="canal-txt"><strong>Canal no WhatsApp</strong><small>Conteúdo semanal sobre patrimônio, sem grupo</small></div>
+        <span class="canal-pill">GRÁTIS</span><span class="canal-seta">›</span>
+      </a>
+      <a class="canal-btn li" href="https://www.linkedin.com/newsletters/arquitetura-patrimonial-7516142606838460417/" target="_blank" rel="noopener">
+        <span class="canal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <div class="canal-txt"><strong>Newsletter Arquitetura Patrimonial</strong><small>Semanal no LinkedIn · toda segunda-feira</small></div>
+        <span class="canal-pill">GRÁTIS</span><span class="canal-seta">›</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq" aria-labelledby="t-faq">
+  <div class="wrap">
+    <span class="sec-label">Dúvidas frequentes</span>
+    <h2 class="sec-title" id="t-faq">FAQ</h2>
+    <div class="divider"></div>
+    <div class="faq" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          Consórcio tem risco?
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Todo investimento tem risco, e com o consórcio não é diferente. Os principais são: inadimplência no grupo (coberta pelo fundo de reserva), variação do crédito pelo INCC, e o tempo de contemplação, que não é garantido. Meu trabalho é estruturar a operação para minimizar esses riscos e maximizar o retorno — escolhendo o grupo certo, o valor de lance ideal e a modalidade mais adequada para o seu perfil.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          E se minha contemplação demorar mais do que o esperado?
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">A contemplação depende das características do grupo, da estratégia adotada e da participação ativa do cliente. Por isso faço uma gestão estratégica contínua buscando potencializar as oportunidades de contemplação. Mais importante do que a velocidade da contemplação é a estratégia utilizada para a construção patrimonial.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          Consórcio só vale a pena se contemplar rápido?
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Não. Embora a contemplação antecipada possa acelerar os resultados, o principal diferencial está na estratégia. Mesmo em cenários de longo prazo, é possível construir patrimônio de forma eficiente, preservando liquidez e reduzindo a necessidade de imobilizar grandes volumes de capital próprio.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          Como funciona a contemplação?
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">A contemplação acontece de duas formas: por sorteio (todos os meses nas assembleias do grupo) ou por lance (você antecipa parcelas para ser contemplado antes). O lance é estratégico — dependendo do grupo e do valor ofertado, é possível ser contemplado no curto prazo, o que muda completamente o cálculo financeiro da operação. Tudo depende da sua estratégia e capacidade de aporte no lance.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          Preciso investir grandes valores para começar?
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Não. Um dos principais diferenciais dessa estratégia é justamente a possibilidade de construir patrimônio de forma gradual, através de aportes mensais planejados, sem a necessidade de imobilizar grandes volumes de capital próprio.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          Qual o diferencial de trabalhar com o Thiago?
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Formação em matemática e contabilidade, 4 anos de operação e mais de 700 clientes ativos. Cada cliente recebe uma análise personalizada — não um produto pronto. Eu olho para o patrimônio atual, os objetivos de médio e longo prazo, a capacidade de pagamento e o perfil de risco antes de indicar qualquer estrutura. O resultado é uma estratégia, não uma venda.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          Como o Thiago é remunerado?
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Minha remuneração vem da comissão paga pela administradora na contratação do consórcio — da mesma forma que um corretor é pago pelo banco ou pela imobiliária. Você não paga nada a mais por contratar pelo meu intermédio: o valor da carta de crédito e as parcelas são os mesmos. A diferença está na qualidade da estratégia e no acompanhamento ao longo do plano.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <img class="footer-logo" src="logo-ocre.png" alt="Invista com Thiago" width="120" height="32" loading="lazy">
+    <nav class="footer-links" aria-label="Links do rodapé">
+      <a href="https://wa.me/5544991112549" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://calendar.app.google/JqPLMmbxKfL9betLA" target="_blank" rel="noopener">Agenda</a>
+      <a href="https://consorcio-alavancai.lovable.app" target="_blank" rel="noopener">Simulador</a>
+      <a href="https://www.instagram.com/invistacomthiago/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/invistacomthiago/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:contato@invistacomthiago.com.br">contato@invistacomthiago.com.br</a>
+    </nav>
+    <p class="footer-disc">
+      Matemático e Contador · Master Franqueado na Monteo · Maringá-PR<br>
+      <b>Disclaimer:</b> As simulações e informações aqui apresentadas têm caráter informativo e não constituem proposta formal, garantia de contemplação ou oferta de crédito. Os valores são estimativas com base em dados de referência e podem sofrer variações conforme a administradora, condições do grupo e perfil do cliente. Este material tem caráter educativo e visa apresentar estratégias de planejamento financeiro e aquisição patrimonial por meio de consórcio.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* ─── ANIMAÇÃO DE NÚMEROS ─── */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const duration = 2000;
+  const start = performance.now();
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const value = Math.round(easeOut(progress) * target);
+    el.textContent = prefix + value.toLocaleString('pt-BR') + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const counters = document.querySelectorAll('.num-val[data-target]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      entry.target.dataset.animated = '1';
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+/* ─── FAQ ACCORDION ─── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ─── FADE-UP ON SCROLL ─── */
+const fadeEls = document.querySelectorAll('section > .wrap > *:not(.sec-label):not(.sec-title):not(.sec-sub):not(.divider)');
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }});
+}, { threshold: 0.08 });
+fadeEls.forEach(el => { el.classList.add('fade-up'); fadeObserver.observe(el); });
+</script>
+
 </body>
 </html>
