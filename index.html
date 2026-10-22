@@ -92,6 +92,7 @@ h1.hero-nome{font-weight:800;font-size:clamp(38px,8vw,72px);letter-spacing:-1.5p
   line-height:1.45;color:var(--ink);opacity:.9;max-width:640px;margin:0 auto 36px}
 .hero-tese em{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+@media(max-width:639px){.hero-ctas .btn-primary,.hero-ctas .btn-secondary{width:100%;justify-content:center}}
 .btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:14px;
   text-decoration:none;font-weight:700;font-size:15px;color:var(--bg);background:var(--grad);
   box-shadow:0 20px 50px -20px rgba(171,116,89,.6);letter-spacing:.2px;transition:transform .15s,box-shadow .15s}
@@ -266,6 +267,7 @@ section:nth-child(even){background:rgba(30,25,21,.5)}
 .cta-inner .sec-title{margin-bottom:20px}
 .cta-inner .sec-sub{margin-bottom:40px}
 .cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+@media(max-width:639px){.cta-btns{flex-direction:column}.cta-btns .btn-primary,.cta-btns .btn-secondary{width:100%;justify-content:center}}
 @media(min-width:640px){.cta-btns{flex-wrap:nowrap}}
 .como-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:48px;text-align:left}
 @media(min-width:640px){.como-grid{grid-template-columns:repeat(3,1fr)}}
