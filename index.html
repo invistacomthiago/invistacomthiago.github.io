@@ -170,6 +170,19 @@ section:nth-child(even){background:rgba(30,25,21,.5)}
 .selo-txt small{display:block;font-size:10.5px;color:var(--muted);font-weight:400;margin-top:3px}
 @media(max-width:420px){.selos{grid-template-columns:1fr}}
 
+/* ─── DIFERENCIAIS ─── */
+.dif-list{max-width:800px;margin:0 auto}
+.dif-item{border-bottom:1px solid var(--line)}
+.dif-btn{width:100%;display:grid;grid-template-columns:40px 1fr 32px;align-items:center;gap:16px;
+  padding:22px 0;background:none;border:none;cursor:pointer;color:var(--ink);text-align:left}
+.dif-num{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:1.5px}
+.dif-title{font-size:17px;font-weight:600;letter-spacing:-.2px}
+.dif-icon{font-size:22px;color:var(--gold);line-height:1;transition:transform .25s;justify-self:end}
+.dif-item.open .dif-icon{transform:rotate(45deg)}
+.dif-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.dif-item.open .dif-body{max-height:200px}
+.dif-body p{font-size:14px;color:var(--muted);line-height:1.65;padding:0 0 20px 56px}
+
 /* ─── RECONHECIMENTO ─── */
 .premio{display:grid;gap:8px;grid-template-columns:1fr 1fr}
 .premio figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
@@ -331,6 +344,7 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
     <nav class="nav-links" aria-label="Seções">
       <a href="#sobre">Sobre</a>
       <a href="#numeros">Números</a>
+      <a href="#diferenciais">Diferenciais</a>
       <a href="#reconhecimento">Reconhecimento</a>
       <a href="#conteudo">Conteúdo</a>
       <a href="#faq">FAQ</a>
@@ -466,6 +480,65 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
           <text x="32" y="42" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="2.5">INVEST</text>
         </svg>
         <div class="selo-txt">Exame Invest Aprovado<small>Certificação de investimentos</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIFERENCIAIS ─── -->
+<section id="diferenciais" aria-labelledby="t-dif">
+  <div class="wrap">
+    <span class="sec-label">Diferenciais para clientes</span>
+    <h2 class="sec-title" id="t-dif">Por que trabalhar comigo?</h2>
+    <div class="divider"></div>
+    <div class="dif-list">
+      <div class="dif-item">
+        <button class="dif-btn" aria-expanded="false">
+          <span class="dif-num">01</span>
+          <span class="dif-title">Acesso a Grupos Exclusivos de Investidores</span>
+          <span class="dif-icon">+</span>
+        </button>
+        <div class="dif-body"><p>Grupos Monteo com investidores que compartilham o mesmo objetivo de crescimento patrimonial — ambiente seletivo, oportunidades reais.</p></div>
+      </div>
+      <div class="dif-item">
+        <button class="dif-btn" aria-expanded="false">
+          <span class="dif-num">02</span>
+          <span class="dif-title">Gestão Ativa da Sua Cota</span>
+          <span class="dif-icon">+</span>
+        </button>
+        <div class="dif-body"><p>Acompanhamento contínuo da sua cota e estratégia de lances para acelerar a contemplação e maximizar o retorno.</p></div>
+      </div>
+      <div class="dif-item">
+        <button class="dif-btn" aria-expanded="false">
+          <span class="dif-num">03</span>
+          <span class="dif-title">Suporte Estratégico na Aquisição do Imóvel</span>
+          <span class="dif-icon">+</span>
+        </button>
+        <div class="dif-body"><p>Orientação especializada na hora certa: do planejamento à assinatura do contrato, sem deixar dinheiro na mesa.</p></div>
+      </div>
+      <div class="dif-item">
+        <button class="dif-btn" aria-expanded="false">
+          <span class="dif-num">04</span>
+          <span class="dif-title">Liquidez para Negociação de Cartas</span>
+          <span class="dif-icon">+</span>
+        </button>
+        <div class="dif-body"><p>Após a contemplação, suporte completo para negociar ou utilizar a carta da forma mais eficiente possível.</p></div>
+      </div>
+      <div class="dif-item">
+        <button class="dif-btn" aria-expanded="false">
+          <span class="dif-num">05</span>
+          <span class="dif-title">Atendimento Direto e Dedicado</span>
+          <span class="dif-icon">+</span>
+        </button>
+        <div class="dif-body"><p>Você não fala com um call center. Fala diretamente comigo — em cada etapa, do primeiro contato à conquista do seu objetivo.</p></div>
+      </div>
+      <div class="dif-item">
+        <button class="dif-btn" aria-expanded="false">
+          <span class="dif-num">06</span>
+          <span class="dif-title">Planejamento Patrimonial Personalizado</span>
+          <span class="dif-icon">+</span>
+        </button>
+        <div class="dif-body"><p>Estratégia alinhada aos seus objetivos de curto, médio e longo prazo — não um produto pronto de prateleira.</p></div>
       </div>
     </div>
   </div>
@@ -813,6 +886,21 @@ const counterObserver = new IntersectionObserver((entries) => {
 counters.forEach(c => counterObserver.observe(c));
 
 /* ─── FAQ ACCORDION ─── */
+document.querySelectorAll('.dif-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.dif-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.dif-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.dif-btn').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
