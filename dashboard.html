@@ -16,8 +16,10 @@
   --draft:#5C5248;--draft-bg:#EDEAE3;
 }
 @media(prefers-color-scheme:dark){
-  :root{--bg:#0D0A08;--bg2:#1A1612;--card:#1E1915;--fg:#F0EBE3;--fg2:#C8BFB5;--fg3:#6E655C;--border:#302820;--ok:#4EBB7A;--ok-bg:#0A2018;--pub:#5B9FE8;--pub-bg:#0A1828;--sch:#B080F0;--sch-bg:#180A28;--draft:#9C948A;--draft-bg:#1A1612;color-scheme:dark;}
+  :root:not([data-theme="light"]){--bg:#0D0A08;--bg2:#1A1612;--card:#1E1915;--fg:#F0EBE3;--fg2:#C8BFB5;--fg3:#6E655C;--border:#302820;--ok:#4EBB7A;--ok-bg:#0A2018;--pub:#5B9FE8;--pub-bg:#0A1828;--sch:#B080F0;--sch-bg:#180A28;--draft:#9C948A;--draft-bg:#1A1612;color-scheme:dark;}
 }
+:root[data-theme="dark"]{--bg:#0D0A08;--bg2:#1A1612;--card:#1E1915;--fg:#F0EBE3;--fg2:#C8BFB5;--fg3:#6E655C;--border:#302820;--ok:#4EBB7A;--ok-bg:#0A2018;--pub:#5B9FE8;--pub-bg:#0A1828;--sch:#B080F0;--sch-bg:#180A28;--draft:#9C948A;--draft-bg:#1A1612;color-scheme:dark;}
+:root[data-theme="light"]{--bg:#F5F2EC;--bg2:#EDEAE3;--card:#FFFFFF;--fg:#0D0A08;--fg2:#5C5248;--fg3:#9C948A;--accent:#D4A843;--border:#DDD8D0;--ok:#2A7A4A;--ok-bg:#E6F5EC;--pub:#1A5FA8;--pub-bg:#E8F1FB;--sch:#6B3FA0;--sch-bg:#F0E8FB;--draft:#5C5248;--draft-bg:#EDEAE3;color-scheme:light;}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:'Inter',system-ui,sans-serif;font-size:14px;background:var(--bg);color:var(--fg)}
 body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
@@ -123,14 +125,18 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
 <div class="header">
   <div class="header-top">
     <div class="brand">Depto de <span>Conteúdo</span></div>
-    <div class="sync-pill" id="sync-pill">Conectando…</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="theme-btn" onclick="toggleTheme()" style="font-size:15px;background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:6px;color:var(--fg2)" title="Alternar tema">☀️</button>
+      <div class="sync-pill" id="sync-pill">Conectando…</div>
+    </div>
   </div>
-  <div class="tabs">
+  <div class="tabs" style="overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none">
     <button class="tab active" onclick="showTab('calendario',this)">Calendário</button>
     <button class="tab" onclick="showTab('comite',this)">Comitê</button>
     <button class="tab" onclick="showTab('metricas',this)">Métricas</button>
     <button class="tab" onclick="showTab('ranking',this)">Ranking</button>
     <button class="tab" onclick="showTab('pamkt',this)">PA Mkt</button>
+    <button class="tab" onclick="showTab('ideias',this)">💡 Ideias</button>
   </div>
 </div>
 
@@ -188,6 +194,66 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
       <button class="save-btn" onclick="saveMetrics()">Salvar métricas</button>
     </div>
     <div id="metrics-updated" style="font-size:10px;color:var(--fg3);margin-top:10px;text-align:center"></div>
+  </div>
+
+  <!-- ===== IDEIAS ===== -->
+  <div class="panel" id="panel-ideias">
+    <style>
+    .idea-form{background:var(--card);border:1px solid var(--accent);border-radius:12px;padding:14px;margin-bottom:16px}
+    .idea-form-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--fg3);margin-bottom:10px}
+    .idea-input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);color:var(--fg);font:inherit;font-size:13px;margin-bottom:8px}
+    .idea-input:focus{outline:none;border-color:var(--accent)}
+    .idea-tags-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+    .idea-tag-opt{padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--bg2);color:var(--fg2);transition:all .12s;letter-spacing:.3px}
+    .idea-tag-opt.sel{background:var(--accent);color:#000;border-color:var(--accent)}
+    .idea-add-btn{width:100%;padding:9px;background:var(--accent);color:#000;border:none;border-radius:8px;font:inherit;font-weight:700;cursor:pointer;font-size:13px}
+    .idea-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .idea-stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer;transition:all .12s}
+    .idea-stat:hover,.idea-stat.active{border-color:var(--accent);color:var(--accent)}
+    .idea-stat .n{font-size:18px;font-weight:800;display:block;font-variant-numeric:tabular-nums}
+    .idea-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;transition:border-color .15s}
+    .idea-card:hover{border-color:var(--accent)}
+    .idea-card-top{display:flex;gap:10px;align-items:flex-start}
+    .idea-card-body{flex:1;min-width:0}
+    .idea-card-title{font-size:13px;font-weight:600;margin-bottom:3px;line-height:1.4}
+    .idea-card-link{font-size:11px;color:var(--accent);text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:block;text-decoration:none;margin-bottom:4px}
+    .idea-card-link:hover{text-decoration:underline}
+    .idea-card-notes{font-size:12px;color:var(--fg3);line-height:1.5;margin-top:4px}
+    .idea-card-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:6px}
+    .idea-card-date{font-size:10px;color:var(--fg3);font-weight:600}
+    .idea-status-btn{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;cursor:pointer;border:none;transition:all .15s;white-space:nowrap}
+    .st-ideia{background:#FFF3CC;color:#7A5800}.st-producao{background:var(--sch-bg);color:var(--sch)}.st-feito{background:var(--ok-bg);color:var(--ok)}
+    .idea-del{font-size:10px;color:var(--fg3);background:none;border:none;cursor:pointer;padding:2px 4px;border-radius:4px;transition:color .15s;margin-left:auto}
+    .idea-del:hover{color:#c00}
+    .idea-empty{padding:30px;text-align:center;color:var(--fg3);font-size:13px}
+    </style>
+
+    <!-- Formulário de nova ideia -->
+    <div class="idea-form">
+      <div class="idea-form-title">+ Nova ideia</div>
+      <input class="idea-input" id="idea-title" placeholder="Título ou descrição da ideia…" />
+      <input class="idea-input" id="idea-url" placeholder="Link (opcional — cole o URL aqui)" type="url" />
+      <input class="idea-input" id="idea-notes" placeholder="Anotações extras (opcional)" />
+      <div class="idea-tags-row" id="idea-tags-row">
+        <span class="idea-tag-opt" data-tag="ig" onclick="toggleIdeaTag(this)">IG</span>
+        <span class="idea-tag-opt" data-tag="lk" onclick="toggleIdeaTag(this)">LK</span>
+        <span class="idea-tag-opt" data-tag="yt" onclick="toggleIdeaTag(this)">YT</span>
+        <span class="idea-tag-opt" data-tag="tiktok" onclick="toggleIdeaTag(this)">TikTok</span>
+        <span class="idea-tag-opt" data-tag="canal" onclick="toggleIdeaTag(this)">Canal WA</span>
+        <span class="idea-tag-opt" data-tag="outro" onclick="toggleIdeaTag(this)">Outro</span>
+      </div>
+      <button class="idea-add-btn" onclick="addIdea()">Salvar ideia</button>
+    </div>
+
+    <!-- Filtros -->
+    <div class="idea-stats" id="idea-filters">
+      <div class="idea-stat active" data-filter="todos" onclick="filterIdeas(this)"><span class="n" id="istat-total">0</span>Todas</div>
+      <div class="idea-stat" data-filter="ideia" onclick="filterIdeas(this)"><span class="n" id="istat-ideia">0</span>💡 Ideia</div>
+      <div class="idea-stat" data-filter="producao" onclick="filterIdeas(this)"><span class="n" id="istat-prod">0</span>🎬 Em produção</div>
+      <div class="idea-stat" data-filter="feito" onclick="filterIdeas(this)"><span class="n" id="istat-done">0</span>✅ Feito</div>
+    </div>
+
+    <div id="ideas-list"></div>
   </div>
 
   <!-- ===== PA MKT ===== -->
@@ -485,6 +551,7 @@ function showTab(id,btn){
   btn.classList.add('active');
   if(id==='ranking')loadRanking();
   if(id==='pamkt')renderPaMkt();
+  if(id==='ideias')renderIdeias();
 }
 document.querySelectorAll('.panel').forEach((p,i)=>{p.style.display=i===0?'block':'none';});
 
@@ -596,6 +663,119 @@ async function loadRanking(){
   }catch(e){
     el.innerHTML='<div class="loading" style="color:red">Erro: '+e.message+'</div>';
   }
+}
+
+// ---- TEMA ----
+function toggleTheme(){
+  const root=document.documentElement;
+  const cur=root.getAttribute('data-theme');
+  const next=cur==='dark'?'light':'dark';
+  root.setAttribute('data-theme',next);
+  try{localStorage.setItem('ict_theme',next);}catch(e){}
+  document.getElementById('theme-btn').textContent=next==='dark'?'🌙':'☀️';
+}
+(function initTheme(){
+  try{
+    const t=localStorage.getItem('ict_theme');
+    if(t){
+      document.documentElement.setAttribute('data-theme',t);
+      const btn=document.getElementById('theme-btn');
+      if(btn)btn.textContent=t==='dark'?'🌙':'☀️';
+    }
+  }catch(e){}
+})();
+
+// ---- IDEIAS ----
+let IDEAS=[];
+try{IDEAS=JSON.parse(localStorage.getItem('ict_ideas')||'[]');}catch(e){}
+let activeIdeaFilter='todos';
+let selectedIdeaTag='';
+
+function saveIdeas(){try{localStorage.setItem('ict_ideas',JSON.stringify(IDEAS));}catch(e){}}
+
+function toggleIdeaTag(el){
+  document.querySelectorAll('.idea-tag-opt').forEach(t=>t.classList.remove('sel'));
+  if(selectedIdeaTag===el.dataset.tag){selectedIdeaTag='';return;}
+  el.classList.add('sel');
+  selectedIdeaTag=el.dataset.tag;
+}
+
+function addIdea(){
+  const title=document.getElementById('idea-title').value.trim();
+  const url=document.getElementById('idea-url').value.trim();
+  const notes=document.getElementById('idea-notes').value.trim();
+  if(!title&&!url){toast('Preencha o título ou o link!');return;}
+  IDEAS.unshift({id:Date.now(),title:title||url,url,notes,tag:selectedIdeaTag,status:'ideia',date:new Date().toISOString()});
+  saveIdeas();
+  document.getElementById('idea-title').value='';
+  document.getElementById('idea-url').value='';
+  document.getElementById('idea-notes').value='';
+  document.querySelectorAll('.idea-tag-opt').forEach(t=>t.classList.remove('sel'));
+  selectedIdeaTag='';
+  renderIdeias();
+  toast('Ideia salva!');
+}
+
+function deleteIdea(id){
+  IDEAS=IDEAS.filter(i=>i.id!==id);
+  saveIdeas();renderIdeias();
+}
+
+function nextIdeaStatus(id){
+  const idea=IDEAS.find(i=>i.id===id);
+  if(!idea)return;
+  const cycle=['ideia','producao','feito'];
+  const cur=cycle.indexOf(idea.status);
+  idea.status=cycle[(cur+1)%cycle.length];
+  saveIdeas();renderIdeias();
+}
+
+function filterIdeas(el){
+  document.querySelectorAll('#idea-filters .idea-stat').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  activeIdeaFilter=el.dataset.filter;
+  renderIdeias();
+}
+
+const TAG_LABELS={ig:'IG',lk:'LK',yt:'YT',tiktok:'TikTok',canal:'Canal WA',outro:'Outro',''  :''};
+const TAG_COLORS={ig:'background:#FFF0F5;color:#C0006A',lk:'background:#E8F1FB;color:#1A5FA8',yt:'background:#FFF0EE;color:#CC0000',tiktok:'background:#E8F8FF;color:#006F8A',canal:'background:#E6F5EC;color:#2A7A4A',outro:'background:var(--bg2);color:var(--fg3)'};
+const ST_LABELS={ideia:'💡 Ideia',producao:'🎬 Em produção',feito:'✅ Feito'};
+const ST_CLS={ideia:'st-ideia',producao:'st-producao',feito:'st-feito'};
+
+function renderIdeias(){
+  const total=IDEAS.length;
+  const byStatus=s=>IDEAS.filter(i=>i.status===s).length;
+  document.getElementById('istat-total').textContent=total;
+  document.getElementById('istat-ideia').textContent=byStatus('ideia');
+  document.getElementById('istat-prod').textContent=byStatus('producao');
+  document.getElementById('istat-done').textContent=byStatus('feito');
+
+  const filtered=activeIdeaFilter==='todos'?IDEAS:IDEAS.filter(i=>i.status===activeIdeaFilter);
+  const list=document.getElementById('ideas-list');
+  if(!filtered.length){list.innerHTML='<div class="idea-empty">Nenhuma ideia aqui ainda.</div>';return;}
+
+  list.innerHTML=filtered.map(idea=>{
+    const d=new Date(idea.date);
+    const dateStr=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+    const tagHtml=idea.tag?`<span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;${TAG_COLORS[idea.tag]||''}">${TAG_LABELS[idea.tag]||idea.tag}</span>`:'';
+    const linkHtml=idea.url?`<a class="idea-card-link" href="${idea.url}" target="_blank">${idea.url}</a>`:'';
+    const notesHtml=idea.notes?`<div class="idea-card-notes">${idea.notes}</div>`:'';
+    return`<div class="idea-card">
+      <div class="idea-card-top">
+        <div class="idea-card-body">
+          <div class="idea-card-title">${idea.title}</div>
+          ${linkHtml}
+          ${notesHtml}
+          <div class="idea-card-meta">
+            ${tagHtml}
+            <span class="idea-card-date">${dateStr}</span>
+            <button class="idea-status-btn ${ST_CLS[idea.status]}" onclick="nextIdeaStatus(${idea.id})">${ST_LABELS[idea.status]}</button>
+            <button class="idea-del" onclick="deleteIdea(${idea.id})" title="Apagar">🗑</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function toast(msg){
