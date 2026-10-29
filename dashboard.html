@@ -94,6 +94,27 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
 .report-form{background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:14px;margin-bottom:10px}
 .report-form textarea{width:100%;height:80px;resize:vertical;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px;font:inherit;color:var(--fg);font-size:13px;margin-bottom:8px}
 .report-form-btns{display:flex;gap:8px;justify-content:flex-end}
+/* Ranking */
+.ranking-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.ranking-header h3{font-size:13px;font-weight:700;color:var(--fg2);text-transform:uppercase;letter-spacing:.5px}
+.rank-refresh{font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;border:1px solid var(--border);background:var(--bg2);color:var(--fg2);cursor:pointer;transition:all .12s}
+.rank-refresh:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+.rank-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;transition:border-color .12s}
+.rank-card:hover{border-color:var(--accent)}
+.rank-pos{min-width:28px;text-align:center;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--fg3)}
+.rank-pos.gold{color:#D4A843}.rank-pos.silver{color:#9DA8B5}.rank-pos.bronze{color:#A0674B}
+.rank-info{flex:1;min-width:0}
+.rank-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--fg3);margin-bottom:3px}
+.rank-link{font-size:12px;font-weight:500;color:var(--fg2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;text-decoration:none}
+.rank-link:hover{color:var(--accent)}
+.rank-stats{display:flex;gap:10px;margin-top:4px;flex-wrap:wrap}
+.rank-stat{font-size:11px;color:var(--fg3);font-variant-numeric:tabular-nums}
+.rank-stat b{color:var(--fg);font-weight:700}
+.rank-score{min-width:50px;text-align:right}
+.rank-score .score-val{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--fg)}
+.rank-score .score-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--fg3)}
+.boost-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--accent);color:#000;white-space:nowrap}
+.rank-updated{font-size:10px;color:var(--fg3);text-align:center;margin-top:10px}
 @media(max-width:520px){.post-card{flex-wrap:wrap}.post-actions{flex-direction:row}}
 </style>
 </head>
@@ -108,6 +129,7 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
     <button class="tab active" onclick="showTab('calendario',this)">Calendário</button>
     <button class="tab" onclick="showTab('comite',this)">Comitê</button>
     <button class="tab" onclick="showTab('metricas',this)">Métricas</button>
+    <button class="tab" onclick="showTab('ranking',this)">Ranking</button>
   </div>
 </div>
 
@@ -133,6 +155,15 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
         <button class="btn-sm primary" onclick="saveReport()">Salvar</button>
       </div>
     </div>
+  </div>
+
+  <div class="panel" id="panel-ranking">
+    <div class="ranking-header">
+      <h3>Posts por Score (likes + comentários×3)</h3>
+      <button class="rank-refresh" onclick="loadRanking()">↻ Atualizar</button>
+    </div>
+    <div id="ranking-list"><div class="loading">Carregando ranking…</div></div>
+    <div class="rank-updated" id="rank-updated"></div>
   </div>
 
   <div class="panel" id="panel-metricas">
@@ -319,6 +350,7 @@ function showTab(id,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('panel-'+id).style.display='block';
   btn.classList.add('active');
+  if(id==='ranking')loadRanking();
 }
 document.querySelectorAll('.panel').forEach((p,i)=>{p.style.display=i===0?'block':'none';});
 
@@ -354,6 +386,46 @@ async function saveMetrics(){
   const row={id:'current',ig:+document.getElementById('in-ig').value||null,lk:+document.getElementById('in-lk').value||null,tt:+document.getElementById('in-tt').value||null,yt:+document.getElementById('in-yt').value||null,updated_at:new Date().toISOString()};
   try{await sbUpsert('metrics',row);dbMetrics=row;renderMetrics();toast('Métricas salvas!');}
   catch(e){toast('Erro: '+e.message);}
+}
+
+async function loadRanking(){
+  const el=document.getElementById('ranking-list');
+  const upd=document.getElementById('rank-updated');
+  el.innerHTML='<div class="loading">Carregando…</div>';
+  try{
+    const rows=await sbGet("post_metrics?select=id,permalink,media_type,likes,comments,score,updated_at&id=neq.''&order=score.desc&limit=20");
+    if(!rows.length){el.innerHTML='<div class="loading">Nenhum dado ainda.</div>';return;}
+    const MEDAL=['🥇','🥈','🥉'];
+    const MEDAL_CLS=['gold','silver','bronze'];
+    const TYPE_LABEL={VIDEO:'🎥 Vídeo',IMAGE:'🖼️ Foto',CAROUSEL_ALBUM:'🎠 Carrossel'};
+    let html='';
+    rows.forEach((r,i)=>{
+      const pos=i+1;
+      const posDisplay=i<3?MEDAL[i]:pos;
+      const posClass=i<3?MEDAL_CLS[i]:'';
+      const boost=i<3?' <span class="boost-badge">💡 Impulsionar</span>':'';
+      const type=TYPE_LABEL[r.media_type]||r.media_type||'—';
+      const permalink=r.permalink||'#';
+      const shortLink=permalink.replace('https://www.instagram.com/','ig/').replace(/\/$/,'');
+      html+=`<div class="rank-card">
+        <div class="rank-pos ${posClass}">${posDisplay}</div>
+        <div class="rank-info">
+          <div class="rank-type">${type}${boost}</div>
+          <a class="rank-link" href="${permalink}" target="_blank">${shortLink}</a>
+          <div class="rank-stats">
+            <span class="rank-stat">❤️ <b>${r.likes}</b> likes</span>
+            <span class="rank-stat">💬 <b>${r.comments}</b> coment.</span>
+          </div>
+        </div>
+        <div class="rank-score"><div class="score-val">${r.score}</div><div class="score-lbl">score</div></div>
+      </div>`;
+    });
+    el.innerHTML=html;
+    const dt=new Date(rows[0].updated_at);
+    upd.textContent='Atualizado em '+dt.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+  }catch(e){
+    el.innerHTML='<div class="loading" style="color:red">Erro: '+e.message+'</div>';
+  }
 }
 
 function toast(msg){
