@@ -130,6 +130,7 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
     <button class="tab" onclick="showTab('comite',this)">Comitê</button>
     <button class="tab" onclick="showTab('metricas',this)">Métricas</button>
     <button class="tab" onclick="showTab('ranking',this)">Ranking</button>
+    <button class="tab" onclick="showTab('pamkt',this)">PA Mkt</button>
   </div>
 </div>
 
@@ -188,6 +189,39 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
     </div>
     <div id="metrics-updated" style="font-size:10px;color:var(--fg3);margin-top:10px;text-align:center"></div>
   </div>
+
+  <!-- ===== PA MKT ===== -->
+  <div class="panel" id="panel-pamkt">
+    <style>
+    .pa-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--fg3);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+    .pa-section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+    .pa-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s}
+    .pa-item.done{opacity:.55;border-style:dashed}
+    .pa-item:hover{border-color:var(--accent)}
+    .pa-check{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);background:var(--bg2);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .15s}
+    .pa-check.checked{background:var(--ok);border-color:var(--ok)}
+    .pa-check.checked::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+    .pa-body{flex:1;min-width:0}
+    .pa-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.3px;margin-right:4px;margin-bottom:4px;display:inline-block}
+    .tag-yt{background:#FF0000;color:#fff}.tag-lk{background:#0A66C2;color:#fff}.tag-ig{background:#E1306C;color:#fff}.tag-site{background:#2A7A4A;color:#fff}.tag-mkt{background:var(--accent);color:#000}
+    .pa-title{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:2px}
+    .pa-desc{font-size:12px;color:var(--fg3);line-height:1.5}
+    .pa-date{font-size:10px;font-weight:700;color:var(--fg3);white-space:nowrap;flex-shrink:0}
+    .pa-stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+    .pa-stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600}
+    .pa-stat .n{font-size:20px;font-weight:800;display:block;font-variant-numeric:tabular-nums}
+    .pa-stat .n.green{color:var(--ok)}.pa-stat .n.amber{color:var(--accent)}
+    </style>
+
+    <div class="pa-stats-bar" id="pa-stats"></div>
+
+    <div class="pa-section-title">✅ Feito</div>
+    <div id="pa-done-list"></div>
+
+    <div class="pa-section-title">⏳ Pendências</div>
+    <div id="pa-pending-list"></div>
+  </div>
+
 </div>
 
 <div class="modal-overlay" id="modal" style="display:none">
@@ -204,6 +238,89 @@ body{display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inse
 </div>
 <div class="toast" id="toast"></div>
 
+<script>
+// ===== PA MKT =====
+const PA_ITEMS = [
+  // FEITO (done:true = já veio marcado)
+  {id:'pa01',done:true,date:'07/10',tags:['site'],title:'Site invistacomthiago.com.br no ar',desc:'GitHub Pages + domínio próprio + DNS configurado no Registro.br'},
+  {id:'pa02',done:true,date:'13/10',tags:['lk'],title:'LinkedIn recuperado e perfil reconstruído',desc:'Foto, capa, título, sobre, experiências, competências, certificados, verificação em 2 etapas'},
+  {id:'pa03',done:true,date:'14/10',tags:['lk'],title:'Newsletter "Arquitetura Patrimonial" criada',desc:'Ed. 1 publicada em 14/10. Ed. 2 agendada para 21/10 às 8h'},
+  {id:'pa04',done:true,date:'14/10',tags:['lk'],title:'Vaga de consultor publicada com selo #Hiring',desc:'Modelo PJ, 100% comissionado, híbrido. Renovar todo dia 1º do mês'},
+  {id:'pa05',done:true,date:'14/10',tags:['site'],title:'Canal WhatsApp "Invista com Thiago" criado',desc:'https://whatsapp.com/channel/0029VbDkI5C5Ejy0HYc7tX22 — botão no site'},
+  {id:'pa06',done:true,date:'14/10',tags:['mkt'],title:'E-mail profissional thiago@invistacomthiago.com.br',desc:'Zoho grátis, SPF/DKIM configurados, assinatura da marca, central de comunicações'},
+  {id:'pa07',done:true,date:'14/10',tags:['ig'],title:'TikTok @invistacomthiago adicionado ao site',desc:'Bloco "Me acompanhe" com todos os canais'},
+  {id:'pa08',done:true,date:'15/10',tags:['lk'],title:'10 posts LinkedIn agendados (lote out–nov)',desc:'Posts 1 a 10 agendados nativamente no LinkedIn de 29/out a 11/nov, 8h'},
+  {id:'pa09',done:true,date:'29/10',tags:['yt'],title:'Canal YouTube @InvistacomThiago criado e configurado',desc:'Banner, foto de perfil, bio, category Educação'},
+  {id:'pa10',done:true,date:'29/10',tags:['yt'],title:'Vídeo "1 imóvel à vista ou 3?" publicado',desc:'Short de 2:17 publicado com título, descrição, 10 tags e miniatura vertical "1 IMÓVEL OU 3?"'},
+  {id:'pa11',done:true,date:'29/10',tags:['site'],title:'YouTube adicionado ao site e ao LinkedIn',desc:'Card YouTube no site + link nos Dados de contato do LinkedIn'},
+  {id:'pa12',done:true,date:'29/10',tags:['ig'],title:'Roteiros dos 4 destaques do Instagram prontos',desc:'CONQUISTAS · O MÉTODO · É PRA MIM? · PRÓXIMO PASSO — salvos em 1_Para gravar/'},
+
+  // PENDÊNCIAS (done:false = ainda falta)
+  {id:'pb01',done:false,date:'urgente',tags:['ig'],title:'Gravar stories do destaque PRÓXIMO PASSO',desc:'3 vídeos curtos (stories 1, 4 e 6) + criar cards Canva (stories 2, 3 e 5). Roteiro: 20261029_destaque_proximo_passo.md'},
+  {id:'pb02',done:false,date:'urgente',tags:['ig'],title:'Gravar stories do destaque É PRA MIM?',desc:'3 vídeos curtos + cards Canva. Roteiro: 20261029_destaque_pra_mim.md'},
+  {id:'pb03',done:false,date:'semana 3',tags:['ig'],title:'Gravar stories do destaque O MÉTODO',desc:'3 vídeos curtos + cards Canva. Roteiro: 20261029_destaque_metodo.md'},
+  {id:'pb04',done:false,date:'semana 4',tags:['ig'],title:'Gravar stories do destaque CONQUISTAS',desc:'3 vídeos curtos + cards Canva. Roteiro: 20261029_destaque_conquistas.md — depende de autorização de clientes'},
+  {id:'pb05',done:false,date:'esta semana',tags:['mkt'],title:'Pedir 3–5 depoimentos de clientes',desc:'Mensagem pronta disponível. Depoimentos vão para o destaque CONQUISTAS e para o storytelling no site'},
+  {id:'pb06',done:false,date:'próximas semanas',tags:['ig','yt'],title:'Fotos no escritório para Reels e TikTok',desc:'Recepção, lounge, auditório — enviar por AirDrop com "Todos os dados das fotos" ativado'},
+  {id:'pb07',done:false,date:'próximas semanas',tags:['yt'],title:'Cortes do MonteoCast para Reels/TikTok',desc:'Precisar do arquivo de vídeo completo (ep22 Airbnb e outros). Enviar o .mov completo e faço os cortes'},
+  {id:'pb08',done:false,date:'todo dia 1º',tags:['lk'],title:'Renovar vaga de consultor no LinkedIn',desc:'LinkedIn → Para negócios → Vagas → Renovar. Compromisso mensal'},
+  {id:'pb09',done:false,date:'quando chegar a 1k',tags:['ig'],title:'Link clicável no TikTok',desc:'Só liberado com 1.000 seguidores. Monitorar e adicionar assim que atingir'},
+  {id:'pb10',done:false,date:'quando der',tags:['mkt'],title:'J.A.R.V.I.S. — preencher .env Gmail/agenda',desc:'Arquivo em ~/Desktop/jarvis-thiago. Falta conectar Gmail e Google Agenda para o briefing por voz funcionar'},
+  {id:'pb11',done:false,date:'próximas semanas',tags:['yt'],title:'Vídeo "O que é investir?" — gravar e publicar',desc:'Manifesto Buffett/Graham/Kiyosaki + 4 estratégias. Material em ~/Desktop/Posicionamento Digital/Conteúdos Instagram/Projeto - Posicionamento O que é investir'},
+  {id:'pb12',done:false,date:'futuro',tags:['mkt'],title:'Manual do Gestor de Comissões com prints reais',desc:'Aguardar estabilização do desenvolvimento antes de criar'},
+  {id:'pb13',done:false,date:'próximas semanas',tags:['lk'],title:'Collabs e live no LinkedIn',desc:'Do plano de ação Monteo original — conteúdo ao vivo e parcerias com outros criadores do setor'},
+];
+
+function renderPaMkt(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('pamkt_done')||'{}');
+    PA_ITEMS.forEach(i=>{ if(saved[i.id]!==undefined) i.done=saved[i.id]; });
+  }catch(e){}
+
+  const done = PA_ITEMS.filter(i=>i.done);
+  const pending = PA_ITEMS.filter(i=>!i.done);
+
+  document.getElementById('pa-stats').innerHTML=`
+    <div class="pa-stat"><span class="n green">${done.length}</span>Concluídas</div>
+    <div class="pa-stat"><span class="n amber">${pending.length}</span>Pendentes</div>
+    <div class="pa-stat"><span class="n">${Math.round(done.length/(PA_ITEMS.length)*100)}%</span>Progresso</div>
+  `;
+
+  document.getElementById('pa-done-list').innerHTML = done.length
+    ? done.map(renderPaItem).join('')
+    : '<div style="color:var(--fg3);font-size:13px;padding:8px 0">Nenhum item concluído ainda.</div>';
+
+  document.getElementById('pa-pending-list').innerHTML = pending.length
+    ? pending.map(renderPaItem).join('')
+    : '<div style="color:var(--ok);font-size:13px;padding:8px 0;font-weight:600">🎉 Tudo feito! Parabéns.</div>';
+}
+
+function renderPaItem(item){
+  const tags = item.tags.map(t=>`<span class="pa-tag tag-${t}">${t.toUpperCase()}</span>`).join('');
+  return `<div class="pa-item${item.done?' done':''}" id="paitem-${item.id}">
+    <div class="pa-check${item.done?' checked':''}" onclick="togglePa('${item.id}')"></div>
+    <div class="pa-body">
+      <div style="margin-bottom:4px">${tags}</div>
+      <div class="pa-title">${item.title}</div>
+      <div class="pa-desc">${item.desc}</div>
+    </div>
+    <div class="pa-date">${item.date}</div>
+  </div>`;
+}
+
+function togglePa(id){
+  const item = PA_ITEMS.find(i=>i.id===id);
+  if(!item) return;
+  item.done = !item.done;
+  try{
+    const saved = JSON.parse(localStorage.getItem('pamkt_done')||'{}');
+    saved[id] = item.done;
+    localStorage.setItem('pamkt_done', JSON.stringify(saved));
+  }catch(e){}
+  renderPaMkt();
+  showToast(item.done ? '✅ Marcado como feito!' : '↩ Movido para pendências');
+}
+</script>
 <script>
 const SB_URL = 'https://vcasnyqewgojqpoknvlg.supabase.co';
 const SB_KEY = 'sb_publishable_C-5-Jw5efeJlQyY63EABvA_z4rqj4Uk';
@@ -367,6 +484,7 @@ function showTab(id,btn){
   document.getElementById('panel-'+id).style.display='block';
   btn.classList.add('active');
   if(id==='ranking')loadRanking();
+  if(id==='pamkt')renderPaMkt();
 }
 document.querySelectorAll('.panel').forEach((p,i)=>{p.style.display=i===0?'block':'none';});
 
