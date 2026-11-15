@@ -342,6 +342,26 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
 /* ─── ANIMAÇÕES ─── */
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ─── ARTIGOS RECENTES ─── */
+.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
+@media(max-width:900px){.rec-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.rec-grid{grid-template-columns:1fr}}
+.art-card{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line);
+  display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+.art-card:hover{border-color:rgba(207,152,89,.4);transform:translateY(-3px)}
+.art-card-img{position:relative;overflow:hidden;aspect-ratio:16/9}
+.art-card-body{padding:22px 22px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.art-cat{align-self:flex-start;display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);background:rgba(207,152,89,.12);padding:4px 12px;border-radius:999px;border:1px solid rgba(207,152,89,.25)}
+.art-card-body h3{font-size:17px;font-weight:700;letter-spacing:-.4px;line-height:1.3}
+.art-card-body p{font-size:13.5px;color:var(--muted);line-height:1.55;flex:1}
+.art-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.art-card-footer time{font-size:11.5px;color:var(--muted)}
+.art-leia{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.3px}
+.art-leia svg{transition:transform .15s}
+.art-card:hover .art-leia svg{transform:translateX(4px)}
+.ver-todos{display:flex;justify-content:center;margin-top:32px}
 </style>
 </head>
 <body>
@@ -845,6 +865,52 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
   </div>
 </section>
 
+<!-- ─── ARTIGOS RECENTES ─── -->
+<!-- Os 3 cartões abaixo são atualizados sozinhos (script no fim da página) com os 3 primeiros da página /artigos. -->
+<section id="artigos-recentes" aria-labelledby="t-artigos">
+  <div class="wrap">
+    <span class="sec-label">Conhecimento</span>
+    <h2 class="sec-title" id="t-artigos">Artigos recentes</h2>
+    <p class="sec-sub">Análises de mercado e estratégia para quem quer construir patrimônio com inteligência.</p>
+    <div class="rec-grid" id="recGrid">
+      <a href="/artigos/brasil-pais-dos-inquilinos.html" class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
+          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="36" fill="#CF9859">🔑</text></svg>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado Imobiliário</span>
+          <h3>O Brasil está virando um país de inquilinos. E os dados confirmam.</h3>
+          <p>23,8% dos domicílios já são alugados — recorde histórico. O novo ciclo imobiliário já está definindo quem constrói patrimônio e quem paga pelo patrimônio dos outros.</p>
+          <div class="art-card-footer"><time>14 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="/artigos/reforma-tributaria-consorcio-ibs-cbs.html" class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
+          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#CF9859">§</text></svg>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado</span>
+          <h3>Reforma Tributária abre brecha para empresas recuperarem imposto via consórcio</h3>
+          <p>A tese do art. 205 da LC 214/2025 e como o IBS/CBS pode virar aliado de empresas no regime regular na compra de imóveis e veículos.</p>
+          <div class="art-card-footer"><time>13 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="/artigos/custos-ocultos-financiamento.html" class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
+          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#CF9859">R$</text></svg>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado</span>
+          <h3>Os custos que ninguém te conta antes de assinar o financiamento</h3>
+          <p>ITBI, escritura, seguro obrigatório e avaliação bancária: até R$ 61 mil em gastos que não aparecem na simulação do banco — mais de R$ 1,6 milhão em juros no prazo.</p>
+          <div class="art-card-footer"><time>06 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+    </div>
+    <div class="ver-todos"><a class="btn-secondary" href="/artigos">Ver todos os artigos</a></div>
+  </div>
+</section>
+
 <!-- ─── FAQ ─── -->
 <section id="faq" aria-labelledby="t-faq">
   <div class="wrap">
@@ -1017,5 +1083,38 @@ fadeEls.forEach(el => { el.classList.add('fade-up'); fadeObserver.observe(el); }
 </script>
 
 <script async src="//www.instagram.com/embed.js"></script>
+<script>
+/* Artigos recentes: puxa os 3 primeiros artigos da página /artigos,
+   para a página inicial se atualizar sozinha quando sair artigo novo. */
+(function () {
+  var grid = document.getElementById('recGrid');
+  if (!grid || !window.fetch || !window.DOMParser) return;
+  fetch('/artigos', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.text() : null; }).then(function (html) {
+    if (!html) return;
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var itens = Array.prototype.slice.call(doc.querySelectorAll('.destaque, .art-card')).slice(0, 3);
+    if (itens.length < 3) return;
+    var modelo = grid.querySelector('.art-card');
+    var novos = itens.map(function (el) {
+      var c = modelo.cloneNode(true);
+      var href = el.getAttribute('href') || '';
+      if (href && href.charAt(0) !== '/' && href.indexOf('http') !== 0) href = '/' + href;
+      c.setAttribute('href', href);
+      var txt = function (sel) { var n = el.querySelector(sel); return n ? n.textContent.trim() : ''; };
+      var data = txt('time') || (txt('.art-meta span') || '').replace(/\s+/g, ' ');
+      c.querySelector('.art-cat').textContent = txt('.art-cat');
+      c.querySelector('h3').textContent = txt('h2') || txt('h3');
+      c.querySelector('p').textContent = txt('p');
+      c.querySelector('time').textContent = data;
+      var ico = el.querySelector('.art-card-img text, .destaque-img text');
+      if (ico) c.querySelector('.art-card-img text').textContent = ico.textContent;
+      return c;
+    });
+    if (novos.some(function (c) { return !c.getAttribute('href') || !c.querySelector('h3').textContent; })) return;
+    grid.innerHTML = '';
+    novos.forEach(function (c) { grid.appendChild(c); });
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>
