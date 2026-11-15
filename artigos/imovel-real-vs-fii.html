@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imóvel real vs. FII: o que o circuit breaker revelou · Thiago Pereira</title>
+<meta name="description" content="Quando a bolsa caiu 10% e acionou o circuit breaker, fundos imobiliários apareceram no extrato como qualquer outra ação. O imóvel físico nunca apareceu.">
+<meta name="theme-color" content="#15120F">
+<link rel="canonical" href="https://invistacomthiago.com.br/artigos/imovel-real-vs-fii">
+<meta property="og:type" content="article">
+<meta property="og:title" content="O que o circuit breaker revelou sobre FII vs. imóvel real">
+<meta property="og:url" content="https://invistacomthiago.com.br/artigos/imovel-real-vs-fii">
+<meta property="og:image" content="https://invistacomthiago.com.br/og-thiago.jpg">
+<meta property="og:locale" content="pt_BR">
+<meta property="article:published_time" content="2026-10-16">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315120F'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23CF9859'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#15120F;--card:#1E1915;--card-2:#29231E;--line:#362D26;--ink:#F6F3EE;--muted:#B3A798;--copper:#AB7459;--gold:#CF9859;--grad:linear-gradient(135deg,#AB7459,#CF9859);--wrap:1120px;--art-w:720px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(171,116,89,.1),transparent 60%),var(--bg)}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
+#navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(21,18,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(54,45,38,.6)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px;padding:0 20px;max-width:var(--wrap);margin:0 auto}
+.nav-logo{height:68px;width:auto}
+.nav-links{display:none;gap:28px}
+.nav-links a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;letter-spacing:.3px;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn-nav{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;background:var(--grad);color:var(--bg);border:none;cursor:pointer;white-space:nowrap;letter-spacing:.2px}
+.btn-wpp{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;background:transparent;color:var(--gold);border:1px solid rgba(207,152,89,.5);white-space:nowrap;letter-spacing:.2px}
+@media(min-width:768px){.nav-links{display:flex}}
+.art-header{padding:120px 0 48px;border-bottom:1px solid var(--line);margin-bottom:48px}
+.art-header .wrap{max-width:var(--art-w)}
+.bread a{font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:24px}
+.bread a:hover{color:var(--gold)}
+.art-cat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);background:rgba(207,152,89,.12);padding:4px 12px;border-radius:999px;border:1px solid rgba(207,152,89,.25);margin-bottom:20px}
+.art-header h1{font-size:clamp(28px,4.5vw,44px);font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin-bottom:16px;text-wrap:balance}
+.art-lead{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:clamp(17px,2.2vw,21px);color:var(--muted);line-height:1.55;margin-bottom:24px}
+.art-meta{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.art-body{max-width:var(--art-w);margin:0 auto;padding:0 20px 80px}
+.art-body p{font-size:16px;line-height:1.75;margin-bottom:22px}
+.art-body h2{font-size:22px;font-weight:800;letter-spacing:-.6px;margin:40px 0 16px}
+.art-body ul,.art-body ol{padding-left:22px;margin-bottom:22px}
+.art-body li{font-size:15.5px;line-height:1.7;margin-bottom:6px}
+.art-body strong{font-weight:700}
+.art-body blockquote{border-left:3px solid var(--gold);padding:12px 20px;margin:28px 0;background:rgba(207,152,89,.06);border-radius:0 8px 8px 0}
+.art-body blockquote p{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:17px;color:var(--muted);margin:0}
+.dado-box{background:rgba(207,152,89,.07);border:1px solid rgba(207,152,89,.2);border-radius:12px;padding:20px 24px;margin:28px 0}
+.dado-box p{font-size:14.5px;margin:0 0 6px;color:var(--ink)}
+.dado-box strong{color:var(--gold);display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.art-footer{max-width:var(--art-w);margin:0 auto;padding:0 20px 80px}
+.art-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:10px 20px;border:1px solid var(--line);border-radius:999px;transition:all .15s}
+.art-back:hover{color:var(--gold);border-color:rgba(207,152,89,.4)}
+.art-sobre{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 32px;margin-top:32px}
+.art-sobre h3{font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.art-sobre p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+footer{border-top:1px solid var(--line);padding:32px 0;text-align:center}
+footer p{font-size:12px;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/"><img src="../logo-ocre.png" alt="Invista com Thiago" class="nav-logo"></a>
+    <div class="nav-links">
+      <a href="/#sobre">Sobre</a><a href="/#numeros">Números</a><a href="/#diferenciais">Diferenciais</a>
+      <a href="/artigos">Artigos</a><a href="/#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn-wpp" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn-nav" href="https://simulador.invistacomthiago.com.br" target="_blank" rel="noopener">Simular agora</a>
+    </div>
+  </div>
+</nav>
+
+<header class="art-header">
+  <div class="wrap">
+    <div class="bread"><a href="/artigos">← Artigos</a></div>
+    <span class="art-cat">Mercado</span>
+    <h1>FII não é imóvel. É uma cota que oscila — o circuit breaker comprovou</h1>
+    <p class="art-lead">Quando a bolsa caiu mais de 10% e acionou o mecanismo de pausa das negociações, fundos imobiliários apareceram no extrato de seus cotistas como qualquer outra ação: em vermelho. O imóvel físico nunca apareceu no extrato de ninguém às 9h da manhã.</p>
+    <div class="art-meta">
+      <span>16 de outubro de 2026</span>
+      <span>· 5 min de leitura</span>
+      <span>· Por Thiago Pereira</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="art-body">
+
+    <p>Em outubro de 2026, a bolsa brasileira abriu em queda de mais de 10%, acionando o circuit breaker — o mecanismo automático que suspende as negociações por 30 minutos para evitar um colapso em cascata. Depois de reabrir, caiu mais 15%. Foi um daqueles dias que revelam a natureza real de cada ativo.</p>
+
+    <p>Para os cotistas de fundos imobiliários, foi um dia de extrato vermelho. Não porque seus apartamentos ou salas comerciais valeram menos — mas porque as cotas negociadas em bolsa refletiram o humor do mercado financeiro, não o valor dos tijolos por trás delas.</p>
+
+    <blockquote>
+      <p>"FII não é imóvel. É uma cota que oscila. O imóvel físico não aparece no seu extrato às 9h da manhã."</p>
+    </blockquote>
+
+    <h2>A diferença que fica invisível no bull market</h2>
+
+    <p>Em períodos de alta, a distinção entre FII e imóvel físico parece irrelevante. Os fundos distribuem dividendos mensais, têm liquidez diária, e boa parte deles apresenta valorização das cotas junto com os imóveis do portfólio. Para muitos investidores, parece a versão conveniente de investir em imóvel.</p>
+
+    <p>Mas os dois instrumentos têm naturezas completamente diferentes. Um FII é um ativo de renda variável negociado em bolsa. Sua cota responde a fluxo de capital, à taxa de juros, ao sentimento do mercado e à liquidez do sistema financeiro — não apenas ao valor intrínseco dos imóveis que compõem o portfólio. Num dia como o do circuit breaker, todo esse risco aparece de uma vez.</p>
+
+    <div class="dado-box">
+      <strong>Circuit breaker — outubro 2026</strong>
+      <p>Bolsa caiu mais de 10% na abertura → negociações suspensas por 30 minutos</p>
+      <p>Após reabertura: queda adicional de mais 15%</p>
+      <p>FIIs negociados em bolsa acompanharam o movimento geral</p>
+      <p>Imóveis físicos: sem variação registrada nenhum extrato</p>
+    </div>
+
+    <h2>O que o imóvel físico oferece que o FII não oferece</h2>
+
+    <p>O imóvel físico tem características que os FIIs não replicam por design:</p>
+
+    <ul>
+      <li><strong>Ausência de marcação a mercado diária.</strong> Um apartamento não tem preço às 10h15 de uma segunda-feira de pânico. Seu valor é avaliado periodicamente, em transações reais, por laudo ou por comparação de mercado.</li>
+      <li><strong>Controle direto sobre o ativo.</strong> O proprietário decide quando vender, reformar, alugar ou usar. Não depende de gestor, assembleia de cotistas ou liquidez de bolsa.</li>
+      <li><strong>Proteção emocional.</strong> Ver o patrimônio cair 15% numa manhã é diferente de saber que o aluguel entrou na conta e que o imóvel segue lá. Para muitas pessoas, isso impacta diretamente a qualidade das decisões financeiras.</li>
+      <li><strong>Colateral real.</strong> O imóvel pode ser usado como garantia em operações de crédito, em consórcio, ou em estruturas patrimoniais que FIIs não suportam.</li>
+    </ul>
+
+    <h2>O que o FII oferece que o imóvel físico não oferece</h2>
+
+    <p>A comparação honesta reconhece as vantagens dos FIIs também:</p>
+
+    <ul>
+      <li>Liquidez diária — vender um FII é instantâneo; vender um imóvel pode levar meses;</li>
+      <li>Diversificação com ticket pequeno — R$ 10 mil pode comprar cotas de um portfólio com dezenas de imóveis em diferentes cidades;</li>
+      <li>Gestão profissional — o fundo contrata gestores, administradores e fiscais;</li>
+      <li>Isenção de IR nos dividendos para pessoa física.</li>
+    </ul>
+
+    <p>O problema não é o FII. O problema é quando o investidor compra FII acreditando que está comprando imóvel. São instrumentos diferentes, com perfis de risco diferentes, que se comportam de forma diferente nos momentos de estresse do mercado.</p>
+
+    <h2>O consórcio como ponte para o imóvel físico</h2>
+
+    <p>Para quem quer construir patrimônio imobiliário real — com escritura, registro e endereço fixo — e não tem o capital total disponível hoje, o consórcio funciona como um plano de poupança forçada que converte parcelas mensais em carta de crédito imobiliária. Sem juros, sem volatilidade de cota, sem dependência de liquidez de bolsa.</p>
+
+    <p>Num dia de circuit breaker, o cotista de FII enfrenta o extrato vermelho. O consorciado que já foi contemplado tem um imóvel. O que ainda não foi contemplado tem uma carta em construção — e uma parcela que não mudou porque a bolsa abriu em queda.</p>
+
+    <p><em>Não é recomendação de investimento. FIIs podem ser parte de uma estratégia patrimonial diversificada. Consulte seu assessor de investimentos.</em></p>
+
+  </div>
+
+  <div class="art-footer">
+    <a href="/artigos" class="art-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar para artigos
+    </a>
+    <div class="art-sobre">
+      <h3>Sobre o autor</h3>
+      <p>Thiago Pereira é master franqueado Monteo em Maringá (PR), especialista em alavancagem patrimonial e estratégia com consórcio. Mais de 30 anos de experiência em finanças corporativas.</p>
+      <p>Para entender como construir patrimônio imobiliário real com planejamento:</p>
+      <a class="btn-nav" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Li%20o%20artigo%20sobre%20im%C3%B3vel%20vs%20FII%20e%20quero%20conversar." target="_blank" rel="noopener">Falar com Thiago</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Thiago Pereira · <a href="https://invistacomthiago.com.br/">invistacomthiago.com.br</a> · <a href="mailto:contato@invistacomthiago.com.br">contato@invistacomthiago.com.br</a></p>
+  </div>
+</footer>
+</body>
+</html>
