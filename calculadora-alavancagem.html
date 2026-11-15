@@ -33,6 +33,7 @@
   --shadow:    0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
   font-synthesis: none;
   color-scheme: dark;
+  --wrap: 1120px;
 }
 
 /* ── Reset / Base ─────────────────────────────────────────────────────── */
@@ -233,6 +234,13 @@ h1 {
   .risk-table td:first-child { white-space: normal; width: 38%; }
 }
 
+
+/* Índices e Financiamento lado a lado (computador) */
+.dupla{display:grid;grid-template-columns:2fr 3fr;gap:0 32px}
+.dupla-2 .input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dupla-3 .input-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:820px){.dupla{grid-template-columns:1fr}.dupla-2 .input-grid,.dupla-3 .input-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}}
+
 /* ── Menu e rodapé iguais aos do site ── */
 /* ─── NAVBAR ─── */
 #navbar{position:fixed;top:0;left:0;right:0;z-index:100;
@@ -323,6 +331,9 @@ body > footer{margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));ma
     </div>
   </div>
 
+  <!-- Blocos 2 e 3 lado a lado: Índices e Financiamento -->
+  <div class="dupla">
+    <div class="dupla-col dupla-2">
   <!-- Bloco 2: Índices -->
   <p class="section-title">Índices e valorização</p>
   <div class="input-grid">
@@ -336,6 +347,8 @@ body > footer{margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));ma
     </div>
   </div>
 
+    </div>
+    <div class="dupla-col dupla-3">
   <!-- Bloco 3: Financiamento -->
   <p class="section-title">Financiamento nas chaves</p>
   <div class="input-grid">
@@ -351,6 +364,9 @@ body > footer{margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));ma
       <label>Prazo consórcio (meses)</label>
       <input type="number" id="prazoConsorcio" value="240" min="60" max="300" step="12">
       <span class="field-hint">Referência do setor: 180–240 meses · máximo: ~300 meses</span>
+    </div>
+  </div>
+
     </div>
   </div>
 
