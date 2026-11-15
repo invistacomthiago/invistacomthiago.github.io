@@ -121,7 +121,7 @@ section:nth-child(even){background:rgba(30,25,21,.5)}
 .divider{width:40px;height:3px;background:var(--grad);border-radius:2px;margin:0 auto 28px}
 
 /* ─── JORNADAS ─── */
-.jornadas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:0 auto}
+.jornadas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:none;margin:0}
 @media(max-width:700px){.jornadas{grid-template-columns:1fr}}
 .jornada{display:flex;flex-direction:column;gap:12px;padding:28px 24px 24px;border-radius:20px;
   background:linear-gradient(145deg,var(--card),var(--card-2));border:1px solid var(--line);
@@ -406,7 +406,7 @@ h1.hero-frase{font-weight:800;font-size:clamp(32px,4.6vw,54px);letter-spacing:-1
 }
 
 /* calculadora dentro da seção de jornada */
-.jornada-ferramenta{margin-top:16px;max-width:1000px}
+.jornada-ferramenta{margin-top:16px;max-width:none}
 .jornada-ferramenta a{display:flex;align-items:center;gap:18px;padding:20px 22px;border-radius:16px;text-decoration:none;color:var(--ink);
   border:1px dashed rgba(207,152,89,.45);transition:border-color .2s}
 .jornada-ferramenta a:hover{border-color:var(--gold);border-style:solid}
