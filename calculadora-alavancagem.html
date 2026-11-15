@@ -252,6 +252,15 @@ h1 {
 @media(min-width:821px){#panel-short .input-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:820px){.renda-aluguel{width:100%}}
 
+
+/* Barra cobre separando temas lado a lado (computador) */
+@media(min-width:821px){
+  .dupla{gap:0}
+  .dupla-2{padding-right:28px}
+  .dupla-3{border-left:2px solid var(--ocre-dim);padding-left:28px}
+  .renda-tipo{border-left:2px solid var(--ocre-dim);padding-left:24px;align-self:stretch}
+}
+
 /* ── Menu e rodapé iguais aos do site ── */
 /* ─── NAVBAR ─── */
 #navbar{position:fixed;top:0;left:0;right:0;z-index:100;
@@ -349,7 +358,7 @@ body > footer{margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));ma
       <input type="number" id="incc" value="6.5" min="0" max="30" step="0.5">
     </div>
     <div class="field">
-      <label>Valorização do imóvel (% ao ano)</label>
+      <label>Valorização (% ao ano)</label>
       <input type="number" id="valorizacao" value="8" min="0" max="40" step="0.5">
     </div>
   </div>
