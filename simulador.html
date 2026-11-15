@@ -1,0 +1,724 @@
+<title>Simulador de Alavancagem</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+/* ── Tokens ───────────────────────────────────────────────────────────── */
+:root {
+  --bg:        #F7F5F0;
+  --bg2:       #EFECE5;
+  --bg3:       #E8E4DB;
+  --card:      #FFFFFF;
+  --fg:        #141210;
+  --fg2:       #5C574F;
+  --fg3:       #8C8680;
+  --ocre:      #C69C3C;
+  --ocre-dim:  #966E1E;
+  --ocre-pale: #F5EDD4;
+  --positive:  #2D6A4F;
+  --negative:  #B5321A;
+  --border:    rgba(20,18,16,.10);
+  --border2:   rgba(20,18,16,.06);
+  --radius:    6px;
+  --shadow:    0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+  font-synthesis: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#0E0D0B;--bg2:#161410;--bg3:#1E1C17;--card:#1A1813;
+    --fg:#F0EDE6;--fg2:#A09890;--fg3:#6A6460;
+    --ocre:#C69C3C;--ocre-dim:#A07820;--ocre-pale:#2A2010;
+    --positive:#52B788;--negative:#E07060;
+    --border:rgba(240,237,230,.08);--border2:rgba(240,237,230,.04);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#0E0D0B;--bg2:#161410;--bg3:#1E1C17;--card:#1A1813;
+  --fg:#F0EDE6;--fg2:#A09890;--fg3:#6A6460;
+  --ocre:#C69C3C;--ocre-dim:#A07820;--ocre-pale:#2A2010;
+  --positive:#52B788;--negative:#E07060;
+  --border:rgba(240,237,230,.08);--border2:rgba(240,237,230,.04);
+  color-scheme:dark;
+}
+
+/* ── Reset / Base ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left,0px));
+  padding-right: max(16px, env(safe-area-inset-right,0px));
+  padding-block: 0;
+}
+input, select { font-family: inherit; font-size: inherit; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ── Layout ───────────────────────────────────────────────────────────── */
+.page { max-width: 760px; margin: 0 auto; padding-block: 48px 80px; }
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ocre); margin-bottom: 10px;
+}
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 8vw, 72px);
+  letter-spacing: .01em; line-height: 1; color: var(--fg);
+  text-wrap: balance; margin-bottom: 14px;
+}
+.subtitle { font-size: 15px; color: var(--fg2); max-width: 540px; margin-bottom: 36px; line-height: 1.65; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+/* ── Section titles ───────────────────────────────────────────────────── */
+.section-title {
+  font-size: 11px; font-weight: 600; letter-spacing: .10em;
+  text-transform: uppercase; color: var(--ocre); margin-bottom: 16px;
+}
+
+/* ── Input grid ───────────────────────────────────────────────────────── */
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px; margin-bottom: 24px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 12px; font-weight: 500; color: var(--fg2); letter-spacing: .02em; }
+.field input {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 9px 12px; color: var(--fg);
+  width: 100%; transition: border-color .15s; font-variant-numeric: tabular-nums;
+}
+.field input:focus { outline: none; border-color: var(--ocre); }
+.field-hint { font-size: 11px; color: var(--fg3); line-height: 1.4; margin-top: -2px; }
+
+/* ── Renda tab toggle ─────────────────────────────────────────────────── */
+.renda-tabs { display: flex; gap: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; width: fit-content; }
+.renda-tab {
+  padding: 8px 16px; font-size: 12px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; background: var(--card); color: var(--fg3);
+  border: none; cursor: pointer; transition: background .15s, color .15s;
+}
+.renda-tab.active { background: var(--ocre); color: #fff; }
+.renda-panel { display: none; }
+.renda-panel.active { display: block; }
+
+/* ── Calcular btn ─────────────────────────────────────────────────────── */
+.btn-calc {
+  background: var(--ocre); color: #fff; border: none;
+  border-radius: var(--radius); padding: 13px 32px; font-size: 14px;
+  font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  transition: opacity .15s; width: 100%; margin-top: 8px;
+}
+.btn-calc:hover { opacity: .88; }
+
+/* ── Results grid ─────────────────────────────────────────────────────── */
+#resultado { margin-top: 40px; }
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+@media (min-width: 560px) {
+  .results-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.result-cell { background: var(--card); padding: 16px 14px; min-width: 0; }
+.result-label { font-size: 10px; font-weight: 600; letter-spacing: .10em; text-transform: uppercase; color: var(--fg3); margin-bottom: 4px; line-height: 1.4; min-height: 2.8em; }
+.result-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(20px, 3.5vw, 32px);
+  line-height: 1; color: var(--fg); font-variant-numeric: tabular-nums;
+  margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.result-note { font-size: 11px; color: var(--fg3); line-height: 1.5; margin-top: 4px; }
+
+/* ── Comparativo ──────────────────────────────────────────────────────── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 10px;
+}
+.compare-col { background: var(--card); padding: 20px 18px; min-width: 0; }
+.compare-col.consorcio { background: var(--ocre-pale); }
+.compare-col-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--fg3); margin-bottom: 14px;
+}
+.compare-col.consorcio .compare-col-title { color: var(--ocre-dim); }
+.compare-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+.compare-row-label { font-size: 12px; color: var(--fg2); min-width: 0; flex: 1; }
+.compare-row-value { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--fg); white-space: nowrap; }
+.compare-row-value.pos { color: var(--positive); }
+.compare-row-value.neg { color: var(--negative); }
+.compare-row-value.ocre { color: var(--ocre); }
+.compare-col-hr { border: none; border-top: 1px solid var(--border2); margin: 10px 0; }
+.compare-col.consorcio .compare-col-hr { border-top-color: rgba(198,156,60,.2); }
+.margem-destaque {
+  display: flex; flex-direction: column; gap: 2px;
+  margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+.compare-col.consorcio .margem-destaque { border-top-color: rgba(198,156,60,.2); }
+.margem-label { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--fg3); }
+.margem-sub { font-size: 10px; color: var(--fg3); letter-spacing: .06em; text-transform: uppercase; }
+.margem-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.margem-note { font-size: 11px; color: var(--fg3); line-height: 1.4; }
+.margem-row { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--border2); }
+.margem-row:last-child { border-bottom: none; }
+.compare-col.consorcio .margem-row { border-bottom-color: rgba(198,156,60,.15); }
+
+.diff-box {
+  background: var(--ocre-pale); border: 1px solid rgba(198,156,60,.25);
+  border-radius: var(--radius); padding: 16px 18px; margin-bottom: 28px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.diff-box-title { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--ocre-dim); }
+.diff-box-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--ocre); font-variant-numeric: tabular-nums; }
+.diff-box-note { font-size: 12px; color: var(--fg2); }
+
+/* ── Tabela de riscos ─────────────────────────────────────────────────── */
+.risk-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 12px; }
+.risk-table th {
+  text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--fg3); padding: 8px 10px 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.risk-table td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--border2); vertical-align: top; color: var(--fg2); line-height: 1.5; }
+.risk-table td:first-child { font-weight: 600; color: var(--fg); white-space: nowrap; padding-right: 14px; }
+.risk-table td:last-child { color: var(--fg3); font-size: 11px; }
+.risk-table tr:last-child td { border-bottom: none; }
+.risk-note { font-size: 12px; color: var(--fg3); margin-bottom: 20px; line-height: 1.6; font-style: italic; }
+
+/* ── Lead capture ─────────────────────────────────────────────────────── */
+.lead-box {
+  background: var(--fg); color: var(--bg);
+  border-radius: var(--radius); padding: 32px 28px; margin-top: 40px;
+}
+.lead-box h2 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 32px;
+  letter-spacing: .02em; margin-bottom: 8px; color: var(--bg);
+}
+.lead-box p { font-size: 14px; color: var(--bg2); margin-bottom: 20px; line-height: 1.6; }
+.lead-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+@media (max-width: 480px) { .lead-fields { grid-template-columns: 1fr; } }
+.lead-fields input {
+  background: var(--bg2); border: 1px solid rgba(240,237,230,.15);
+  border-radius: var(--radius); padding: 10px 14px; color: var(--fg); width: 100%; font-size: 14px;
+}
+.lead-fields input::placeholder { color: var(--fg3); }
+.lead-fields input:focus { outline: none; border-color: var(--ocre); }
+.btn-lead {
+  display: block; width: 100%; background: var(--ocre); color: #fff; border: none;
+  border-radius: var(--radius); padding: 14px; font-size: 14px; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase; text-align: center;
+  text-decoration: none; transition: opacity .15s;
+}
+.btn-lead:hover { opacity: .88; }
+.lead-disclaimer { font-size: 11px; color: var(--fg3); margin-top: 10px; }
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+.footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); }
+.footer p { font-size: 12px; color: var(--fg3); line-height: 1.65; }
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .compare-grid { grid-template-columns: 1fr; }
+  .risk-table { font-size: 11px; }
+  .risk-table td:last-child { display: none; }
+}
+</style>
+
+<div class="page">
+  <!-- Header -->
+  <p class="eyebrow">Simulador · Invista com Thiago</p>
+  <h1>Imóvel na planta não compete com renda fixa.<br>Ele compete com o banco.</h1>
+  <p class="subtitle">
+    Preencha os dados do seu imóvel e veja a conta real: retorno da alavancagem,
+    parcela nas chaves e o que muda quando você substitui o juro bancário.
+  </p>
+
+  <!-- Bloco 1: Imóvel e obra -->
+  <p class="section-title">Imóvel e obra</p>
+  <div class="input-grid">
+    <div class="field">
+      <label>Valor do imóvel (R$)</label>
+      <input type="number" id="vImovel" value="600000" min="0" step="10000">
+    </div>
+    <div class="field">
+      <label>Entrada (%)</label>
+      <input type="number" id="pEntrada" value="10" min="0" max="100" step="1">
+    </div>
+    <div class="field">
+      <label>Parcela mensal na obra (R$)</label>
+      <input type="number" id="vParcela" value="2000" min="0" step="100">
+    </div>
+    <div class="field">
+      <label>Reforço anual (R$)</label>
+      <input type="number" id="vReforco" value="36000" min="0" step="1000">
+    </div>
+    <div class="field">
+      <label>Prazo da obra (meses)</label>
+      <input type="number" id="mObra" value="48" min="12" max="120" step="6">
+    </div>
+  </div>
+
+  <!-- Bloco 2: Índices -->
+  <p class="section-title">Índices e valorização</p>
+  <div class="input-grid">
+    <div class="field">
+      <label>INCC (% ao ano)</label>
+      <input type="number" id="incc" value="6.5" min="0" max="30" step="0.5">
+    </div>
+    <div class="field">
+      <label>Valorização do imóvel (% ao ano)</label>
+      <input type="number" id="valorizacao" value="8" min="0" max="40" step="0.5">
+    </div>
+  </div>
+
+  <!-- Bloco 3: Financiamento -->
+  <p class="section-title">Financiamento nas chaves</p>
+  <div class="input-grid">
+    <div class="field">
+      <label>Taxa do banco (% ao ano)</label>
+      <input type="number" id="taxaBanco" value="15" min="4" max="30" step="0.25">
+    </div>
+    <div class="field">
+      <label>Prazo financiamento (anos)</label>
+      <input type="number" id="prazoFin" value="30" min="5" max="35" step="1">
+    </div>
+    <div class="field">
+      <label>Prazo consórcio (meses)</label>
+      <input type="number" id="prazoConsorcio" value="240" min="60" max="300" step="12">
+      <span class="field-hint">Referência do setor: 180–240 meses · máximo: ~300 meses</span>
+    </div>
+  </div>
+
+  <!-- Bloco 4: Renda -->
+  <p class="section-title">Renda estimada do imóvel</p>
+  <div class="input-grid">
+    <div class="field">
+      <label>Aluguel tradicional (R$/mês)</label>
+      <input type="number" id="vAluguel" value="3100" min="0" step="100">
+      <span class="field-hint">Long stay · referência: 0,5–0,7% do valor/mês</span>
+    </div>
+  </div>
+
+  <div class="renda-tabs">
+    <button class="renda-tab active" onclick="setRendaTab('off')">Só aluguel trad.</button>
+    <button class="renda-tab" onclick="setRendaTab('short')">+ Short Stay / Airbnb</button>
+  </div>
+
+  <div id="panel-short" class="renda-panel">
+    <div class="input-grid">
+      <div class="field">
+        <label>Diária média (R$)</label>
+        <input type="number" id="vDiaria" value="350" min="0" step="10">
+        <span class="field-hint">Inclua todos os tipos de diária (fin. de semana + semana)</span>
+      </div>
+      <div class="field">
+        <label>Taxa de ocupação (%)</label>
+        <input type="number" id="pOcupacao" value="65" min="10" max="100" step="5">
+        <span class="field-hint">SP: 65–95% · Praia/turismo: 55–75% · Média Brasil: ~58%</span>
+      </div>
+      <div class="field">
+        <label>Taxa da plataforma (%)</label>
+        <input type="number" id="pPlataforma" value="15" min="0" max="30" step="1">
+        <span class="field-hint">Airbnb: ~15% · Booking: ~15–18%</span>
+      </div>
+      <div class="field">
+        <label>Limpeza + gestora (R$/mês)</label>
+        <input type="number" id="vLimpeza" value="800" min="0" step="100">
+        <span class="field-hint">Referência: R$600–R$1.200/mês para studio</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-calc" onclick="calcular()">Calcular</button>
+
+  <!-- Resultado -->
+  <div id="resultado" hidden>
+    <hr class="divider">
+    <p class="eyebrow">Resultado da simulação</p>
+
+    <!-- Métricas da obra -->
+    <div class="results-grid" id="gridObra"></div>
+
+    <hr class="divider">
+    <p class="section-title">Banco vs. Consórcio — mesmos números, instrumento diferente</p>
+    <p style="font-size:13px;color:var(--fg2);margin-bottom:16px;line-height:1.6">
+      A <strong>margem</strong> é o quanto sobra (ou falta) todo mês depois de pagar a parcela com a renda do imóvel.
+      Com o banco, você paga juro sobre o saldo. Com consórcio, você paga taxa de administração sobre o crédito — sem juro bancário, o custo cai e a conta muda.
+    </p>
+
+    <div class="compare-grid" id="compareGrid"></div>
+    <div class="diff-box" id="diffBox"></div>
+
+    <hr class="divider">
+    <p class="section-title">O que esta conta não inclui — referências de mercado</p>
+    <p class="risk-note">
+      Todos os itens abaixo reduzem a rentabilidade real. As referências são médias de mercado — seu caso pode variar.
+    </p>
+    <div id="riskTable"></div>
+
+    <!-- Lead box -->
+    <div class="lead-box">
+      <h2>Quer ver essa conta no seu caso?</h2>
+      <p>Faço uma análise gratuita com os dados do imóvel que você está avaliando — sem compromisso.</p>
+      <div class="lead-fields">
+        <input type="text" id="leadNome" placeholder="Seu nome">
+        <input type="tel" id="leadWpp" placeholder="WhatsApp (DDD + número)">
+      </div>
+      <a id="btnLead" href="#" class="btn-lead" onclick="abrirWhatsApp(event)">
+        Falar com Thiago no WhatsApp
+      </a>
+      <p class="lead-disclaimer">Seus dados são usados apenas para retorno do consultor. Sem spam.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>
+      Simulação elaborada por <strong>Thiago Pereira · @invistacomthiago</strong> · nov/2026.<br>
+      Nenhum resultado é assegurado. Esta simulação é ilustrativa e não constitui oferta ou promessa de retorno.<br>
+      ⚠️ SIMULAÇÃO — valores aproximados para fins de análise comparativa.<br>
+      Fontes: BCB SGS 432 (Selic), SGS 7456 (INCC-M), Bradesco Financiamentos out/2026, AirROI jul/2026, ABAC nov/2026.
+    </p>
+  </div>
+
+</div>
+
+<script>
+let rendaTab = 'off';
+
+function setRendaTab(tab) {
+  rendaTab = tab;
+  document.querySelectorAll('.renda-tab').forEach((b,i) => b.classList.toggle('active', (i===0 && tab==='off') || (i===1 && tab==='short')));
+  document.getElementById('panel-short').classList.toggle('active', tab === 'short');
+}
+
+function fmt(v, prefix='R$', dec=0) {
+  const n = Math.abs(v);
+  const s = n.toLocaleString('pt-BR', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+  return (v < 0 ? '−' : '') + (prefix ? prefix + ' ' : '') + s;
+}
+function fmtPct(v, dec=1) {
+  if (!isFinite(v) || isNaN(v) || Math.abs(v) > 9999) return 'N/D';
+  return v.toLocaleString('pt-BR', {minimumFractionDigits: dec, maximumFractionDigits: dec}) + '%';
+}
+
+function calcular() {
+  const vImovel    = +document.getElementById('vImovel').value    || 0;
+  const pEntrada   = +document.getElementById('pEntrada').value   || 0;
+  const vParcela   = +document.getElementById('vParcela').value   || 0;
+  const vReforco   = +document.getElementById('vReforco').value   || 0;
+  const mObra      = +document.getElementById('mObra').value      || 48;
+  const inccAA     = +document.getElementById('incc').value       || 6.5;
+  const valorAA    = +document.getElementById('valorizacao').value || 8;
+  const taxaAA     = +document.getElementById('taxaBanco').value  || 15;
+  const prazoFin   = +document.getElementById('prazoFin').value   || 30;
+
+  // Renda — aluguel trad. sempre lido do input; short stay só se aba ativa
+  const vAluguel = +document.getElementById('vAluguel').value || 0;
+  let vAluguelShort = 0;
+  if (rendaTab === 'short') {
+    const diaria     = +document.getElementById('vDiaria').value     || 350;
+    const ocupacao   = +document.getElementById('pOcupacao').value   || 65;
+    const plataforma = +document.getElementById('pPlataforma').value || 15;
+    const limpeza    = +document.getElementById('vLimpeza').value    || 800;
+    const receitaBruta = diaria * (ocupacao / 100) * 30;
+    vAluguelShort = receitaBruta * (1 - plataforma / 100) - limpeza;
+  }
+
+  // ── Obra ─────────────────────────────────────────────────────────────
+  const inccAM = Math.pow(1 + inccAA/100, 1/12) - 1;
+  const entrada = vImovel * pEntrada / 100;
+  const saldoInicial = vImovel - entrada;
+
+  // Saldo corrigido nas chaves
+  // As intermediárias pagas durante a obra reduzem o saldo nominal antes da correção pelo INCC
+  const totalParcelasNominais = vParcela * mObra + vReforco * Math.floor(mObra/12);
+  const saldoAntesCorrecao = Math.max(saldoInicial - totalParcelasNominais, 0);
+  const saldoCorrigido = saldoAntesCorrecao * Math.pow(1 + inccAA/100, mObra/12);
+
+  // Total pago na obra (entrada + parcelas + reforços corrigidos pelo INCC)
+  let totalPagoObra = entrada;
+  for (let m = 1; m <= mObra; m++) {
+    const fator = Math.pow(1 + inccAA/100, m/12);
+    totalPagoObra += vParcela * fator;
+    if (m % 12 === 0) totalPagoObra += vReforco * fator;
+  }
+
+  // ── Valorização ───────────────────────────────────────────────────────
+  const valorNasChaves = vImovel * Math.pow(1 + valorAA/100, mObra/12);
+
+  // ── TIR via Newton-Raphson ────────────────────────────────────────────
+  // Modelo: invisto entrada + parcelas (equity out-of-pocket);
+  // recebo o valor TOTAL do imóvel no final (alavancagem = controlo ativo maior com capital menor).
+  // O saldo devedor é refinanciado/pago separadamente — a TIR mede o retorno sobre o capital próprio.
+  const fluxos = [-entrada];
+  for (let m = 1; m <= mObra; m++) {
+    const fator = Math.pow(1 + inccAA/100, m/12);
+    let pag = vParcela * fator;
+    if (m % 12 === 0) pag += vReforco * fator;
+    fluxos.push(-pag);
+  }
+  fluxos[mObra] += valorNasChaves; // valor TOTAL do imóvel nas chaves
+
+  function npv(r) {
+    return fluxos.reduce((acc, f, i) => {
+      const dv = Math.pow(1 + r, i);
+      return acc + (isFinite(dv) && dv !== 0 ? f / dv : 0);
+    }, 0);
+  }
+  let r = 0.01;
+  for (let i = 0; i < 200; i++) {
+    if (!isFinite(r) || r < -0.9999) { r = 0.005; }
+    const f  = npv(r);
+    const df = fluxos.reduce((acc, fl, j) => {
+      const dv = Math.pow(1 + r, j + 1);
+      return acc - (isFinite(dv) && dv !== 0 ? j * fl / dv : 0);
+    }, 0);
+    if (Math.abs(df) < 1e-10) break;
+    const rNew = r - f / df;
+    if (!isFinite(rNew)) break;
+    if (Math.abs(rNew - r) < 1e-9) { r = rNew; break; }
+    r = rNew;
+  }
+  const tirAA = (isFinite(r) && r > -1) ? (Math.pow(1 + r, 12) - 1) * 100 : null;
+
+  // ── Financiamento Banco (tabela Price) ───────────────────────────────
+  const taxaMes = taxaAA / 100 / 12;
+  const nMeses  = prazoFin * 12;
+  const parcelaBanco = saldoCorrigido * taxaMes * Math.pow(1+taxaMes, nMeses)
+                     / (Math.pow(1+taxaMes, nMeses) - 1);
+
+  // ── Consórcio — 19% taxa adm total sobre crédito ─────────────────────
+  // Parcela integral = (crédito + taxa_adm_total) / prazo_meses_consorcio
+  // Prazo do consórcio é diferente do financiamento (máx ~240 meses no setor)
+  const prazoConsorcioMeses = +document.getElementById('prazoConsorcio').value || 240;
+  const taxaAdm = 0.19;
+  const parcelaConsorcio = (saldoCorrigido * (1 + taxaAdm)) / prazoConsorcioMeses;
+
+  // Margem (renda - parcela)
+  const margemBanco     = vAluguel - parcelaBanco;
+  const margemConsorcio = vAluguel - parcelaConsorcio;
+
+  let margemBancoLong = 0, margemConsorcioLong = 0;
+  let margemBancoShort = 0, margemConsorcioShort = 0;
+  const temDoisModos = (rendaTab === 'short');
+  if (temDoisModos) {
+    margemBancoLong     = vAluguel - parcelaBanco;
+    margemConsorcioLong = vAluguel - parcelaConsorcio;
+    margemBancoShort    = vAluguelShort - parcelaBanco;
+    margemConsorcioShort= vAluguelShort - parcelaConsorcio;
+  }
+
+  const diffMensal = parcelaBanco - parcelaConsorcio;
+  // Comparação justa: custo total de cada instrumento no seu próprio prazo
+  const diffAcum = parcelaBanco * nMeses - parcelaConsorcio * prazoConsorcioMeses;
+
+  // ── Render ────────────────────────────────────────────────────────────
+  document.getElementById('resultado').hidden = false;
+  document.getElementById('resultado').scrollIntoView({behavior:'smooth', block:'start'});
+
+  document.getElementById('gridObra').innerHTML = `
+    ${cell('Total pago na obra', fmt(totalPagoObra), 'vs. ' + fmt(entrada + vParcela*mObra + vReforco*(mObra/12)) + ' nominais')}
+    ${cell('Saldo corrigido nas chaves', fmt(saldoCorrigido), 'nominal era ' + fmt(saldoInicial))}
+    ${cell('Valor simulado nas chaves', fmt(valorNasChaves), fmtPct(valorAA) + ' ao ano por ' + (mObra/12).toFixed(0) + ' anos')}
+    ${cell('TIR anualizada', tirAA !== null ? fmtPct(tirAA) : 'N/D', 'retorno do capital próprio (alavancagem)')}
+  `;
+
+  if (temDoisModos) {
+    // Dois blocos de margem: Long Stay + Short Stay
+    const mBLc = margemBancoLong     >= 0 ? 'pos' : 'neg';
+    const mCLc = margemConsorcioLong >= 0 ? 'pos' : 'neg';
+    const mBSc = margemBancoShort    >= 0 ? 'pos' : 'neg';
+    const mCSc = margemConsorcioShort>= 0 ? 'pos' : 'neg';
+
+    document.getElementById('compareGrid').innerHTML = `
+      <div class="compare-col">
+        <p class="compare-col-title">Financiamento Bancário</p>
+        <div class="compare-row"><span class="compare-row-label">Taxa ao ano</span><span class="compare-row-value">${fmtPct(taxaAA)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Saldo nas chaves</span><span class="compare-row-value">${fmt(saldoCorrigido)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Parcela mensal</span><span class="compare-row-value neg">${fmt(parcelaBanco)}</span></div>
+        <hr class="compare-col-hr">
+        <div class="margem-destaque">
+          <span class="margem-label">Margem mensal</span>
+          <div class="margem-row">
+            <span class="margem-sub">Aluguel trad. · ${fmt(vAluguel)}/mês</span>
+            <span class="margem-value ${mBLc}">${fmt(margemBancoLong)}</span>
+            <span class="margem-note">${margemBancoLong >= 0 ? 'O imóvel se paga sozinho.' : fmt(Math.abs(margemBancoLong)) + '/mês do seu bolso'}</span>
+          </div>
+          <div class="margem-row">
+            <span class="margem-sub">Short Stay · ${fmt(vAluguelShort)}/mês est.</span>
+            <span class="margem-value ${mBSc}">${fmt(margemBancoShort)}</span>
+            <span class="margem-note">${margemBancoShort >= 0 ? 'O imóvel se paga sozinho.' : fmt(Math.abs(margemBancoShort)) + '/mês do seu bolso'}</span>
+          </div>
+        </div>
+      </div>
+      <div class="compare-col consorcio">
+        <p class="compare-col-title">Consórcio (sem juro)</p>
+        <div class="compare-row"><span class="compare-row-label">Taxa adm. total</span><span class="compare-row-value ocre">19% s/ crédito</span></div>
+        <div class="compare-row"><span class="compare-row-label">Crédito utilizado</span><span class="compare-row-value">${fmt(saldoCorrigido)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Parcela integral · ${prazoConsorcioMeses}m</span><span class="compare-row-value ocre">${fmt(parcelaConsorcio)}</span></div>
+        <hr class="compare-col-hr">
+        <div class="margem-destaque">
+          <span class="margem-label">Margem mensal</span>
+          <div class="margem-row">
+            <span class="margem-sub">Aluguel trad. · ${fmt(vAluguel)}/mês</span>
+            <span class="margem-value ${mCLc}">${fmt(margemConsorcioLong)}</span>
+            <span class="margem-note">${margemConsorcioLong >= 0 ? 'O imóvel se paga sozinho.' : fmt(Math.abs(margemConsorcioLong)) + '/mês do seu bolso'}</span>
+          </div>
+          <div class="margem-row">
+            <span class="margem-sub">Short Stay · ${fmt(vAluguelShort)}/mês est.</span>
+            <span class="margem-value ${mCSc}">${fmt(margemConsorcioShort)}</span>
+            <span class="margem-note">${margemConsorcioShort >= 0 ? 'O imóvel se paga sozinho.' : fmt(Math.abs(margemConsorcioShort)) + '/mês do seu bolso'}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    // Modo simples — só aluguel tradicional
+    const mBc = margemBanco     >= 0 ? 'pos' : 'neg';
+    const mCc = margemConsorcio >= 0 ? 'pos' : 'neg';
+    document.getElementById('compareGrid').innerHTML = `
+      <div class="compare-col">
+        <p class="compare-col-title">Financiamento Bancário</p>
+        <div class="compare-row"><span class="compare-row-label">Taxa ao ano</span><span class="compare-row-value">${fmtPct(taxaAA)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Saldo nas chaves</span><span class="compare-row-value">${fmt(saldoCorrigido)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Parcela mensal</span><span class="compare-row-value neg">${fmt(parcelaBanco)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Renda do imóvel</span><span class="compare-row-value">${fmt(vAluguel)}</span></div>
+        <div class="margem-destaque">
+          <span class="margem-label">Margem mensal</span>
+          <span class="margem-value ${mBc}">${fmt(margemBanco)}</span>
+          <span class="margem-note">Aluguel ${fmt(vAluguel)} − parcela ${fmt(parcelaBanco)} = ${margemBanco >= 0 ? 'sobra ' + fmt(margemBanco) + '/mês' : 'faltam ' + fmt(Math.abs(margemBanco)) + '/mês do seu bolso'}</span>
+        </div>
+      </div>
+      <div class="compare-col consorcio">
+        <p class="compare-col-title">Consórcio (sem juro)</p>
+        <div class="compare-row"><span class="compare-row-label">Taxa adm. total</span><span class="compare-row-value ocre">19% s/ crédito</span></div>
+        <div class="compare-row"><span class="compare-row-label">Crédito utilizado</span><span class="compare-row-value">${fmt(saldoCorrigido)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Parcela integral · ${prazoConsorcioMeses}m</span><span class="compare-row-value ocre">${fmt(parcelaConsorcio)}</span></div>
+        <div class="compare-row"><span class="compare-row-label">Renda do imóvel</span><span class="compare-row-value">${fmt(vAluguel)}</span></div>
+        <div class="margem-destaque">
+          <span class="margem-label">Margem mensal</span>
+          <span class="margem-value ${mCc}">${fmt(margemConsorcio)}</span>
+          <span class="margem-note">Aluguel ${fmt(vAluguel)} − parcela ${fmt(parcelaConsorcio)} = ${margemConsorcio >= 0 ? 'sobra ' + fmt(margemConsorcio) + '/mês' : 'faltam ' + fmt(Math.abs(margemConsorcio)) + '/mês do seu bolso'}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('diffBox').innerHTML = `
+    <p class="diff-box-title">Diferença de custo total — banco (${prazoFin} anos) vs. consórcio (${prazoConsorcioMeses} meses)</p>
+    <p class="diff-box-value">${fmt(Math.abs(diffAcum))}</p>
+    <p class="diff-box-note">
+      Banco: ${fmt(parcelaBanco)}/mês × ${nMeses} meses = ${fmt(parcelaBanco * nMeses)}.
+      Consórcio: ${fmt(parcelaConsorcio)}/mês × ${prazoConsorcioMeses} meses = ${fmt(parcelaConsorcio * prazoConsorcioMeses)}.
+      Diferença total de custo — o que fica com o banco a mais.
+    </p>
+  `;
+
+  // Tabela de riscos com referências de mercado
+  const itbi = vImovel * 0.025; // 2,5% média
+  const cartorio = vImovel * 0.008; // 0,8%
+  const corretagem = valorNasChaves * 0.055; // 5,5%
+  const seguroMes = saldoCorrigido * 0.00030; // ~0,03%/mês (DFI + MIP)
+  const mobiliaSt = 'R$ 60–120 mil (studio 25m²)';
+  const gcLucro = (valorNasChaves - totalPagoObra) * 0.15;
+
+  document.getElementById('riskTable').innerHTML = `
+    <table class="risk-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Como entra na conta</th>
+          <th>Referência de mercado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TR no financiamento</td>
+          <td>Atualização mensal do saldo devedor pelo banco — aumenta o saldo total e o prazo real</td>
+          <td>TR recente: ~0,0083%/mês · histórico pico: 1,2%/mês · pode adicionar 2–8% ao custo total</td>
+        </tr>
+        <tr>
+          <td>Taxa de contrato (banco)</td>
+          <td>Cobrança mensal administrativa do credor sobre o contrato ativo</td>
+          <td>~R$ 25/mês · R$ 9.000 em 30 anos</td>
+        </tr>
+        <tr>
+          <td>Seguros obrigatórios (DFI + MIP)</td>
+          <td>Obrigatórios no financiamento SFH — Danos Físicos + Morte e Invalidez</td>
+          <td>~0,03% do saldo/mês · est. ${fmt(seguroMes)}/mês nas chaves</td>
+        </tr>
+        <tr>
+          <td>ITBI</td>
+          <td>Imposto de transmissão — pago na lavratura da escritura</td>
+          <td>2–3% do valor do imóvel · est. ${fmt(itbi)} (2,5% s/ ${fmt(vImovel)})</td>
+        </tr>
+        <tr>
+          <td>Cartório e escritura</td>
+          <td>Registro de imóvel + ITCMD se aplicável · varia por estado</td>
+          <td>0,5–1,2% do valor · est. ${fmt(cartorio)} (0,8% s/ ${fmt(vImovel)})</td>
+        </tr>
+        <tr>
+          <td>Corretagem na venda</td>
+          <td>Honorários do corretor na revenda do imóvel</td>
+          <td>5–6% sobre o valor de venda · est. ${fmt(corretagem)} (5,5% s/ ${fmt(valorNasChaves)} simulado)</td>
+        </tr>
+        <tr>
+          <td>Ganho de capital + IR</td>
+          <td>IR de 15% sobre o lucro na venda — lucro = venda − custo de aquisição</td>
+          <td>Lucro est. ${fmt(valorNasChaves - totalPagoObra)} · IR est. ${fmt(gcLucro)} · imóvel de investimento: sem isenção; redução de 5%/ano após 5 anos (mín. 70%)</td>
+        </tr>
+        <tr>
+          <td>Mobília (short stay)</td>
+          <td>Necessária para operar por temporada — impacto no TIR e payback</td>
+          <td>${mobiliaSt} · mais moderno e bem localizado = diária mais alta + ocupação maior</td>
+        </tr>
+        <tr>
+          <td>Vacância (aluguel trad.)</td>
+          <td>Meses sem inquilino + inadimplência parcial</td>
+          <td>Média histórica: 10–15% ao ano · planeje 1–2 meses vagos/ano</td>
+        </tr>
+        <tr>
+          <td>Contemplação no consórcio</td>
+          <td>Prazo de acesso ao crédito depende de lance ou sorteio</td>
+          <td>Lance fixo/fidelidade aumenta probabilidade · sem garantia de data</td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+}
+
+function cell(label, value, note) {
+  return `<div class="result-cell">
+    <p class="result-label">${label}</p>
+    <p class="result-value">${value}</p>
+    ${note ? `<p class="result-note">${note}</p>` : ''}
+  </div>`;
+}
+
+function abrirWhatsApp(e) {
+  e.preventDefault();
+  const nome = document.getElementById('leadNome').value.trim();
+  const wpp  = document.getElementById('leadWpp').value.trim().replace(/\D/g,'');
+  const msg = encodeURIComponent(
+    `Olá Thiago! Vi o simulador no seu site e quero entender melhor a conta no meu caso.` +
+    (nome ? `\nMeu nome: ${nome}` : '')
+  );
+  const numero = wpp.length >= 10 ? `55${wpp}` : '5544991112549';
+  window.open(`https://wa.me/${numero}?text=${msg}`, '_blank');
+}
+
+calcular();
+</script>
