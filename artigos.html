@@ -361,5 +361,36 @@ footer a:hover{color:var(--gold)}
   </div>
 </footer>
 
+<script>
+/* Filtros de categoria: mostra só os artigos da categoria clicada.
+   Botões de categorias ainda sem artigo ficam escondidos e aparecem
+   sozinhos quando o primeiro artigo daquela categoria for publicado. */
+(function () {
+  var norm = function (t) {
+    return (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+  };
+  var itens = Array.prototype.slice.call(document.querySelectorAll('.destaque, .art-card'));
+  var catDe = function (el) {
+    var c = el.querySelector('.art-cat');
+    return c ? norm(c.textContent) : '';
+  };
+  var combina = function (el, filtro) {
+    return filtro === 'todos' || catDe(el).indexOf(filtro) === 0;
+  };
+  var botoes = Array.prototype.slice.call(document.querySelectorAll('.filtros .filtro'));
+  botoes.forEach(function (b) {
+    var f = norm(b.textContent);
+    if (f !== 'todos' && !itens.some(function (el) { return combina(el, f); })) {
+      b.style.display = 'none';
+    }
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      botoes.forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      itens.forEach(function (el) { el.style.display = combina(el, f) ? '' : 'none'; });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
