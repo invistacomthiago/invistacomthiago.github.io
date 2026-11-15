@@ -487,6 +487,16 @@ body.sem-rolagem{overflow:hidden}
 /* qualificação + prêmio na mesma seção */
 #reconhecimento .selos{margin:0 0 28px;max-width:560px}
 
+
+/* franquia (lista aberta, sem acordeão) */
+.fr-lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 48px;max-width:980px}
+.fr-item{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:22px 0;border-top:1px solid var(--line)}
+.fr-num{font-size:12px;font-weight:800;color:var(--gold);letter-spacing:1.5px;padding-top:4px}
+.fr-item h3{font-size:17px;font-weight:700;letter-spacing:-.2px;margin-bottom:6px}
+.fr-item p{font-size:14.5px;color:var(--muted);line-height:1.6}
+.fr-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+@media(max-width:760px){.fr-lista{grid-template-columns:1fr}.fr-ctas a{width:100%;justify-content:center}}
+
 /* sem animação de surgir: tudo visível desde o carregamento */
 .fade-up{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
@@ -501,7 +511,7 @@ body.sem-rolagem{overflow:hidden}
     <nav class="nav-links" aria-label="Seções">
       <a href="#sobre">Sobre</a>
       <a href="#clientes">Clientes</a>
-      <a href="#diferenciais">Diferenciais</a>
+      <a href="#diferenciais">Franquia</a>
       <a href="#reconhecimento">Reconhecimento</a>
       <a href="#conteudo">Mídia</a>
       <a href="/artigos">Artigos</a>
@@ -547,30 +557,30 @@ body.sem-rolagem{overflow:hidden}
 <section id="jornada" aria-labelledby="t-jornada">
   <div class="wrap">
     <span class="sec-label">Escolha seu caminho</span>
-    <h2 class="sec-title" id="t-jornada">Escolha sua jornada</h2>
+    <h2 class="sec-title" id="t-jornada">Como você quer caminhar comigo?</h2>
     <div class="divider"></div>
     <div class="jornadas">
       <a class="jornada" href="https://simulador.invistacomthiago.com.br/" target="_blank" rel="noopener">
         <svg class="jornada-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <div>
           <div class="jornada-tit">Quero ser cliente</div>
-          <div class="jornada-desc">Estruture seu patrimônio com estratégia. Simule agora e veja como o consórcio trabalha para você.</div>
+          <div class="jornada-desc">Planeje a compra do seu imóvel ou a construção do seu patrimônio. Comece pelo simulador.</div>
         </div>
         <div class="jornada-cta">Simular agora →</div>
       </a>
-      <a class="jornada" href="https://www.linkedin.com/jobs/view/4432718408/" target="_blank" rel="noopener">
+      <a class="jornada" href="#diferenciais">
         <svg class="jornada-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <div>
-          <div class="jornada-tit">Quero ser consultor</div>
-          <div class="jornada-desc">Faça parte da operação. Veja a vaga aberta e candidate-se para trabalhar comigo.</div>
+          <div class="jornada-tit">Quero empreender comigo</div>
+          <div class="jornada-desc">Seja franqueado na minha operação da Monteo ou entre no time como consultor.</div>
         </div>
-        <div class="jornada-cta">Ver vaga →</div>
+        <div class="jornada-cta">Ver como funciona →</div>
       </a>
       <a class="jornada" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Tenho%20interesse%20em%20indicar%20algu%C3%A9m%20e%20saber%20mais%20sobre%20as%20parcerias%20de%20indica%C3%A7%C3%A3o." target="_blank" rel="noopener">
         <svg class="jornada-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M19 8h3M22 5l-3 3 3 3"/></svg>
         <div>
-          <div class="jornada-tit">Indique e ganhe</div>
-          <div class="jornada-desc">Conhece alguém que quer construir patrimônio? Indique e seja remunerado. Em breve, modelos completos de parceria.</div>
+          <div class="jornada-tit">Quero indicar</div>
+          <div class="jornada-desc">Conhece alguém que quer construir patrimônio? A indicação é remunerada. Me chama no WhatsApp que eu explico como funciona.</div>
         </div>
         <div class="jornada-cta">Falar com Thiago →</div>
       </a>
@@ -699,61 +709,22 @@ body.sem-rolagem{overflow:hidden}
   </div>
 </section>
 
-<!-- ─── DIFERENCIAIS ─── -->
+<!-- ─── DIFERENCIAIS (franquia) ─── -->
 <section id="diferenciais" aria-labelledby="t-dif">
   <div class="wrap">
-    <span class="sec-label">Diferenciais para clientes e consultores</span>
-    <h2 class="sec-title" id="t-dif">Por que trabalhar comigo?</h2>
+    <span class="sec-label" id="franquia">Para quem quer empreender no consórcio</span>
+    <h2 class="sec-title" id="t-dif">Por que crescer comigo na Monteo</h2>
     <div class="divider"></div>
-    <div class="dif-list">
-      <div class="dif-item">
-        <button class="dif-btn" aria-expanded="false">
-          <span class="dif-num">01</span>
-          <span class="dif-title">Acesso a Grupos Exclusivos de Investidores</span>
-          <span class="dif-icon">+</span>
-        </button>
-        <div class="dif-body"><p>Grupos Monteo com investidores que compartilham o mesmo objetivo de crescimento patrimonial — ambiente seletivo, oportunidades reais.</p></div>
-      </div>
-      <div class="dif-item">
-        <button class="dif-btn" aria-expanded="false">
-          <span class="dif-num">02</span>
-          <span class="dif-title">Gestão Ativa da Sua Cota</span>
-          <span class="dif-icon">+</span>
-        </button>
-        <div class="dif-body"><p>Acompanhamento contínuo da sua cota e estratégia de lances para acelerar a contemplação e maximizar o retorno.</p></div>
-      </div>
-      <div class="dif-item">
-        <button class="dif-btn" aria-expanded="false">
-          <span class="dif-num">03</span>
-          <span class="dif-title">Suporte Estratégico na Aquisição do Imóvel</span>
-          <span class="dif-icon">+</span>
-        </button>
-        <div class="dif-body"><p>Orientação especializada na hora certa: do planejamento à assinatura do contrato, sem deixar dinheiro na mesa.</p></div>
-      </div>
-      <div class="dif-item">
-        <button class="dif-btn" aria-expanded="false">
-          <span class="dif-num">04</span>
-          <span class="dif-title">Liquidez para Negociação de Cartas</span>
-          <span class="dif-icon">+</span>
-        </button>
-        <div class="dif-body"><p>Após a contemplação, suporte completo para negociar ou utilizar a carta da forma mais eficiente possível.</p></div>
-      </div>
-      <div class="dif-item">
-        <button class="dif-btn" aria-expanded="false">
-          <span class="dif-num">05</span>
-          <span class="dif-title">Atendimento Direto e Dedicado</span>
-          <span class="dif-icon">+</span>
-        </button>
-        <div class="dif-body"><p>Você não fala com um call center. Fala diretamente comigo — em cada etapa, do primeiro contato à conquista do seu objetivo.</p></div>
-      </div>
-      <div class="dif-item">
-        <button class="dif-btn" aria-expanded="false">
-          <span class="dif-num">06</span>
-          <span class="dif-title">Planejamento Patrimonial Personalizado</span>
-          <span class="dif-icon">+</span>
-        </button>
-        <div class="dif-body"><p>Estratégia alinhada aos seus objetivos de curto, médio e longo prazo — não um produto pronto de prateleira.</p></div>
-      </div>
+    <ol class="fr-lista">
+      <li class="fr-item"><span class="fr-num">01</span><div><h3>Um método que já funciona</h3><p>Você recebe o manual, o playbook e o roteiro de reunião oficiais da Monteo, do primeiro contato ao pós-venda.</p></div></li>
+      <li class="fr-item"><span class="fr-num">02</span><div><h3>Estrutura pronta em Maringá</h3><p>Escritório com lounge para receber clientes, auditório para treinamentos e sala para o time.</p></div></li>
+      <li class="fr-item"><span class="fr-num">03</span><div><h3>Ferramentas que eu uso no dia a dia</h3><p>Simulador, calculadora de alavancagem e CRM para organizar a carteira e os contatos.</p></div></li>
+      <li class="fr-item"><span class="fr-num">04</span><div><h3>Eu acompanho de perto</h3><p>Metas, carteira, reuniões difíceis e propostas grandes: você não começa sozinho.</p></div></li>
+      <li class="fr-item"><span class="fr-num">05</span><div><h3>Uma marca reconhecida</h3><p>A Monteo foi eleita Consórcio Imobiliário do Ano no Real Estate Awards 2026 e tem o selo GPTW pelo 3º ano.</p></div></li>
+    </ol>
+    <div class="fr-ctas">
+      <a class="btn-primary" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Quero%20saber%20como%20%C3%A9%20ser%20franqueado%20com%20voc%C3%AA." target="_blank" rel="noopener">Quero conhecer a franquia</a>
+      <a class="btn-secondary" href="https://www.linkedin.com/jobs/view/4432718408/" target="_blank" rel="noopener">Ver vaga de consultor</a>
     </div>
   </div>
 </section>
