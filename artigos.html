@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artigos · Thiago Pereira — Arquitetura Patrimonial</title>
+<meta name="description" content="Estratégia, mercado e conhecimento para quem quer construir patrimônio com inteligência. Artigos sobre consórcio, alavancagem e planejamento patrimonial por Thiago Pereira.">
+<meta name="theme-color" content="#15120F">
+<link rel="canonical" href="https://invistacomthiago.com.br/artigos">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Artigos · Thiago Pereira — Arquitetura Patrimonial">
+<meta property="og:description" content="Estratégia, mercado e conhecimento para quem quer construir patrimônio com inteligência.">
+<meta property="og:url" content="https://invistacomthiago.com.br/artigos">
+<meta property="og:image" content="https://invistacomthiago.com.br/og-thiago.jpg">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315120F'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23CF9859'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Artigos · Thiago Pereira",
+  "url": "https://invistacomthiago.com.br/artigos",
+  "author": {
+    "@type": "Person",
+    "name": "Thiago Pereira",
+    "url": "https://invistacomthiago.com.br/"
+  },
+  "description": "Estratégia, mercado e conhecimento para quem quer construir patrimônio com inteligência."
+}
+</script>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#15120F;--card:#1E1915;--card-2:#29231E;--line:#362D26;
+  --ink:#F6F3EE;--muted:#B3A798;--copper:#AB7459;--gold:#CF9859;
+  --grad:linear-gradient(135deg,#AB7459,#CF9859);--wrap:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(171,116,89,.12),transparent 60%),var(--bg)}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
+
+/* ─── NAVBAR ─── */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(21,18,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(54,45,38,.6)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px;padding:0 20px;max-width:var(--wrap);margin:0 auto}
+.nav-logo{height:68px;width:auto}
+.nav-links{display:none;gap:28px}
+.nav-links a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;letter-spacing:.3px;transition:color .15s}
+.nav-links a:hover,.nav-links a.ativa{color:var(--ink)}
+.nav-links a.ativa{color:var(--gold)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn-nav{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;
+  background:var(--grad);color:var(--bg);border:none;cursor:pointer;white-space:nowrap;letter-spacing:.2px}
+.btn-wpp{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;
+  background:transparent;color:var(--gold);border:1px solid rgba(207,152,89,.5);white-space:nowrap;letter-spacing:.2px}
+@media(min-width:768px){.nav-links{display:flex}}
+
+/* ─── HEADER DA PÁGINA ─── */
+.page-header{padding:140px 0 72px;text-align:center}
+.page-header .sec-label{display:block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:16px}
+.page-header h1{font-size:clamp(36px,6vw,56px);font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:16px}
+.page-header p{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:clamp(17px,2.5vw,22px);color:var(--muted);max-width:520px;margin:0 auto}
+
+/* ─── FILTROS ─── */
+.filtros{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.filtro{padding:8px 20px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--line);
+  background:transparent;color:var(--muted);transition:all .15s;text-decoration:none}
+.filtro:hover,.filtro.ativo{background:var(--grad);color:var(--bg);border-color:transparent}
+
+/* ─── DESTAQUE (primeiro artigo grande) ─── */
+.destaque{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:20px;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);margin-bottom:48px;
+  transition:border-color .2s,transform .2s;text-decoration:none;color:inherit}
+.destaque:hover{border-color:rgba(207,152,89,.4);transform:translateY(-3px)}
+.destaque-img{position:relative;overflow:hidden;min-height:320px}
+.destaque-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.destaque:hover .destaque-img img{transform:scale(1.04)}
+.destaque-img::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 60%,rgba(21,18,15,.5))}
+.destaque-body{padding:48px 44px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.art-cat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);background:rgba(207,152,89,.12);padding:4px 12px;border-radius:999px;border:1px solid rgba(207,152,89,.25)}
+.destaque-body h2{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-1px;line-height:1.15}
+.destaque-body p{font-size:15px;color:var(--muted);line-height:1.6}
+.art-meta{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:10px;margin-top:4px}
+.art-meta span{display:flex;align-items:center;gap:5px}
+.art-leia{display:inline-flex;align-items:center;gap:8px;margin-top:8px;
+  font-size:13px;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.3px}
+.art-leia svg{transition:transform .15s}
+.destaque:hover .art-leia svg{transform:translateX(4px)}
+@media(max-width:767px){
+  .destaque{grid-template-columns:1fr}
+  .destaque-img{min-height:220px}
+  .destaque-body{padding:28px 24px}
+}
+
+/* ─── GRID DE ARTIGOS ─── */
+.grid-artigos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:72px}
+@media(max-width:900px){.grid-artigos{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.grid-artigos{grid-template-columns:1fr}}
+
+.art-card{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line);
+  display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  transition:border-color .2s,transform .2s}
+.art-card:hover{border-color:rgba(207,152,89,.4);transform:translateY(-3px)}
+.art-card-img{position:relative;overflow:hidden;aspect-ratio:16/9}
+.art-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.art-card:hover .art-card-img img{transform:scale(1.05)}
+.art-card-body{padding:22px 22px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.art-card-body h3{font-size:17px;font-weight:700;letter-spacing:-.4px;line-height:1.3}
+.art-card-body p{font-size:13.5px;color:var(--muted);line-height:1.55;flex:1}
+.art-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;
+  border-top:1px solid var(--line)}
+.art-card-footer time{font-size:11.5px;color:var(--muted)}
+.art-card-footer .art-leia{margin-top:0;font-size:12px}
+
+/* ─── NEWSLETTER ─── */
+.newsletter{background:var(--card-2);border:1px solid var(--line);border-radius:20px;
+  padding:48px 40px;text-align:center;margin-bottom:80px}
+.newsletter h2{font-size:clamp(22px,3.5vw,30px);font-weight:800;letter-spacing:-1px;margin-bottom:10px}
+.newsletter p{font-size:15px;color:var(--muted);max-width:440px;margin:0 auto 28px;line-height:1.55}
+.nl-form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.nl-form input{flex:1;min-width:220px;padding:13px 18px;border-radius:10px;
+  background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:14px;font-family:inherit;outline:none;
+  transition:border-color .15s}
+.nl-form input:focus{border-color:rgba(207,152,89,.5)}
+.nl-form input::placeholder{color:var(--muted)}
+.nl-form button{padding:13px 24px;border-radius:10px;background:var(--grad);color:var(--bg);
+  font-weight:700;font-size:14px;border:none;cursor:pointer;letter-spacing:.2px;white-space:nowrap}
+
+/* ─── FOOTER ─── */
+footer{border-top:1px solid var(--line);padding:32px 0;text-align:center}
+footer p{font-size:12px;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--gold)}
+
+/* ─── PLACEHOLDER DE IMAGEM (enquanto não tem foto real) ─── */
+.img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:rgba(207,152,89,.4);letter-spacing:1px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/"><img src="logo-ocre.png" alt="Invista com Thiago" class="nav-logo"></a>
+    <div class="nav-links">
+      <a href="/#sobre">Sobre</a>
+      <a href="/#numeros">Números</a>
+      <a href="/#diferenciais">Diferenciais</a>
+      <a href="/#reconhecimento">Reconhecimento</a>
+      <a href="/artigos" class="ativa">Artigos</a>
+      <a href="/#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn-wpp" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn-nav" href="https://simulador.invistacomthiago.com.br" target="_blank" rel="noopener">Simular agora</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="wrap">
+      <span class="sec-label">Conhecimento</span>
+      <h1>Estratégia para<br>construir patrimônio</h1>
+      <p>Conceitos, casos reais e análises de mercado para quem quer crescer com inteligência.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- FILTROS -->
+    <div class="filtros">
+      <a href="#" class="filtro ativo">Todos</a>
+      <a href="#" class="filtro">Estratégia</a>
+      <a href="#" class="filtro">Mercado</a>
+      <a href="#" class="filtro">Guias</a>
+      <a href="#" class="filtro">Casos Reais</a>
+    </div>
+
+    <!-- DESTAQUE -->
+    <a href="artigos/consorcio-vs-financiamento.html" class="destaque">
+      <div class="destaque-img">
+        <img src="historia-cliente-estrategia.jpg" alt="Consórcio vs. financiamento imobiliário" loading="eager">
+      </div>
+      <div class="destaque-body">
+        <span class="art-cat">Estratégia</span>
+        <h2>Consórcio ou financiamento: o que ninguém te conta antes de assinar</h2>
+        <p>A comparação que todo comprador de imóvel deveria fazer — mas quase ninguém faz antes de entrar em um financiamento. Juros reais, prazo e custo efetivo lado a lado.</p>
+        <div class="art-meta">
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            14 nov 2026
+          </span>
+          <span>· 7 min de leitura</span>
+        </div>
+        <span class="art-leia">
+          Ler artigo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- GRID -->
+    <div class="grid-artigos">
+
+      <a href="artigos/lance-fixo-o-que-e.html" class="art-card">
+        <div class="art-card-img">
+          <img src="historia-lance-fixo.jpg" alt="O que é lance fixo no consórcio" loading="lazy">
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Guias</span>
+          <h3>Lance fixo: a estratégia que garante contemplação independente do sorteio</h3>
+          <p>Como o lance fixo funciona, em quais grupos está disponível e por que pode ser mais previsível do que qualquer simulação de sorteio.</p>
+          <div class="art-card-footer">
+            <time>07 nov 2026</time>
+            <span class="art-leia">
+              Ler
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="artigos/reforma-tributaria-consorcio.html" class="art-card">
+        <div class="art-card-img" style="background:var(--card-2)">
+          <div class="img-placeholder">em breve</div>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado</span>
+          <h3>Reforma tributária e consórcio: o que muda para quem usa crédito na PJ</h3>
+          <p>A tese do art. 205 e como o IBS/CBS pode ser aproveitado como crédito tributário via consórcio — uma janela que poucos contadores e empresários conhecem.</p>
+          <div class="art-card-footer">
+            <time>05 nov 2026</time>
+            <span class="art-leia">
+              Ler
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="artigos/alavancagem-com-consorcio.html" class="art-card">
+        <div class="art-card-img">
+          <img src="historia-contemplado-novo.jpg" alt="Alavancagem patrimonial com consórcio" loading="lazy">
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Estratégia</span>
+          <h3>Como usar consórcio para alavancar patrimônio sem comprometer o fluxo de caixa</h3>
+          <p>A lógica por trás de quem usa múltiplas cartas para escalar ativos — e por que o prazo longo é uma vantagem, não um problema.</p>
+          <div class="art-card-footer">
+            <time>29 out 2026</time>
+            <span class="art-leia">
+              Ler
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="artigos/por-que-confiar.html" class="art-card">
+        <div class="art-card-img">
+          <img src="historia-por-que-confiar.jpg" alt="Como escolher um consultor de consórcio" loading="lazy">
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Guias</span>
+          <h3>7 perguntas que você deve fazer antes de contratar um consórcio</h3>
+          <p>Taxa de administração, fundo de reserva, histórico de assembleias, liquidez da cota — o checklist que separa uma boa estratégia de uma armadilha financeira.</p>
+          <div class="art-card-footer">
+            <time>22 out 2026</time>
+            <span class="art-leia">
+              Ler
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="artigos/upgrade-veiculo.html" class="art-card">
+        <div class="art-card-img" style="background:var(--card-2)">
+          <div class="img-placeholder">em breve</div>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Casos Reais</span>
+          <h3>O ciclo de 30 meses: como trocar de carro sem perder dinheiro</h3>
+          <p>A estratégia de upgrade recorrente com consórcio de veículo — como clientes estão saindo do ciclo de desvalorização e usando o crédito a favor do patrimônio.</p>
+          <div class="art-card-footer">
+            <time>15 out 2026</time>
+            <span class="art-leia">
+              Ler
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="artigos/selic-e-imovel.html" class="art-card">
+        <div class="art-card-img" style="background:var(--card-2)">
+          <div class="img-placeholder">em breve</div>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado</span>
+          <h3>Selic em alta: por que ainda faz sentido comprar imóvel agora</h3>
+          <p>A análise que a maioria dos investidores não faz: o que a Selic alta significa para quem usa consórcio — e por que o momento pode ser melhor do que parece.</p>
+          <div class="art-card-footer">
+            <time>08 out 2026</time>
+            <span class="art-leia">
+              Ler
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div><!-- /grid -->
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter">
+      <h2>Receba análises antes de todo mundo</h2>
+      <p>Uma vez por mês, um artigo sobre estratégia patrimonial direto no seu e-mail. Sem spam, sem oferta.</p>
+      <form class="nl-form" onsubmit="return false">
+        <input type="email" placeholder="seu@email.com">
+        <button type="submit">Quero receber</button>
+      </form>
+    </div>
+
+  </div><!-- /wrap -->
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Thiago Pereira · <a href="https://invistacomthiago.com.br/">invistacomthiago.com.br</a> · <a href="mailto:contato@invistacomthiago.com.br">contato@invistacomthiago.com.br</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
