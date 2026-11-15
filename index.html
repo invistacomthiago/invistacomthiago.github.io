@@ -503,6 +503,18 @@ body.sem-rolagem{overflow:hidden}
 .sobre-foto-fixa{position:sticky;top:100px;margin-bottom:0;max-height:calc(100vh - 140px)}
 @media(max-width:860px){.sobre-foto-fixa{position:static;max-height:420px;order:-1}.sobre-grid > div:last-child{order:-1}}
 
+
+/* canais: 3 cartões lado a lado (computador) */
+@media(min-width:901px){
+  #redes .canais{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:none}
+  #redes a.canal-btn,#redes .canal-email{flex-direction:column;align-items:flex-start;gap:12px;height:100%;padding:22px;flex-wrap:nowrap}
+  #redes a.canal-btn:hover{transform:translateY(-3px)}
+  #redes .canal-txt{flex:none}
+  #redes .canal-pill{margin-left:0;margin-top:auto}
+  #redes .canal-seta{display:none}
+  #redes .ce-form{flex:none;width:100%;margin-top:auto}
+}
+
 /* sem animação de surgir: tudo visível desde o carregamento */
 .fade-up{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
@@ -913,7 +925,7 @@ body.sem-rolagem{overflow:hidden}
     <span class="sec-label">Canais</span>
     <h2 class="sec-title" id="t-redes">Acompanhe meu conteúdo</h2>
     <p class="sec-sub">Toda semana: estratégias de patrimônio, mercado imobiliário e bastidores do que estamos construindo.</p>
-    <div class="redes" style="margin:0 0 28px;max-width:640px">
+    <div class="redes" style="margin:0 0 20px;max-width:none">
       <a href="https://www.instagram.com/invistacomthiago/" target="_blank" rel="noopener" aria-label="Instagram @invistacomthiago">
         <span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
         <strong>Instagram</strong><small>@invistacomthiago</small>
