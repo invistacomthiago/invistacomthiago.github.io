@@ -1,45 +1,31 @@
 <title>Simulador de Alavancagem</title>
+<meta name="theme-color" content="#15120F">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap">
 
 <style>
 /* ── Tokens ───────────────────────────────────────────────────────────── */
 :root {
-  --bg:        #F7F5F0;
-  --bg2:       #EFECE5;
-  --bg3:       #E8E4DB;
-  --card:      #FFFFFF;
-  --fg:        #141210;
-  --fg2:       #5C574F;
-  --fg3:       #8C8680;
-  --ocre:      #C69C3C;
-  --ocre-dim:  #966E1E;
-  --ocre-pale: #F5EDD4;
-  --positive:  #2D6A4F;
-  --negative:  #B5321A;
-  --border:    rgba(20,18,16,.10);
-  --border2:   rgba(20,18,16,.06);
+  /* Paleta do site invistacomthiago.com.br (só modo escuro, igual ao site) */
+  --bg:        #15120F;
+  --bg2:       #1A1612;
+  --bg3:       #29231E;
+  --card:      #1E1915;
+  --fg:        #F6F3EE;
+  --fg2:       #B3A798;
+  --fg3:       #9A8E80;
+  --ocre:      #CF9859;
+  --ocre-dim:  #AB7459;
+  --ocre-pale: #261D17;
+  --grad:      linear-gradient(135deg,#AB7459,#CF9859);
+  --positive:  #52B788;
+  --negative:  #E07060;
+  --border:    #362D26;
+  --border2:   rgba(54,45,38,.6);
   --radius:    6px;
-  --shadow:    0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+  --shadow:    0 1px 4px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
   font-synthesis: none;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:#0E0D0B;--bg2:#161410;--bg3:#1E1C17;--card:#1A1813;
-    --fg:#F0EDE6;--fg2:#A09890;--fg3:#6A6460;
-    --ocre:#C69C3C;--ocre-dim:#A07820;--ocre-pale:#2A2010;
-    --positive:#52B788;--negative:#E07060;
-    --border:rgba(240,237,230,.08);--border2:rgba(240,237,230,.04);
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg:#0E0D0B;--bg2:#161410;--bg3:#1E1C17;--card:#1A1813;
-  --fg:#F0EDE6;--fg2:#A09890;--fg3:#6A6460;
-  --ocre:#C69C3C;--ocre-dim:#A07820;--ocre-pale:#2A2010;
-  --positive:#52B788;--negative:#E07060;
-  --border:rgba(240,237,230,.08);--border2:rgba(240,237,230,.04);
-  color-scheme:dark;
+  color-scheme: dark;
 }
 
 /* ── Reset / Base ─────────────────────────────────────────────────────── */
@@ -103,13 +89,13 @@ h1 {
   text-transform: uppercase; background: var(--card); color: var(--fg3);
   border: none; cursor: pointer; transition: background .15s, color .15s;
 }
-.renda-tab.active { background: var(--ocre); color: #fff; }
+.renda-tab.active { background: var(--grad); color: var(--bg); }
 .renda-panel { display: none; }
 .renda-panel.active { display: block; }
 
 /* ── Calcular btn ─────────────────────────────────────────────────────── */
 .btn-calc {
-  background: var(--ocre); color: #fff; border: none;
+  background: var(--grad); color: var(--bg); border: none;
   border-radius: var(--radius); padding: 13px 32px; font-size: 14px;
   font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
   transition: opacity .15s; width: 100%; margin-top: 8px;
@@ -162,22 +148,22 @@ h1 {
 .compare-row-value.neg { color: var(--negative); }
 .compare-row-value.ocre { color: var(--ocre); }
 .compare-col-hr { border: none; border-top: 1px solid var(--border2); margin: 10px 0; }
-.compare-col.consorcio .compare-col-hr { border-top-color: rgba(198,156,60,.2); }
+.compare-col.consorcio .compare-col-hr { border-top-color: rgba(171,116,89,.2); }
 .margem-destaque {
   display: flex; flex-direction: column; gap: 2px;
   margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--border);
 }
-.compare-col.consorcio .margem-destaque { border-top-color: rgba(198,156,60,.2); }
+.compare-col.consorcio .margem-destaque { border-top-color: rgba(171,116,89,.2); }
 .margem-label { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--fg3); }
 .margem-sub { font-size: 10px; color: var(--fg3); letter-spacing: .06em; text-transform: uppercase; }
 .margem-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
 .margem-note { font-size: 11px; color: var(--fg3); line-height: 1.4; }
 .margem-row { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--border2); }
 .margem-row:last-child { border-bottom: none; }
-.compare-col.consorcio .margem-row { border-bottom-color: rgba(198,156,60,.15); }
+.compare-col.consorcio .margem-row { border-bottom-color: rgba(171,116,89,.15); }
 
 .diff-box {
-  background: var(--ocre-pale); border: 1px solid rgba(198,156,60,.25);
+  background: var(--ocre-pale); border: 1px solid rgba(171,116,89,.25);
   border-radius: var(--radius); padding: 16px 18px; margin-bottom: 28px;
   display: flex; flex-direction: column; gap: 4px;
 }
@@ -211,13 +197,13 @@ h1 {
 .lead-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
 @media (max-width: 480px) { .lead-fields { grid-template-columns: 1fr; } }
 .lead-fields input {
-  background: var(--bg2); border: 1px solid rgba(240,237,230,.15);
+  background: var(--bg2); border: 1px solid rgba(246,243,238,.15);
   border-radius: var(--radius); padding: 10px 14px; color: var(--fg); width: 100%; font-size: 14px;
 }
 .lead-fields input::placeholder { color: var(--fg3); }
 .lead-fields input:focus { outline: none; border-color: var(--ocre); }
 .btn-lead {
-  display: block; width: 100%; background: var(--ocre); color: #fff; border: none;
+  display: block; width: 100%; background: var(--grad); color: var(--bg); border: none;
   border-radius: var(--radius); padding: 14px; font-size: 14px; font-weight: 700;
   letter-spacing: .05em; text-transform: uppercase; text-align: center;
   text-decoration: none; transition: opacity .15s;
