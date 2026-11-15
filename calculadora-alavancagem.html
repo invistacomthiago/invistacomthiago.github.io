@@ -261,6 +261,12 @@ h1 {
   .renda-tipo{border-left:2px solid var(--ocre-dim);padding-left:24px;align-self:stretch}
 }
 
+
+/* Botão Calcular menor, na linha da renda (computador) */
+.renda-acao{display:flex;flex-direction:column;gap:6px;margin-left:auto}
+.renda-acao .btn-calc{width:auto;margin-top:0;padding:12px 40px}
+@media(max-width:820px){.renda-acao{margin-left:0;width:100%}.renda-acao .renda-tipo-label{display:none}.renda-acao .btn-calc{width:100%;padding:14px}}
+
 /* ── Menu e rodapé iguais aos do site ── */
 /* ─── NAVBAR ─── */
 #navbar{position:fixed;top:0;left:0;right:0;z-index:100;
@@ -402,6 +408,10 @@ body > footer{margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));ma
       </div>
 
     </div>
+    <div class="renda-acao">
+      <span class="renda-tipo-label" aria-hidden="true">&nbsp;</span>
+      <button class="btn-calc" onclick="calcular()">Calcular</button>
+    </div>
   </div>
 
   <div id="panel-short" class="renda-panel">
@@ -429,7 +439,6 @@ body > footer{margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));ma
     </div>
   </div>
 
-  <button class="btn-calc" onclick="calcular()">Calcular</button>
 
   <!-- Resultado -->
   <div id="resultado" hidden>
