@@ -497,6 +497,12 @@ body.sem-rolagem{overflow:hidden}
 .fr-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 @media(max-width:760px){.fr-lista{grid-template-columns:1fr}.fr-ctas a{width:100%;justify-content:center}}
 
+
+/* sobre: linha do tempo na coluna do texto; foto acompanha a rolagem */
+.sobre-grid > div:last-child{align-self:stretch}
+.sobre-foto-fixa{position:sticky;top:100px;margin-bottom:0;max-height:calc(100vh - 140px)}
+@media(max-width:860px){.sobre-foto-fixa{position:static;max-height:420px;order:-1}.sobre-grid > div:last-child{order:-1}}
+
 /* sem animação de surgir: tudo visível desde o carregamento */
 .fade-up{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
@@ -614,10 +620,7 @@ body.sem-rolagem{overflow:hidden}
             <span>Matemático · Contador · Master Franqueado Monteo</span>
           </div>
         </div>
-      </div>
-      <div>
-        <img class="sobre-foto2" src="img/thiago-sobre.jpg" alt="Thiago Pereira no escritório da Monteo" loading="lazy" width="563" height="1000">
-        <ol class="tempo" aria-label="Linha do tempo">
+        <ol class="tempo" style="margin-top:32px" aria-label="Linha do tempo">
           <li><span class="ano">1995</span><span class="txt"><b>Começo em finanças.</b> Primeiro emprego na área financeira, em Cachoeiro de Itapemirim (ES).</span></li>
           <li><span class="ano">2000</span><span class="txt"><b>Formado em Matemática.</b> Depois vieram a pós em Controladoria (2009) e Ciências Contábeis (2020).</span></li>
           <li><span class="ano">2002</span><span class="txt"><b>Gerente financeiro na saúde.</b> Doze anos nas finanças de uma operadora de planos de saúde, depois a administração de um hospital.</span></li>
@@ -625,6 +628,9 @@ body.sem-rolagem{overflow:hidden}
           <li><span class="ano">2022</span><span class="txt"><b>Entrada na Monteo.</b> Estudei o consórcio a fundo antes de vender a primeira cota.</span></li>
           <li><span class="ano">hoje</span><span class="txt"><b>Master Franqueado em Maringá.</b> Mais de 700 clientes na carteira, atendimento em todo o Brasil.</span></li>
         </ol>
+      </div>
+      <div>
+        <img class="sobre-foto2 sobre-foto-fixa" src="img/thiago-sobre.jpg" alt="Thiago Pereira no escritório da Monteo" loading="lazy" width="563" height="1000">
       </div>
     </div>
 
