@@ -343,6 +343,23 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
+/* ─── CANAL E-MAIL (inscrição dentro do bloco) ─── */
+.canal-email{display:flex;align-items:center;gap:14px;flex-wrap:wrap;width:100%;padding:16px 20px;border-radius:16px;
+  color:var(--ink);border:1px solid rgba(207,152,89,.45);background:linear-gradient(135deg,rgba(171,116,89,.12),var(--card-2))}
+.canal-email .canal-ico{background:rgba(207,152,89,.16);color:var(--gold)}
+.canal-email .canal-txt{flex:1 1 200px;min-width:0}
+.ce-form{display:flex;gap:8px;flex:1 1 300px;min-width:0}
+.ce-form input{flex:1;min-width:0;padding:11px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);
+  color:var(--ink);font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+.ce-form input:focus{border-color:rgba(207,152,89,.6)}
+.ce-form input::placeholder{color:var(--muted)}
+.ce-form button{padding:11px 16px;border-radius:10px;background:var(--grad);color:var(--bg);font-weight:700;font-size:13.5px;
+  border:none;cursor:pointer;white-space:nowrap;font-family:inherit}
+.ce-form button:disabled{opacity:.6;cursor:wait}
+.ce-msg{flex-basis:100%;font-size:13px;color:var(--muted);margin:0}
+.ce-msg:empty{display:none}
+.ce-msg.ok{color:#5be397}.ce-msg.erro{color:#E07060}
+
 /* ─── ARTIGOS RECENTES ─── */
 .rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
 @media(max-width:900px){.rec-grid{grid-template-columns:repeat(2,1fr)}}
@@ -861,6 +878,16 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
         <div class="canal-txt"><strong>Newsletter Arquitetura Patrimonial</strong><small>Semanal no LinkedIn · toda segunda-feira</small></div>
         <span class="canal-pill">GRÁTIS</span><span class="canal-seta">›</span>
       </a>
+      <div class="canal-email">
+        <span class="canal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></span>
+        <div class="canal-txt"><strong>Receber por e-mail</strong><small>Os novos conteúdos direto na sua caixa · sem spam</small></div>
+        <form class="ce-form" id="ceForm" novalidate>
+          <input type="email" name="email" placeholder="seu@email.com" required autocomplete="email" aria-label="Seu e-mail">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <button type="submit">Quero receber</button>
+        </form>
+        <p class="ce-msg" id="ceMsg" role="status" aria-live="polite"></p>
+      </div>
     </div>
   </div>
 </section>
@@ -1114,6 +1141,32 @@ fadeEls.forEach(el => { el.classList.add('fade-up'); fadeObserver.observe(el); }
     grid.innerHTML = '';
     novos.forEach(function (c) { grid.appendChild(c); });
   }).catch(function () {});
+})();
+</script>
+<script>
+/* Inscrição por e-mail na seção "Siga": envia para contato@invistacomthiago.com.br (FormSubmit). */
+(function () {
+  var f = document.getElementById('ceForm'), msg = document.getElementById('ceMsg');
+  if (!f) return;
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = f.email.value.trim();
+    msg.className = 'ce-msg';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { msg.textContent = 'Confira o e-mail digitado.'; msg.classList.add('erro'); return; }
+    if (f._honey.value) return;
+    var btn = f.querySelector('button'); btn.disabled = true; msg.textContent = 'Enviando...';
+    fetch('https://formsubmit.co/ajax/contato@invistacomthiago.com.br', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email: email, origem: 'Página inicial', _subject: 'Nova inscrição na newsletter do site', _template: 'table' })
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return r.ok && String(d.success) !== 'false'; }); })
+      .then(function (ok) {
+        if (!ok) throw 0;
+        msg.textContent = 'Pronto! Você vai receber os próximos conteúdos no seu e-mail.'; msg.classList.add('ok'); f.reset();
+      })
+      .catch(function () { msg.textContent = 'Não consegui registrar agora. Tente de novo ou use o canal do WhatsApp acima.'; msg.classList.add('erro'); })
+      .then(function () { btn.disabled = false; });
+  });
 })();
 </script>
 </body>
