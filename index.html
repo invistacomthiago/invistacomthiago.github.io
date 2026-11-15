@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thiago Pereira · Arquitetura Patrimonial</title>
-<meta name="description" content="Thiago Pereira, Arquitetura Patrimonial: estratégias com consórcio para transformar capital presente em patrimônio futuro. Mais de 700 clientes e R$ 400 milhões em crédito estruturado.">
+<meta name="description" content="Thiago Pereira, Master Franqueado Monteo em Maringá. 30 anos em finanças e planejamento patrimonial com consórcio. Mais de 700 clientes na carteira e R$ 400 milhões em crédito estruturado.">
 <meta name="theme-color" content="#15120F">
 <link rel="canonical" href="https://invistacomthiago.com.br/">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Thiago Pereira · Arquitetura Patrimonial">
-<meta property="og:description" content="Eu não vendo consórcio. Eu faço Arquitetura Patrimonial: transformo capital presente em patrimônio futuro.">
+<meta property="og:description" content="Passei 30 anos cuidando do dinheiro de empresas. Hoje ajudo quem ganha bem a planejar o próprio patrimônio.">
 <meta property="og:url" content="https://invistacomthiago.com.br/">
 <meta property="og:image" content="https://invistacomthiago.com.br/og-thiago.jpg">
 <meta property="og:locale" content="pt_BR">
@@ -26,7 +26,7 @@
   "email": "mailto:contato@invistacomthiago.com.br",
   "image": "https://invistacomthiago.com.br/foto-thiago.jpg",
   "jobTitle": "Master Franqueado Monteo · Arquitetura Patrimonial com consórcio",
-  "description": "Estrutura estratégias com consórcio para construção de patrimônio, renda e alavancagem patrimonial. Mais de 700 clientes e mais de R$ 400 milhões em crédito estruturado.",
+  "description": "30 anos em finanças corporativas. Master Franqueado Monteo em Maringá desde 2022, com planejamento patrimonial com consórcio. Mais de 700 clientes na carteira e mais de R$ 400 milhões em crédito estruturado.",
   "knowsAbout": ["Consórcio imobiliário", "Alavancagem patrimonial", "Planejamento patrimonial", "Investimento imobiliário"],
   "worksFor": {"@type": "Organization", "name": "Monteo"},
   "sameAs": ["https://www.instagram.com/invistacomthiago/", "https://www.tiktok.com/@invistacomthiago", "https://www.linkedin.com/in/invistacomthiago/", "https://youtube.com/@InvistacomThiago"]
@@ -379,6 +379,117 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
 .art-leia svg{transition:transform .15s}
 .art-card:hover .art-leia svg{transform:translateX(4px)}
 .ver-todos{display:flex;justify-content:center;margin-top:32px}
+
+/* ═══ REVISÃO 15/11/2026 ═══ */
+/* títulos de seção alinhados à esquerda (antes: tudo centralizado) */
+.sec-label,.sec-title{text-align:left}
+.sec-sub{text-align:left;margin:0 0 28px;max-width:640px}
+.divider{margin:0 0 28px}
+.cta-inner .sec-label,.cta-inner .sec-title,.cta-inner .sec-sub{text-align:center;margin-left:auto;margin-right:auto}
+
+/* topo: texto à esquerda, foto grande à direita */
+#hero{min-height:0;padding:120px 0 64px;background:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero-kicker{display:block;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
+h1.hero-frase{font-weight:800;font-size:clamp(32px,4.6vw,54px);letter-spacing:-1.4px;line-height:1.06;margin-bottom:18px;text-wrap:balance}
+.hero-apoio{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:clamp(19px,2.3vw,24px);line-height:1.4;color:var(--ink);opacity:.92;margin-bottom:14px;max-width:34ch}
+.hero-cred{font-size:14.5px;color:var(--muted);line-height:1.6;margin-bottom:30px;max-width:46ch}
+#hero .hero-ctas{justify-content:flex-start}
+.hero-foto-grande{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/5;max-height:640px;width:100%}
+.hero-foto-grande img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.hero-foto-grande figcaption{position:absolute;left:16px;bottom:14px;font-size:12px;font-weight:600;color:var(--ink);
+  background:rgba(21,18,15,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:7px 12px;border-radius:999px;border:1px solid var(--line)}
+@media(max-width:860px){
+  #hero{padding:104px 0 48px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero-foto-grande{aspect-ratio:4/4.4;max-height:520px}
+}
+
+/* calculadora dentro da seção de jornada */
+.jornada-ferramenta{margin-top:16px;max-width:1000px}
+.jornada-ferramenta a{display:flex;align-items:center;gap:18px;padding:20px 22px;border-radius:16px;text-decoration:none;color:var(--ink);
+  border:1px dashed rgba(207,152,89,.45);transition:border-color .2s}
+.jornada-ferramenta a:hover{border-color:var(--gold);border-style:solid}
+.jornada-ferramenta .jf-ico{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(207,152,89,.12);display:grid;place-items:center;color:var(--gold)}
+.jornada-ferramenta strong{display:block;font-size:15px}
+.jornada-ferramenta small{display:block;font-size:13px;color:var(--muted);line-height:1.5;margin-top:2px}
+.jornada-ferramenta .jf-cta{margin-left:auto;flex:none;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.8px;text-transform:uppercase}
+@media(max-width:600px){.jornada-ferramenta .jf-cta{display:none}}
+
+/* sobre + linha do tempo + números */
+.sobre-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.sobre-grid .sobre-texto{max-width:none}
+.sobre-foto2{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 25%;border-radius:20px;border:1px solid var(--line);display:block;margin-bottom:28px}
+.tempo{list-style:none;margin:0;padding:0}
+.tempo li{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.tempo li:last-child{border-bottom:none}
+.tempo .ano{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:21px;color:var(--gold);line-height:1.25}
+.tempo .txt{font-size:14px;color:var(--muted);line-height:1.55}
+.tempo .txt b{color:var(--ink);font-weight:700}
+@media(max-width:860px){.sobre-grid{grid-template-columns:1fr;gap:28px}.sobre-foto2{aspect-ratio:4/4;max-height:460px}}
+#numeros{margin-top:56px;scroll-margin-top:90px}
+.numeros-grid.n4{grid-template-columns:repeat(4,1fr);max-width:none;margin:0}
+.num-ctx{display:block;font-size:11.5px;color:#9A8E80;margin-top:6px;line-height:1.4}
+@media(max-width:860px){.numeros-grid.n4{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.numeros-grid.n4 .num-card{padding:24px 12px}}
+
+/* clientes: vídeos verticais com player */
+.videos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.videos-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.videos-grid{grid-template-columns:1fr 1fr;gap:10px}}
+.vcard{position:relative;display:block;width:100%;aspect-ratio:9/14;border-radius:16px;overflow:hidden;border:1px solid var(--line);
+  background:var(--card-2);cursor:pointer;padding:0;color:var(--ink);text-align:left;font:inherit}
+.vcard img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.72);transition:transform .4s,filter .3s}
+.vcard:hover img{transform:scale(1.04);filter:brightness(.85)}
+.vcard .vplay{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
+  background:rgba(246,243,238,.92);display:grid;place-items:center;transition:transform .2s}
+.vcard:hover .vplay{transform:translate(-50%,-50%) scale(1.08)}
+.vcard .vplay::after{content:"";margin-left:4px;border-left:15px solid #15120F;border-top:9px solid transparent;border-bottom:9px solid transparent}
+.vcard .vleg{position:absolute;left:0;right:0;bottom:0;padding:34px 12px 12px;background:linear-gradient(transparent,rgba(16,14,12,.96))}
+.vcard .vtag{display:block;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.vcard .vtit{display:block;font-size:13.5px;font-weight:700;line-height:1.3}
+.vcard .vsub{display:block;font-size:12px;color:#D9CFC3;line-height:1.35;margin-top:3px}
+.vcard:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:640px){.vcard .vsub{display:none}.vcard .vplay{width:44px;height:44px}}
+.clientes-sub{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:34px 0 14px}
+.clientes-sub:first-of-type{margin-top:0}
+
+/* mídia: 6 destaques */
+.midia-dest{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.midia-dest{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.midia-dest{grid-template-columns:1fr}}
+.mcard{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card);
+  color:var(--ink);text-decoration:none;text-align:left;cursor:pointer;padding:0;font:inherit;transition:border-color .2s,transform .2s;width:100%}
+.mcard:hover{border-color:rgba(207,152,89,.5);transform:translateY(-3px)}
+.mcard .mthumb{position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;background:var(--card-2)}
+.mcard .mthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.mcard .mthumb.retrato img{object-position:center 20%}
+.mcard .vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:rgba(246,243,238,.9);display:grid;place-items:center}
+.mcard .vplay::after{content:"";margin-left:4px;border-left:13px solid #15120F;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.mcard .mbody{padding:14px 16px 18px}
+.mcard .ep{display:block;font-size:10.5px;color:var(--gold);font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.mcard strong{display:block;font-size:15px;font-weight:700;line-height:1.35;margin-top:5px}
+
+/* player (janela por cima da página) */
+.player{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  background:rgba(10,8,7,.88);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.player.aberto{display:flex}
+.player-caixa{position:relative;width:min(420px,100%);height:min(86vh,760px);border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.player-caixa.largo{width:min(1000px,100%);height:auto;aspect-ratio:16/9}
+.player-caixa iframe{width:100%;height:100%;border:0;display:block}
+.player-fechar{position:absolute;top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.player-fechar:hover{border-color:var(--gold)}
+.player-fora{position:absolute;bottom:max(14px,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);font-size:12.5px;color:var(--muted);text-decoration:underline;white-space:nowrap}
+body.sem-rolagem{overflow:hidden}
+
+/* qualificação + prêmio na mesma seção */
+#reconhecimento .selos{margin:0 0 28px;max-width:560px}
+
+/* sem animação de surgir: tudo visível desde o carregamento */
+.fade-up{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -389,10 +500,10 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
     <img class="nav-logo" src="logo-ocre.png" alt="Invista com Thiago" width="152" height="40">
     <nav class="nav-links" aria-label="Seções">
       <a href="#sobre">Sobre</a>
-      <a href="#numeros">Números</a>
+      <a href="#clientes">Clientes</a>
       <a href="#diferenciais">Diferenciais</a>
       <a href="#reconhecimento">Reconhecimento</a>
-      <a href="#conteudo">Conteúdo</a>
+      <a href="#conteudo">Mídia</a>
       <a href="/artigos">Artigos</a>
       <a href="/calculadora-alavancagem" target="_blank" rel="noopener">Calculadora</a>
       <a href="#faq">FAQ</a>
@@ -405,30 +516,29 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
 </header>
 
 <!-- ─── HERO ─── -->
-<section id="hero" aria-labelledby="hero-nome">
+<section id="hero" aria-labelledby="hero-frase">
   <div class="wrap">
-    <div class="hero-inner">
-      <div class="hero-foto-wrap">
-        <img class="hero-foto" src="foto-thiago.jpg" alt="Thiago Pereira" width="140" height="140">
-        <span class="hero-badge">Master Franqueado</span>
+    <div class="hero-grid">
+      <div>
+        <span class="hero-kicker">Thiago Pereira · Master Franqueado Monteo</span>
+        <h1 class="hero-frase" id="hero-frase">Passei 30 anos cuidando do dinheiro de empresas.</h1>
+        <p class="hero-apoio">Hoje ajudo quem ganha bem a planejar o próprio patrimônio.</p>
+        <p class="hero-cred">Matemático e contador. Master Franqueado da Monteo em Maringá, com atendimento em todo o Brasil.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
+            Falar no WhatsApp
+          </a>
+          <a class="btn-secondary" href="https://simulador.invistacomthiago.com.br" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg>
+            Simular minha estratégia
+          </a>
+        </div>
       </div>
-      <span class="hero-metodo">Arquitetura Patrimonial</span>
-      <h1 class="hero-nome" id="hero-nome">Thiago Pereira</h1>
-      <p class="hero-tese">Eu não vendo consórcio.<br>Transformo capital presente em<br><em>patrimônio futuro.</em></p>
-      <div class="hero-ctas">
-        <a class="btn-primary" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
-          Falar no WhatsApp
-        </a>
-        <a class="btn-secondary" href="https://simulador.invistacomthiago.com.br" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg>
-          Simular minha estratégia
-        </a>
-      </div>
-      <div class="hero-scroll" aria-hidden="true">
-        <span>Conheça mais</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-      </div>
+      <figure class="hero-foto-grande">
+        <img src="img/thiago-hero.jpg" alt="Thiago Pereira no escritório da Monteo em Maringá" width="619" height="1100" fetchpriority="high">
+        <figcaption>Escritório Monteo · Maringá-PR</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -465,27 +575,11 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
         <div class="jornada-cta">Falar com Thiago →</div>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- ─── FERRAMENTAS ─── -->
-<section id="ferramentas" aria-labelledby="t-ferramentas" style="padding:60px 0 20px">
-  <div class="wrap">
-    <h2 class="sec-title" id="t-ferramentas" style="margin-bottom:8px">Ferramentas gratuitas</h2>
-    <p style="text-align:center;color:var(--muted);font-size:14px;margin-bottom:32px">Faça as contas antes de qualquer decisão</p>
-    <div style="max-width:720px;margin:0 auto">
-      <a href="/calculadora-alavancagem" target="_blank" rel="noopener"
-         style="display:flex;align-items:center;gap:20px;padding:28px 28px;border-radius:20px;border:1px solid rgba(207,152,89,.25);background:var(--surface);text-decoration:none;transition:border-color .2s,transform .2s,box-shadow .2s"
-         onmouseover="this.style.borderColor='rgba(207,152,89,.6)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 20px 50px -20px rgba(171,116,89,.3)'"
-         onmouseout="this.style.borderColor='rgba(207,152,89,.25)';this.style.transform='';this.style.boxShadow=''">
-        <div style="flex-shrink:0;width:52px;height:52px;border-radius:14px;background:rgba(207,152,89,.12);display:flex;align-items:center;justify-content:center">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg>
-        </div>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px">Calculadora de Alavancagem Imobiliária</div>
-          <div style="font-size:13px;color:var(--muted);line-height:1.5">Imóvel na planta × banco × consórcio — insira os dados do seu imóvel e veja a conta completa: TIR, parcela, margem e diferença acumulada.</div>
-        </div>
-        <div style="flex-shrink:0;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.8px;text-transform:uppercase;white-space:nowrap">Abrir →</div>
+    <div class="jornada-ferramenta">
+      <a href="/calculadora-alavancagem" target="_blank" rel="noopener">
+        <span class="jf-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg></span>
+        <span><strong>Ferramenta gratuita: Calculadora de Alavancagem Imobiliária</strong><small>Imóvel na planta, banco ou consórcio. Coloque os dados do seu imóvel e veja a conta completa: TIR, parcela, margem e diferença acumulada.</small></span>
+        <span class="jf-cta">Abrir →</span>
       </a>
     </div>
   </div>
@@ -495,72 +589,113 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
 <section id="sobre" aria-labelledby="t-sobre">
   <div class="wrap">
     <span class="sec-label">Quem sou eu</span>
-    <h2 class="sec-title" id="t-sobre">A história por trás da estratégia</h2>
+    <h2 class="sec-title" id="t-sobre">Minha história</h2>
     <div class="divider"></div>
-    <div class="sobre-inner">
-      <div class="sobre-foto-col">
-        <img class="sobre-foto" src="foto-thiago-sobre.jpg" alt="Thiago Pereira" loading="lazy">
-      </div>
+    <div class="sobre-grid">
       <div class="sobre-texto">
-        <p>Em 2021, eu estava no começo de uma virada que eu ainda não entendia completamente. Tinha formação em matemática e contabilidade, entendia os números — mas não sabia usar isso a meu favor.</p>
-        <p>Foi quando entrei em contato com o consórcio de verdade. Não como produto, mas como <strong>estratégia</strong>. Percebi que a maioria das pessoas usa o consórcio como plano B, como espera passiva. Eu aprendi a usar como <strong>motor ativo de construção de patrimônio</strong>.</p>
-        <p>Hoje, como Master Franqueado da Monteo, já estruturei mais de <strong>R$ 400 milhões em crédito</strong> para mais de <strong>700 clientes</strong> — de profissionais liberais a investidores com múltiplos imóveis. Não vendo consórcio. Faço Arquitetura Patrimonial.</p>
-        <p>Sou matemático, contador e, antes de tudo, estrategista. Cada cliente recebe uma estrutura feita para o patrimônio <em>dele</em> — não um produto pronto de prateleira.</p>
+        <p>Comecei em finanças em 1995. Passei a maior parte da carreira como executivo financeiro em empresas de saúde, cuidando do caixa de operadoras e hospitais.</p>
+        <p>Durante todo esse tempo, eu cuidava do dinheiro das empresas e não do meu. Só comecei a investir com disciplina aos 38 anos, num programa de trainee em que colegas bem mais jovens já faziam isso havia anos.</p>
+        <p>Em 2022 entrei na Monteo. Estudei o consórcio a fundo antes de vender a primeira cota e passei a usar o crédito como parte de um planejamento, com prazo, custo e objetivo definidos.</p>
+        <p>Hoje sou Master Franqueado da Monteo em Maringá, com mais de 700 clientes na carteira. <strong>Eu não vendo consórcio.</strong> Antes de indicar qualquer grupo, olho o patrimônio, os objetivos e a capacidade de pagamento de cada pessoa.</p>
         <div class="sobre-assinatura">
-          <img src="foto-thiago.jpg" alt="Thiago Pereira" width="56" height="56">
+          <img src="foto-thiago.jpg" alt="" width="56" height="56">
           <div class="sobre-assinatura-txt">
             <strong>Thiago Pereira</strong>
             <span>Matemático · Contador · Master Franqueado Monteo</span>
           </div>
         </div>
       </div>
+      <div>
+        <img class="sobre-foto2" src="img/thiago-sobre.jpg" alt="Thiago Pereira no escritório da Monteo" loading="lazy" width="563" height="1000">
+        <ol class="tempo" aria-label="Linha do tempo">
+          <li><span class="ano">1995</span><span class="txt"><b>Começo em finanças.</b> Primeiro emprego na área financeira, em Cachoeiro de Itapemirim (ES).</span></li>
+          <li><span class="ano">2000</span><span class="txt"><b>Formado em Matemática.</b> Depois vieram a pós em Controladoria (2009) e Ciências Contábeis (2020).</span></li>
+          <li><span class="ano">2002</span><span class="txt"><b>Gerente financeiro na saúde.</b> Doze anos nas finanças de uma operadora de planos de saúde, depois a administração de um hospital.</span></li>
+          <li><span class="ano">aos 38</span><span class="txt"><b>A virada.</b> Num programa de trainee, percebi que colegas bem mais jovens investiam havia anos. Eu cuidava do dinheiro das empresas e não do meu.</span></li>
+          <li><span class="ano">2022</span><span class="txt"><b>Entrada na Monteo.</b> Estudei o consórcio a fundo antes de vender a primeira cota.</span></li>
+          <li><span class="ano">hoje</span><span class="txt"><b>Master Franqueado em Maringá.</b> Mais de 700 clientes na carteira, atendimento em todo o Brasil.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div id="numeros" aria-labelledby="t-numeros">
+      <span class="sec-label">Em números</span>
+      <h3 class="sec-title" id="t-numeros" style="font-size:clamp(22px,3.4vw,30px)">O trabalho até aqui</h3>
+      <div class="numeros-grid n4" style="margin-top:20px">
+        <div class="num-card">
+          <span class="num-val" data-target="30" data-suffix=" anos">30 anos</span>
+          <span class="num-label">em finanças</span><span class="num-ctx">desde 1995</span>
+        </div>
+        <div class="num-card">
+          <span class="num-val" data-target="4" data-suffix=" anos">4 anos</span>
+          <span class="num-label">na Monteo</span><span class="num-ctx">desde agosto de 2022</span>
+        </div>
+        <div class="num-card">
+          <span class="num-val" data-target="700" data-suffix="+">700+</span>
+          <span class="num-label">clientes na carteira</span><span class="num-ctx">carteira própria e herdada, nov/2026</span>
+        </div>
+        <div class="num-card">
+          <span class="num-val" data-target="400" data-prefix="R$ " data-suffix=" mi+">R$ 400 mi+</span>
+          <span class="num-label">em crédito estruturado</span><span class="num-ctx">volume de vendas da carteira</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ─── NÚMEROS ─── -->
-<section id="numeros" aria-labelledby="t-numeros">
+<!-- ─── CLIENTES (depoimentos e contemplações em vídeo) ─── -->
+<section id="clientes" aria-labelledby="t-clientes">
   <div class="wrap">
-    <span class="sec-label">Em números</span>
-    <h2 class="sec-title" id="t-numeros">Resultados que falam por si</h2>
-    <div class="divider"></div>
-    <div class="numeros-grid">
-      <div class="num-card">
-        <span class="num-val" data-target="4" data-suffix=" anos">4 anos</span>
-        <span class="num-label">de mercado e operação</span>
-      </div>
-      <div class="num-card">
-        <span class="num-val" data-target="700" data-suffix="+">700+</span>
-        <span class="num-label">clientes atendidos</span>
-      </div>
-      <div class="num-card">
-        <span class="num-val" data-target="400" data-prefix="R$ " data-suffix=" mi+">R$ 400 mi+</span>
-        <span class="num-label">em crédito estruturado</span>
-      </div>
+    <span class="sec-label" id="depoimentos">O que dizem os clientes</span>
+    <h2 class="sec-title" id="t-clientes">Clientes</h2>
+    <p class="sec-sub">Depoimentos e contemplações em vídeo, contados pelos próprios clientes. Toque para assistir.</p>
+    <p class="clientes-sub">Depoimentos</p>
+    <div class="videos-grid">
+      <button class="vcard" type="button" data-video="yt:0NVQOt2OePA" aria-label="Assistir: Ronaldo Cardeiro">
+        <img src="https://i.ytimg.com/vi/0NVQOt2OePA/hqdefault.jpg" alt="Ronaldo Cardeiro" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Depoimento</span><span class="vtit">Ronaldo Cardeiro</span><span class="vsub">Como foi ser contemplado e o que a estratégia representou para ele.</span></span>
+      </button>
+      <button class="vcard" type="button" data-video="ig:C3VN3fVAsP3" aria-label="Assistir: Guilherme">
+        <img src="historia-guilherme.jpg" alt="Guilherme" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Depoimento</span><span class="vtit">Guilherme</span><span class="vsub">Do primeiro contato à contemplação.</span></span>
+      </button>
+      <button class="vcard" type="button" data-video="ig:DC9w-XrvGF7" aria-label="Assistir: Cliente da carteira">
+        <img src="historia-cliente-estrategia.jpg" alt="Cliente da carteira" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Depoimento</span><span class="vtit">Cliente da carteira</span><span class="vsub">O que mudou com a estratégia certa e por que a escolha do especialista importa.</span></span>
+      </button>
+      <button class="vcard" type="button" data-video="ig:DDfPCcevHhP" aria-label="Assistir: Por que confiar?">
+        <img src="historia-por-que-confiar.jpg" alt="Cliente" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Depoimento</span><span class="vtit">Por que confiar?</span><span class="vsub">Um cliente conta o que o levou a fechar e a indicar.</span></span>
+      </button>
     </div>
-  </div>
-</section>
-
-<!-- ─── SELOS ─── -->
-<section id="selos" aria-labelledby="t-selos">
-  <div class="wrap">
-    <span class="sec-label">Certificações</span>
-    <h2 class="sec-title" id="t-selos">Qualificação reconhecida</h2>
-    <div class="divider"></div>
-    <div class="selos">
-      <a class="selo" href="http://badges.com.br/share/e0d83cbf0a60000293a5df1d53b71bf1.php?a=6064" target="_blank" rel="noopener">
-        <img class="selo-ico" src="abac-selo.png" alt="Certificação ABAC PCA-10">
-        <div class="selo-txt">Certificado ABAC PCA-10<small>Especialista em Consórcio · Verificar</small></div>
-      </a>
-      <div class="selo">
-        <svg class="selo-ico" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="32" cy="32" r="30" fill="#0f0f0f" stroke="#CF9859" stroke-width="2.5"/>
-          <text x="32" y="29" font-family="Georgia,serif" font-size="14" font-weight="700" font-style="italic" fill="#E8161B" text-anchor="middle" letter-spacing=".5">exame.</text>
-          <text x="32" y="42" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="2.5">INVEST</text>
-        </svg>
-        <div class="selo-txt">Exame Invest Aprovado<small>Certificação de investimentos</small></div>
-      </div>
+    <p class="clientes-sub" id="contemplados">Contemplações</p>
+    <div class="videos-grid">
+      <button class="vcard" type="button" data-video="ig:Det--2Ex2dX" aria-label="Assistir: A ligação mais esperada">
+        <img src="historia-contemplado-novo.jpg" alt="Cliente contemplado" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Contemplação</span><span class="vtit">A ligação mais esperada</span><span class="vsub">Cliente recebe a confirmação da contemplação.</span></span>
+      </button>
+      <button class="vcard" type="button" data-video="ig:DUio5YLkeE6" aria-label="Assistir: Do lance à contemplação">
+        <img src="historia-lance-fixo.jpg" alt="Case de lance fixo" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Case real · lance fixo</span><span class="vtit">Do lance à contemplação</span><span class="vsub">Como foi a operação deste cliente.</span></span>
+      </button>
+      <button class="vcard" type="button" data-video="ig:DP4kr7uj6w4" aria-label="Assistir: A ligação">
+        <img src="historia-ligacao-contemplacao.jpg" alt="Ligação de contemplação" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Bastidores</span><span class="vtit">A ligação</span><span class="vsub">O momento em que o cliente descobre que foi contemplado.</span></span>
+      </button>
+      <button class="vcard" type="button" data-video="ig:C-GRhTAPouc" aria-label="Assistir: A ligação do investidor">
+        <img src="historia-ligacao-investidor.jpg" alt="Ligação de contemplação para investidor" loading="lazy">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vleg"><span class="vtag">Bastidores</span><span class="vtit">A ligação do investidor</span><span class="vsub">O momento em que o investidor descobre que foi contemplado.</span></span>
+      </button>
     </div>
+    <p class="nota" style="text-align:left">Experiências individuais. Contemplação por sorteio ou lance, sem prazo garantido. Resultados passados não garantem resultados futuros.</p>
   </div>
 </section>
 
@@ -626,8 +761,22 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
 <!-- ─── RECONHECIMENTO ─── -->
 <section id="reconhecimento" aria-labelledby="t-premio">
   <div class="wrap">
-    <span class="sec-label">Prêmios e reconhecimento</span>
-    <h2 class="sec-title" id="t-premio">Reconhecimento do mercado</h2>
+    <span class="sec-label">Certificações e prêmios</span>
+    <h2 class="sec-title" id="t-premio">Qualificação e reconhecimento</h2>
+        <div class="selos">
+      <a class="selo" href="http://badges.com.br/share/e0d83cbf0a60000293a5df1d53b71bf1.php?a=6064" target="_blank" rel="noopener">
+        <img class="selo-ico" src="abac-selo.png" alt="Certificação ABAC PCA-10">
+        <div class="selo-txt">Certificado ABAC PCA-10<small>Especialista em Consórcio · Verificar</small></div>
+      </a>
+      <div class="selo">
+        <svg class="selo-ico" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#0f0f0f" stroke="#CF9859" stroke-width="2.5"/>
+          <text x="32" y="29" font-family="Georgia,serif" font-size="14" font-weight="700" font-style="italic" fill="#E8161B" text-anchor="middle" letter-spacing=".5">exame.</text>
+          <text x="32" y="42" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="2.5">INVEST</text>
+        </svg>
+        <div class="selo-txt">Exame Invest Aprovado<small>Certificação de investimentos</small></div>
+      </div>
+    </div>
     <p class="sec-sub">A Monteo foi eleita Consórcio Imobiliário do Ano no Real Estate Awards 2026 e é certificada GPTW pelo 3º ano consecutivo.</p>
     <div class="premio">
       <figure class="f-main"><img src="img/trofeu-retrato-terno-azul.jpg" alt="Thiago Pereira com o troféu do Real Estate Awards 2026" loading="lazy"><figcaption>Real Estate Awards 2026 · Consórcio Imobiliário do Ano</figcaption></figure>
@@ -635,6 +784,42 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
       <figure class="f-sec"><img style="object-position:center 50%" src="img/premio-equipe-palco.jpg" alt="Equipe Monteo no palco do prêmio" loading="lazy"><figcaption>O time no palco</figcaption></figure>
       <figure class="f-sec"><img style="object-position:center top" src="img/gptw-3-anos-bolo.jpg" alt="Comemoração dos 3 anos de certificação GPTW" loading="lazy"><figcaption>3º ano GPTW</figcaption></figure>
     </div>
+  </div>
+</section>
+
+<!-- ─── NA MÍDIA (destaques; o restante fica em /midia) ─── -->
+<section id="midia" aria-labelledby="t-midia">
+  <div class="wrap">
+    <span class="sec-label" id="conteudo">Na mídia</span>
+    <h2 class="sec-title" id="t-midia">Podcasts, lives e imprensa</h2>
+    <p class="sec-sub">Seis participações escolhidas. Os episódios do MonteoCast, as lives e os cortes estão todos na página de mídia.</p>
+    <div class="midia-dest">
+      <button class="mcard" type="button" data-video="ytw:X3c73a4O_zU" aria-label="Assistir: Desistindo da falsa “segurança”">
+        <span class="mthumb"><img src="https://i.ytimg.com/vi/X3c73a4O_zU/hqdefault.jpg" alt="" loading="lazy"><span class="vplay" aria-hidden="true"></span></span>
+        <span class="mbody"><span class="ep">Valuation Podcast · Ep. 15</span><strong>Desistindo da falsa “segurança”</strong></span>
+      </button>
+      <button class="mcard" type="button" data-video="ytw:F0evudL-7b0" aria-label="Assistir: Construir patrimônio não é sorte, é estratégia">
+        <span class="mthumb"><img src="https://i.ytimg.com/vi/F0evudL-7b0/hqdefault.jpg" alt="" loading="lazy"><span class="vplay" aria-hidden="true"></span></span>
+        <span class="mbody"><span class="ep">AvantBusiness Cast · João Pessoa</span><strong>Construir patrimônio não é sorte, é estratégia</strong></span>
+      </button>
+      <button class="mcard" type="button" data-video="ytw:KpOa47GLl4Y" aria-label="Assistir: Seu vendedor de consórcio é especialista? Faça essas perguntas antes de contratar">
+        <span class="mthumb"><img src="https://i.ytimg.com/vi/KpOa47GLl4Y/hqdefault.jpg" alt="" loading="lazy"><span class="vplay" aria-hidden="true"></span></span>
+        <span class="mbody"><span class="ep">MonteoCast · Ep. 21</span><strong>Seu vendedor de consórcio é especialista? Faça essas perguntas antes de contratar</strong></span>
+      </button>
+      <button class="mcard" type="button" data-video="ytw:wEIa0U2JHuI" aria-label="Assistir: Como ganhar mais com Airbnb usando consórcio">
+        <span class="mthumb"><img src="https://i.ytimg.com/vi/wEIa0U2JHuI/hqdefault.jpg" alt="" loading="lazy"><span class="vplay" aria-hidden="true"></span></span>
+        <span class="mbody"><span class="ep">MonteoCast · Ep. 22</span><strong>Como ganhar mais com Airbnb usando consórcio</strong></span>
+      </button>
+      <button class="mcard" type="button" data-video="ytw:gwcPueRdINM" aria-label="Assistir: Estratégia patrimonial com consórcio ao vivo">
+        <span class="mthumb"><img src="https://i.ytimg.com/vi/gwcPueRdINM/hqdefault.jpg" alt="" loading="lazy"><span class="vplay" aria-hidden="true"></span></span>
+        <span class="mbody"><span class="ep">LePont Personal Brokers · Live</span><strong>Estratégia patrimonial com consórcio ao vivo</strong></span>
+      </button>
+      <a class="mcard" href="https://www.instagram.com/p/DTiRcDgkd9E/" target="_blank" rel="noopener">
+        <span class="mthumb retrato"><img src="imprensa-thumb.jpg" alt="" loading="lazy"></span>
+        <span class="mbody"><span class="ep">Imprensa</span><strong>Matéria espontânea sobre alavancagem patrimonial com consórcio</strong></span>
+      </a>
+    </div>
+    <div class="ver-todos" style="justify-content:flex-start"><a class="btn-secondary" href="/midia">Ver toda a mídia</a></div>
   </div>
 </section>
 
@@ -657,157 +842,13 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
   </div>
 </section>
 
-<!-- ─── IMPRENSA ─── -->
-<section id="imprensa" aria-labelledby="t-imprensa">
-  <div class="wrap">
-    <span class="sec-label">Na mídia</span>
-    <h2 class="sec-title" id="t-imprensa">Imprensa</h2>
-    <p class="sec-sub">Matéria espontânea e gratuita — quando o mercado fala por você.</p>
-    <div class="imprensa">
-      <a href="https://www.instagram.com/p/DTiRcDgkd9E/" target="_blank" rel="noopener">
-        <img class="thumb" src="imprensa-thumb.jpg" alt="Matéria de imprensa" loading="lazy" onerror="this.style.background='var(--card-2)';this.removeAttribute('onerror')">
-        <span><span class="ep">Assessoria de Imprensa</span><strong>Matéria espontânea sobre alavancagem patrimonial com consórcio</strong></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── EM EVIDÊNCIA ─── -->
-<section id="em-evidencia" aria-labelledby="t-evidencia">
-  <div class="wrap" style="max-width:540px">
-    <span class="sec-label">Repercussão</span>
-    <h2 class="sec-title" id="t-evidencia">Em evidência</h2>
-    <p class="sec-sub">Publicação em colaboração com <strong>@monteo.oficial</strong> — quase 1 milhão de visualizações.</p>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:8px">
-      <blockquote class="instagram-media" data-instgrm-captioned
-        data-instgrm-permalink="https://www.instagram.com/reel/DOJRh0qkZf4/"
-        data-instgrm-version="14"
-        style="background:#0D0A08;border:1px solid #3A342E;border-radius:18px;margin:0;max-width:480px;width:100%">
-        <a href="https://www.instagram.com/reel/DOJRh0qkZf4/" target="_blank" rel="noopener"
-           style="display:block;padding:24px;color:#D4A843;font-weight:700;text-align:center">
-          Ver no Instagram
-        </a>
-      </blockquote>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:#1E1915;border:1px solid #362D26;border-radius:99px;padding:8px 18px">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CF9859" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        <span style="font-size:13px;font-weight:700;color:#CF9859;letter-spacing:.4px">~1 milhão de visualizações</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── LIVES ─── -->
-<section id="lives" aria-labelledby="t-lives">
-  <div class="wrap">
-    <span class="sec-label">Conteúdo</span>
-    <h2 class="sec-title" id="t-lives">Lives com parceiros</h2>
-    <p class="sec-sub">Participações ao vivo que ficaram gravadas.</p>
-    <div class="midia">
-      <a href="https://www.youtube.com/live/gwcPueRdINM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/gwcPueRdINM/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">LePont Personal Brokers · Live</span><strong>Estratégia patrimonial com consórcio ao vivo</strong></span></a>
-      <a href="https://www.youtube.com/live/lKVx-haDBmI" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/lKVx-haDBmI/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">LePont Personal Brokers · Live</span><strong>Alavancagem imobiliária — perguntas e respostas ao vivo</strong></span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── CORTES ─── -->
-<section id="cortes" aria-labelledby="t-cortes">
-  <div class="wrap">
-    <span class="sec-label">YouTube Shorts</span>
-    <h2 class="sec-title" id="t-cortes">Cortes</h2>
-    <p class="sec-sub">Clipes curtos do canal <strong>@monteooficial</strong> com participação do Thiago.</p>
-    <div class="midia">
-      <a href="https://www.youtube.com/shorts/v1jloM5NZOI" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/v1jloM5NZOI/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">Shorts · Monteo</span><strong>Selic em alta: é hora de investir no mercado imobiliário?</strong></span></a>
-      <a href="https://www.youtube.com/shorts/N6ZWHzLVMAo" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/N6ZWHzLVMAo/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">Shorts · Monteo</span><strong>Um detalhe que fez ele economizar R$ 110 mil</strong></span></a>
-      <a href="https://www.youtube.com/shorts/SM97IC3RDXI" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/SM97IC3RDXI/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">Shorts · Monteo</span><strong>Ganho de capital ou renda passiva?</strong></span></a>
-      <a href="https://www.youtube.com/shorts/YYvWea7oRU0" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/YYvWea7oRU0/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">Shorts · Monteo</span><strong>Como ter seu imóvel sem esperar décadas!</strong></span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── MONTEOCAST ─── -->
-<section id="monteocast" aria-labelledby="t-monteocast">
-  <div class="wrap">
-    <span class="sec-label" id="conteudo">Podcast</span>
-    <h2 class="sec-title" id="t-monteocast">MonteoCast</h2>
-    <p class="sec-sub">Podcast oficial da Monteo — episódios com a minha participação.</p>
-    <div class="midia">
-      <a href="https://youtu.be/wEIa0U2JHuI" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/wEIa0U2JHuI/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 22</span><strong>Como ganhar mais com Airbnb usando consórcio</strong></span></a>
-      <a href="https://youtu.be/KpOa47GLl4Y" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/KpOa47GLl4Y/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 21</span><strong>Seu vendedor de consórcio é especialista? Faça essas perguntas antes de contratar</strong></span></a>
-      <a href="https://youtu.be/IV3lCd98ZYE" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/IV3lCd98ZYE/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 16</span><strong>Selic alta: consórcio ainda vale a pena?</strong></span></a>
-      <a href="https://youtu.be/pDlTGVK8tiQ" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/pDlTGVK8tiQ/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 13</span><strong>Reforma tributária e consórcio: atenção, investidor</strong></span></a>
-      <a href="https://youtu.be/op4WJk-Scws" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/op4WJk-Scws/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 08</span><strong>Consórcio: turbine o retorno dos aluguéis</strong></span></a>
-      <a href="https://youtu.be/rfk3PDTMyXQ" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/rfk3PDTMyXQ/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 07</span><strong>Fortuna inteligente: consórcio e leilão</strong></span></a>
-      <a href="https://youtu.be/t-RHeoBHzzM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/t-RHeoBHzzM/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 04</span><strong>O segredo das grandes operações com consórcio</strong></span></a>
-      <a href="https://youtu.be/zyLZoRjiGpc" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/zyLZoRjiGpc/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 03</span><strong>Consórcio para consumo x consórcio para investimento</strong></span></a>
-      <a href="https://youtu.be/89_4jaPNwxg" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/89_4jaPNwxg/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">MonteoCast · Ep. 01</span><strong>Formas de alavancar com consórcio imobiliário</strong></span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PARTICIPAÇÕES ─── -->
-<section id="participacoes" aria-labelledby="t-participacoes">
-  <div class="wrap">
-    <span class="sec-label">Podcast</span>
-    <h2 class="sec-title" id="t-participacoes">Participações externas</h2>
-    <p class="sec-sub">Convidado em outros programas pelo Brasil.</p>
-    <div class="midia">
-      <a href="https://youtu.be/jlwcrwP617g" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/jlwcrwP617g/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">Receita de Sucesso Podcast · Monteo</span><strong>Cultura organizacional e crescimento com propósito</strong></span></a>
-      <a href="https://youtu.be/X3c73a4O_zU" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/X3c73a4O_zU/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">Valuation Podcast · Ep. 15</span><strong>Desistindo da falsa "segurança"</strong></span></a>
-      <a href="https://youtu.be/F0evudL-7b0" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/F0evudL-7b0/mqdefault.jpg" alt="" loading="lazy"><span><span class="ep">AvantBusiness Cast · Ep. 09 · João Pessoa</span><strong>Construir patrimônio não é sorte, é estratégia</strong></span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── DEPOIMENTOS ─── -->
-<section id="depoimentos" aria-labelledby="t-depoimentos">
-  <div class="wrap">
-    <span class="sec-label">O que dizem os clientes</span>
-    <h2 class="sec-title" id="t-depoimentos">Depoimentos</h2>
-    <p class="sec-sub">Clientes contando a própria experiência com a estratégia.</p>
-    <div class="depo-grid">
-      <div class="depo">
-        <p class="depo-text">Ronaldo Cardeiro conta a experiência de ser contemplado e o retorno sobre o investimento que a estratégia gerou para ele.</p>
-        <a class="depo-link" href="https://www.youtube.com/shorts/0NVQOt2OePA" target="_blank" rel="noopener">Ver depoimento →</a>
-      </div>
-      <div class="depo">
-        <p class="depo-text">Guilherme conta como foi a experiência de estruturar o patrimônio com consórcio — do primeiro contato à contemplação.</p>
-        <a class="depo-link" href="https://www.instagram.com/invistacomthiago/reel/C3VN3fVAsP3/" target="_blank" rel="noopener">Ver depoimento →</a>
-      </div>
-      <div class="depo">
-        <p class="depo-text">Um cliente da carteira conta o que a estratégia certa mudou — e por que a escolha do especialista faz toda a diferença.</p>
-        <a class="depo-link" href="https://www.instagram.com/monteo.oficial/reel/DC9w-XrvGF7/" target="_blank" rel="noopener">Ver depoimento →</a>
-      </div>
-      <div class="depo">
-        <p class="depo-text">Por que confiar? Um cliente responde com a própria história e explica o que o levou a fechar — e a indicar.</p>
-        <a class="depo-link" href="https://www.instagram.com/monteo.oficial/reel/DDfPCcevHhP/" target="_blank" rel="noopener">Ver depoimento →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── CLIENTES CONTEMPLADOS ─── -->
-<section id="contemplados" aria-labelledby="t-historias">
-  <div class="wrap">
-    <span class="sec-label">Cases e bastidores</span>
-    <h2 class="sec-title" id="t-historias">Clientes contemplados</h2>
-    <p class="sec-sub">Resultados reais e bastidores das contemplações.</p>
-    <div class="midia">
-      <a href="https://www.instagram.com/reel/Det--2Ex2dX/" target="_blank" rel="noopener"><img class="capa" src="historia-contemplado-novo.jpg" alt="Cliente contemplado" loading="lazy" onerror="this.style.background='var(--card-2)';this.removeAttribute('onerror')"><span><span class="ep">✦ Contemplação confirmada</span><strong>Mais um cliente recebe a notícia que muda tudo</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/DUio5YLkeE6/" target="_blank" rel="noopener"><img class="capa" src="historia-lance-fixo.jpg" alt="Case de lance fixo" loading="lazy"><span><span class="ep">✦ Resultado real</span><strong>Cliente dobrou o capital com a estratégia de lance fixo</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/DP4kr7uj6w4/" target="_blank" rel="noopener"><img class="capa" src="historia-ligacao-contemplacao.jpg" alt="Ligação de contemplação" loading="lazy"><span><span class="ep">✦ A ligação que muda tudo</span><strong>O momento em que o cliente descobre que foi contemplado</strong></span></a>
-      <a href="https://www.instagram.com/monteo.oficial/reel/C-GRhTAPouc/" target="_blank" rel="noopener"><img class="capa" src="historia-ligacao-investidor.jpg" alt="Ligação de contemplação para investidor" loading="lazy"><span><span class="ep">✦ A ligação que muda tudo</span><strong>O momento em que o investidor descobre que foi contemplado</strong></span></a>
-    </div>
-    <p class="nota">Experiências individuais. Contemplação por sorteio ou lance, sem prazo garantido. Resultados passados não garantem resultados futuros.</p>
-  </div>
-</section>
-
 <!-- ─── CTA FINAL ─── -->
 <section id="cta">
   <div class="wrap">
     <div class="cta-inner">
       <span class="sec-label">Próximo passo</span>
-      <h2 class="sec-title">Pronto para estruturar o seu patrimônio?</h2>
-      <p class="sec-sub">Seja pelo WhatsApp, pela agenda ou pelo simulador — a primeira conversa é gratuita e sem compromisso.</p>
+      <h2 class="sec-title">Vamos conversar sobre o seu caso?</h2>
+      <p class="sec-sub">A primeira conversa é gratuita. Pode ser pelo WhatsApp, por videochamada ou no escritório em Maringá.</p>
       <div class="cta-btns">
         <a class="btn-primary" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
@@ -825,31 +866,77 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
       <div class="como-grid">
         <div class="como-card">
           <p class="como-num">01</p>
-          <h3>Diagnóstico</h3>
-          <p>Entendemos sua situação financeira atual, seus objetivos e o melhor caminho para chegar lá.</p>
+          <h3>Conversa</h3>
+          <p>Entendo sua renda, seu patrimônio e o que você quer comprar.</p>
         </div>
         <div class="como-card">
           <p class="como-num">02</p>
-          <h3>Planejamento personalizado</h3>
-          <p>Montamos uma estratégia sob medida com as melhores ferramentas do mercado de consórcio.</p>
+          <h3>Proposta</h3>
+          <p>Uma simulação com grupos reais, mostrando também os pontos desfavoráveis.</p>
         </div>
         <div class="como-card">
           <p class="como-num">03</p>
-          <h3>Acompanhamento e assessoria na execução</h3>
-          <p>Estamos ao seu lado em cada etapa, do planejamento à conquista do seu objetivo.</p>
+          <h3>Acompanhamento</h3>
+          <p>Assembleias, lances e uso do crédito, até o fim do plano.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ─── ARTIGOS RECENTES ─── -->
+<!-- Os 3 cartões abaixo são atualizados sozinhos (script no fim da página) com os 3 primeiros da página /artigos. -->
+<section id="artigos-recentes" aria-labelledby="t-artigos">
+  <div class="wrap">
+    <span class="sec-label">Conhecimento</span>
+    <h2 class="sec-title" id="t-artigos">Artigos recentes</h2>
+    <p class="sec-sub">Análises de mercado e estratégia para quem quer construir patrimônio com inteligência.</p>
+    <div class="rec-grid" id="recGrid">
+      <a href="/artigos/brasil-pais-dos-inquilinos.html" class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
+          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="36" fill="#CF9859">🔑</text></svg>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado Imobiliário</span>
+          <h3>O Brasil está virando um país de inquilinos. E os dados confirmam.</h3>
+          <p>23,8% dos domicílios já são alugados, um recorde histórico. O novo ciclo imobiliário já está definindo quem constrói patrimônio e quem paga pelo patrimônio dos outros.</p>
+          <div class="art-card-footer"><time>14 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="/artigos/reforma-tributaria-consorcio-ibs-cbs.html" class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
+          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#CF9859">§</text></svg>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado</span>
+          <h3>Reforma Tributária abre brecha para empresas recuperarem imposto via consórcio</h3>
+          <p>A tese do art. 205 da LC 214/2025 e como o IBS/CBS pode virar aliado de empresas no regime regular na compra de imóveis e veículos.</p>
+          <div class="art-card-footer"><time>13 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+      <a href="/artigos/custos-ocultos-financiamento.html" class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
+          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#CF9859">R$</text></svg>
+        </div>
+        <div class="art-card-body">
+          <span class="art-cat">Mercado</span>
+          <h3>Os custos que ninguém te conta antes de assinar o financiamento</h3>
+          <p>ITBI, escritura, seguro obrigatório e avaliação bancária: até R$ 61 mil em gastos que não aparecem na simulação do banco, além de mais de R$ 1,6 milhão em juros no prazo.</p>
+          <div class="art-card-footer"><time>06 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+        </div>
+      </a>
+    </div>
+    <div class="ver-todos"><a class="btn-secondary" href="/artigos">Ver todos os artigos</a></div>
+  </div>
+</section>
+
 <!-- ─── REDES ─── -->
 <section id="redes" aria-labelledby="t-redes">
   <div class="wrap">
-    <span class="sec-label">Acompanhe</span>
-    <h2 class="sec-title" id="t-redes">Siga para ficar por dentro</h2>
+    <span class="sec-label">Canais</span>
+    <h2 class="sec-title" id="t-redes">Acompanhe meu conteúdo</h2>
     <p class="sec-sub">Toda semana: estratégias de patrimônio, mercado imobiliário e bastidores do que estamos construindo.</p>
-    <div class="redes" style="margin-bottom:40px">
+    <div class="redes" style="margin:0 0 28px;max-width:640px">
       <a href="https://www.instagram.com/invistacomthiago/" target="_blank" rel="noopener" aria-label="Instagram @invistacomthiago">
         <span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
         <strong>Instagram</strong><small>@invistacomthiago</small>
@@ -867,7 +954,7 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
         <strong>YouTube</strong><small>@InvistacomThiago</small>
       </a>
     </div>
-    <div class="canais">
+    <div class="canais" style="margin:0">
       <a class="canal-btn wpp" href="https://whatsapp.com/channel/0029VbDkI5C5Ejy0HYc7tX22" target="_blank" rel="noopener">
         <span class="canal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
         <div class="canal-txt"><strong>Canal no WhatsApp</strong><small>Conteúdo semanal sobre patrimônio, sem grupo</small></div>
@@ -892,57 +979,11 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
   </div>
 </section>
 
-<!-- ─── ARTIGOS RECENTES ─── -->
-<!-- Os 3 cartões abaixo são atualizados sozinhos (script no fim da página) com os 3 primeiros da página /artigos. -->
-<section id="artigos-recentes" aria-labelledby="t-artigos">
-  <div class="wrap">
-    <span class="sec-label">Conhecimento</span>
-    <h2 class="sec-title" id="t-artigos">Artigos recentes</h2>
-    <p class="sec-sub">Análises de mercado e estratégia para quem quer construir patrimônio com inteligência.</p>
-    <div class="rec-grid" id="recGrid">
-      <a href="/artigos/brasil-pais-dos-inquilinos.html" class="art-card">
-        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
-          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="36" fill="#CF9859">🔑</text></svg>
-        </div>
-        <div class="art-card-body">
-          <span class="art-cat">Mercado Imobiliário</span>
-          <h3>O Brasil está virando um país de inquilinos. E os dados confirmam.</h3>
-          <p>23,8% dos domicílios já são alugados — recorde histórico. O novo ciclo imobiliário já está definindo quem constrói patrimônio e quem paga pelo patrimônio dos outros.</p>
-          <div class="art-card-footer"><time>14 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
-        </div>
-      </a>
-      <a href="/artigos/reforma-tributaria-consorcio-ibs-cbs.html" class="art-card">
-        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
-          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#CF9859">§</text></svg>
-        </div>
-        <div class="art-card-body">
-          <span class="art-cat">Mercado</span>
-          <h3>Reforma Tributária abre brecha para empresas recuperarem imposto via consórcio</h3>
-          <p>A tese do art. 205 da LC 214/2025 e como o IBS/CBS pode virar aliado de empresas no regime regular na compra de imóveis e veículos.</p>
-          <div class="art-card-footer"><time>13 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
-        </div>
-      </a>
-      <a href="/artigos/custos-ocultos-financiamento.html" class="art-card">
-        <div class="art-card-img" style="background:linear-gradient(135deg,#1a1612,#2d2318);display:flex;align-items:center;justify-content:center">
-          <svg width="52" height="52" viewBox="0 0 52 52" style="opacity:.35"><text x="26" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#CF9859">R$</text></svg>
-        </div>
-        <div class="art-card-body">
-          <span class="art-cat">Mercado</span>
-          <h3>Os custos que ninguém te conta antes de assinar o financiamento</h3>
-          <p>ITBI, escritura, seguro obrigatório e avaliação bancária: até R$ 61 mil em gastos que não aparecem na simulação do banco — mais de R$ 1,6 milhão em juros no prazo.</p>
-          <div class="art-card-footer"><time>06 nov 2026</time><span class="art-leia">Ler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
-        </div>
-      </a>
-    </div>
-    <div class="ver-todos"><a class="btn-secondary" href="/artigos">Ver todos os artigos</a></div>
-  </div>
-</section>
-
 <!-- ─── FAQ ─── -->
 <section id="faq" aria-labelledby="t-faq">
   <div class="wrap">
     <span class="sec-label">Dúvidas frequentes</span>
-    <h2 class="sec-title" id="t-faq">FAQ</h2>
+    <h2 class="sec-title" id="t-faq">Perguntas frequentes</h2>
     <div class="divider"></div>
     <div class="faq" role="list">
 
@@ -952,7 +993,7 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
           <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">Todo investimento tem risco, e com o consórcio não é diferente. Os principais são: inadimplência no grupo (coberta pelo fundo de reserva), variação do crédito pelo INCC, e o tempo de contemplação, que não é garantido. Meu trabalho é estruturar a operação para minimizar esses riscos e maximizar o retorno — escolhendo o grupo certo, o valor de lance ideal e a modalidade mais adequada para o seu perfil.</div>
+          <div class="faq-a-inner">Todo investimento tem risco, e com o consórcio não é diferente. Os principais são: inadimplência no grupo (coberta pelo fundo de reserva), variação do crédito pelo INCC, e o tempo de contemplação, que não é garantido. Meu trabalho é escolher o grupo, a modalidade e a estratégia de lance mais adequados ao seu perfil e deixar claros todos os custos.</div>
         </div>
       </div>
 
@@ -982,7 +1023,7 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
           <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">A contemplação acontece de duas formas: por sorteio (todos os meses nas assembleias do grupo) ou por lance (você antecipa parcelas para ser contemplado antes). O lance é estratégico — dependendo do grupo e do valor ofertado, é possível ser contemplado no curto prazo, o que muda completamente o cálculo financeiro da operação. Tudo depende da sua estratégia e capacidade de aporte no lance.</div>
+          <div class="faq-a-inner">A contemplação acontece de duas formas: por sorteio (todos os meses nas assembleias do grupo) ou por lance (você antecipa parcelas para ser contemplado antes). O lance é estratégico: dependendo do grupo e do valor ofertado, é possível ser contemplado no curto prazo, o que muda completamente o cálculo financeiro da operação. Tudo depende da sua estratégia e capacidade de aporte no lance.</div>
         </div>
       </div>
 
@@ -1002,7 +1043,7 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
           <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">Formação em matemática e contabilidade, 4 anos de operação e mais de 700 clientes ativos. Cada cliente recebe uma análise personalizada — não um produto pronto. Eu olho para o patrimônio atual, os objetivos de médio e longo prazo, a capacidade de pagamento e o perfil de risco antes de indicar qualquer estrutura. O resultado é uma estratégia, não uma venda.</div>
+          <div class="faq-a-inner">30 anos em finanças corporativas, 4 anos na Monteo e mais de 700 clientes na carteira. Antes de indicar qualquer grupo, olho o patrimônio, os objetivos de médio e longo prazo, a capacidade de pagamento e o perfil de risco de cada pessoa.</div>
         </div>
       </div>
 
@@ -1012,7 +1053,7 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
           <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg></span>
         </button>
         <div class="faq-a" role="region">
-          <div class="faq-a-inner">Minha remuneração vem da comissão paga pela administradora na contratação do consórcio — da mesma forma que um corretor é pago pelo banco ou pela imobiliária. Você não paga nada a mais por contratar pelo meu intermédio: o valor da carta de crédito e as parcelas são os mesmos. A diferença está na qualidade da estratégia e no acompanhamento ao longo do plano.</div>
+          <div class="faq-a-inner">Minha remuneração vem da comissão paga pela administradora na contratação do consórcio, da mesma forma que um corretor é pago pelo banco ou pela imobiliária. Você não paga nada a mais por contratar pelo meu intermédio: o valor da carta de crédito e as parcelas são os mesmos. A diferença está na qualidade da estratégia e no acompanhamento ao longo do plano.</div>
         </div>
       </div>
 
@@ -1046,7 +1087,7 @@ function animateCounter(el) {
   const target = parseInt(el.dataset.target, 10);
   const prefix = el.dataset.prefix || '';
   const suffix = el.dataset.suffix || '';
-  const duration = 2000;
+  const duration = 1200;
   const start = performance.now();
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
   function step(now) {
@@ -1101,15 +1142,9 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
-/* ─── FADE-UP ON SCROLL ─── */
-const fadeEls = document.querySelectorAll('section > .wrap > *:not(.sec-label):not(.sec-title):not(.sec-sub):not(.divider)');
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }});
-}, { threshold: 0.08 });
-fadeEls.forEach(el => { el.classList.add('fade-up'); fadeObserver.observe(el); });
+/* (efeito de surgir ao rolar removido em 15/11/2026: o conteúdo aparece já carregado) */
 </script>
 
-<script async src="//www.instagram.com/embed.js"></script>
 <script>
 /* Artigos recentes: puxa os 3 primeiros artigos da página /artigos,
    para a página inicial se atualizar sozinha quando sair artigo novo. */
@@ -1167,6 +1202,37 @@ fadeEls.forEach(el => { el.classList.add('fade-up'); fadeObserver.observe(el); }
       .catch(function () { msg.textContent = 'Não consegui registrar agora. Tente de novo ou use o canal do WhatsApp acima.'; msg.classList.add('erro'); })
       .then(function () { btn.disabled = false; });
   });
+})();
+</script>
+
+<!-- ─── PLAYER DE VÍDEO (abre por cima da página) ─── -->
+<div class="player" id="player" role="dialog" aria-modal="true" aria-label="Vídeo">
+  <div class="player-caixa" id="playerCaixa"></div>
+  <button class="player-fechar" type="button" id="playerFechar" aria-label="Fechar vídeo">×</button>
+  <a class="player-fora" id="playerFora" href="#" target="_blank" rel="noopener">Abrir no app</a>
+</div>
+<script>
+/* Player: cartões com data-video="yt:ID" (vertical), "ytw:ID" (horizontal) ou "ig:CÓDIGO" (Reel do Instagram). */
+(function () {
+  var p = document.getElementById('player'), cx = document.getElementById('playerCaixa'),
+      fechar = document.getElementById('playerFechar'), fora = document.getElementById('playerFora'), ultimo = null;
+  function abrir(v) {
+    var tipo = v.split(':')[0], ref = v.slice(tipo.length + 1), src, link;
+    if (tipo === 'ig') { src = 'https://www.instagram.com/reel/' + ref + '/embed/'; link = 'https://www.instagram.com/reel/' + ref + '/'; }
+    else { src = 'https://www.youtube-nocookie.com/embed/' + ref + '?autoplay=1&rel=0&playsinline=1'; link = 'https://youtu.be/' + ref; }
+    cx.className = 'player-caixa' + (tipo === 'ytw' ? ' largo' : '');
+    cx.innerHTML = '<iframe src="' + src + '" title="Vídeo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+    fora.href = link; fora.textContent = tipo === 'ig' ? 'Abrir no Instagram' : 'Abrir no YouTube';
+    p.classList.add('aberto'); document.body.classList.add('sem-rolagem'); fechar.focus();
+  }
+  function sair() { p.classList.remove('aberto'); cx.innerHTML = ''; document.body.classList.remove('sem-rolagem'); if (ultimo) ultimo.focus(); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-video]'); if (!b) return;
+    e.preventDefault(); ultimo = b; abrir(b.getAttribute('data-video'));
+  });
+  fechar.addEventListener('click', sair);
+  p.addEventListener('click', function (e) { if (e.target === p) sair(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && p.classList.contains('aberto')) sair(); });
 })();
 </script>
 </body>
