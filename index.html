@@ -71,6 +71,10 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;
   background:var(--grad);color:var(--bg);border:none;cursor:pointer;white-space:nowrap;letter-spacing:.2px}
 .btn-wpp{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;
   background:transparent;color:var(--gold);border:1px solid rgba(207,152,89,.5);white-space:nowrap;letter-spacing:.2px}
+.btn-calc{padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;
+  background:transparent;color:var(--muted);border:1px solid rgba(179,167,152,.35);white-space:nowrap;letter-spacing:.2px;transition:color .15s,border-color .15s}
+.btn-calc:hover{color:var(--ink);border-color:rgba(179,167,152,.7)}
+@media(max-width:767px){.btn-calc{display:none}}
 @media(min-width:768px){.nav-links{display:flex}}
 
 /* ─── HERO ─── */
@@ -355,6 +359,7 @@ footer{padding:40px 20px 32px;border-top:1px solid var(--line)}
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
+      <a class="btn-calc" href="/calculadora-alavancagem" target="_blank" rel="noopener">Calculadora</a>
       <a class="btn-wpp" href="https://wa.me/5544991112549?text=Ol%C3%A1%2C%20Thiago!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20o%20meu%20patrim%C3%B4nio." target="_blank" rel="noopener">WhatsApp</a>
       <a class="btn-nav" href="https://simulador.invistacomthiago.com.br" target="_blank" rel="noopener">Simular agora</a>
     </div>
