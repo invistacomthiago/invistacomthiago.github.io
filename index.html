@@ -515,6 +515,12 @@ body.sem-rolagem{overflow:hidden}
   #redes .ce-form{flex:none;width:100%;margin-top:auto}
 }
 
+
+/* Play no centro e maior, cobrindo o play que já vem desenhado nas capas dos Reels */
+.vcard .vplay{top:50%;width:max(48px,19%);height:auto;aspect-ratio:1;background:#F6F3EE;box-shadow:0 0 0 6px rgba(246,243,238,.18)}
+.vcard .vplay::after{margin-left:12%;border-left-width:clamp(15px,22%,19px);border-top-width:clamp(9px,13%,11px);border-bottom-width:clamp(9px,13%,11px)}
+@media(max-width:640px){.vcard .vplay{width:max(44px,24%);height:auto}}
+
 /* sem animação de surgir: tudo visível desde o carregamento */
 .fade-up{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
